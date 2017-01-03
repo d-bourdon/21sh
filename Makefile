@@ -1,20 +1,22 @@
-#* ************************************************************************** *#
-#*                                                                            *#
-#*                                                        :::      ::::::::   *#
-#*   Makefile                                           :+:      :+:    :+:   *#
-#*                                                    +:+ +:+         +:+     *#
-#*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        *#
-#*                                                +#+#+#+#+#+   +#+           *#
-#*   Created: 2016/06/15 14:15:13 by dbourdon          #+#    #+#             *#
-#*   Updated: 2016/10/20 15:49:34 by dbourdon         ###   ########.fr       *#
-#*                                                                            *#
-#* ************************************************************************** *#
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2016/06/15 14:15:13 by dbourdon          #+#    #+#              #
+#    Updated: 2017/01/03 14:55:01 by dbourdon         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
 NAME = 21sh
 
 SRC = 	./src/*
 
 MALIB = libft/libft.a
+
+FILE_H = -I ./includes/
 
 OBJ = $(SRC:.c=.o)
 
@@ -25,7 +27,7 @@ FLAGS = -Wall -Wextra -Werror
 all: $(NAME)
 
 $(NAME) : $(MALIB) $(OBG)
-	-@clang $(FLAGS) $(SRC) -g -o $(NAME) -L./libft/ -lft -l termcap
+	-@clang $(FLAGS) $(SRC) $(FILE_H) -g -o $(NAME) -L./libft/ -lft -l termcap
 	@echo "Compilation"
 
 $(MALIB):
@@ -45,7 +47,7 @@ re: fclean all
 	-@make re -C libft/
 
 norme:
-	@norminette ./src/*.[ch] ./libft/*.[ch]
+	@norminette ./includes/*.[ch] ./src/*.[ch] ./libft/*.[ch]
 
 check:
 	@echo "***** Verification norme :"

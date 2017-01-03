@@ -1,0 +1,489 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"b",
+				"b_term"
+			],
+			[
+				"ft_p",
+				"ft_putchar_fd"
+			],
+			[
+				"ft",
+				"ft_putstr_fd"
+			],
+			[
+				"t_",
+				"t_info"
+			],
+			[
+				"ft_print",
+				"ft_print_lign"
+			],
+			[
+				"t",
+				"t_elem"
+			],
+			[
+				"mo",
+				"ft_move_next"
+			],
+			[
+				"ft_put",
+				"ft_putstr"
+			],
+			[
+				"l_",
+				"l_win"
+			],
+			[
+				"c",
+				"c_lflag"
+			],
+			[
+				"ar",
+				"argv"
+			],
+			[
+				"in",
+				"include"
+			],
+			[
+				"z",
+				"z"
+			],
+			[
+				"ft_",
+				"ft_putstr"
+			],
+			[
+				"dete",
+				"detecte_cle2"
+			],
+			[
+				"total",
+				"total_y"
+			],
+			[
+				"bo",
+				"ft_bonjour"
+			],
+			[
+				"tmp",
+				"tmp2"
+			],
+			[
+				"x",
+				"x"
+			],
+			[
+				"i",
+				"int"
+			],
+			[
+				"p",
+				"printf\tprintf …"
+			],
+			[
+				"po",
+				"pos2"
+			],
+			[
+				"pt",
+				"printf\tprintf …"
+			],
+			[
+				"pos",
+				"pos1"
+			],
+			[
+				"mlx",
+				"mlx_pixel_put"
+			],
+			[
+				"ft_str",
+				"ft_strdup"
+			],
+			[
+				"fts",
+				"ft_strcmp"
+			],
+			[
+				"ch",
+				"chdir"
+			],
+			[
+				"str",
+				"ft_strjoinfree"
+			],
+			[
+				"n",
+				"npath"
+			],
+			[
+				"free",
+				"free_tabtab"
+			],
+			[
+				"ft_retou",
+				"ft_retour_env2"
+			],
+			[
+				"fr",
+				"free"
+			],
+			[
+				"e",
+				"environ"
+			],
+			[
+				"inc",
+				"inc\t#include <…>"
+			],
+			[
+				"s",
+				"signum"
+			],
+			[
+				"ft_s",
+				"ft_strjoinfree"
+			],
+			[
+				"env",
+				"envtab"
+			],
+			[
+				"en",
+				"environ"
+			],
+			[
+				"exec",
+				"exec_cmd"
+			],
+			[
+				"strjoin",
+				"ft_strjoin"
+			],
+			[
+				"cherche",
+				"ft_cherche_cmd"
+			],
+			[
+				"do",
+				"liste_dossier"
+			],
+			[
+				"opendir",
+				"opendirornot"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 367.0,
+		"last_filter": "Package Control: ",
+		"selected_items":
+		[
+			[
+				"Package Control: ",
+				"Package Control: Satisfy Dependencies"
+			],
+			[
+				"pack",
+				"Package Control: Upgrade Package"
+			]
+		],
+		"width": 449.0
+	},
+	"console":
+	{
+		"height": 126.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '2915d1851351e5ee549c20394736b442' + '8bc59f460fa1548d1514676163dafc88'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/Users/dbourdon/21sh"
+	],
+	"file_history":
+	[
+		"/Users/dbourdon/make-makefile.sh",
+		"/Users/dbourdon/c-select/src/affichage.c",
+		"/Users/dbourdon/select/lol",
+		"/Users/dbourdon/select/src/stock.c",
+		"/Users/dbourdon/select/src/erreur.c",
+		"/Users/dbourdon/select/src/init_term.c",
+		"/Users/dbourdon/select/src/parssing.c",
+		"/Users/dbourdon/select/src/ft_select.h",
+		"/Users/dbourdon/select/src/main.c",
+		"/Users/dbourdon/select/libft/ft_putstr_fd.c",
+		"/Users/dbourdon/select/config.sh",
+		"/Users/dbourdon/select/src/txt.txt",
+		"/Users/dbourdon/select/src/test.c",
+		"/Users/dbourdon/select/src/ft_lstaddend.c",
+		"/Users/dbourdon/select/libft/ft_isnbr.c",
+		"/Users/dbourdon/select/libft/ft_pow.c",
+		"/Users/dbourdon/select/libft/ft_revers.c",
+		"/Users/dbourdon/select/src/signal.c",
+		"/Users/dbourdon/select/libft/ft_putstr.c",
+		"/Users/dbourdon/select/main.c",
+		"/Users/dbourdon/fdf/fdf.sublime-project",
+		"/Users/dbourdon/fdf/free_tabtab.c",
+		"/Users/dbourdon/fdf/libft/ft_isnbr.c",
+		"/Users/dbourdon/fdf/libft/ft_pow.c",
+		"/Users/dbourdon/fdf/libft/ft_revers.c",
+		"/Users/dbourdon/fdf/ft_erreur.c",
+		"/Users/dbourdon/fdf/parssing.c",
+		"/Users/dbourdon/fdf/libft/ft_atoi.c",
+		"/Users/dbourdon/fdf/matrice.c",
+		"/Users/dbourdon/fdf/zoom.c",
+		"/Users/dbourdon/fdf/ligne.c",
+		"/Users/dbourdon/fdf/init.c",
+		"/Users/dbourdon/fdf/main.c",
+		"/Users/dbourdon/fdf/ft_lstaddend.c",
+		"/Users/dbourdon/fdf/fdf.h",
+		"/Users/dbourdon/fdf/color.c",
+		"/Users/dbourdon/fdf/maps/pentenegpos.fdf",
+		"/Users/dbourdon/fdf/maps/pylone.fdf",
+		"/Users/dbourdon/fdf/42.fdf",
+		"/Users/dbourdon/fdf/rotation.c",
+		"/Users/dbourdon/fdf/soft4-4",
+		"/Users/dbourdon/fdf/norme",
+		"/Users/dbourdon/Downloads/fdf/maps/mars.fdf",
+		"/Users/dbourdon/fdf/soft.fdf",
+		"/Users/dbourdon/fdf/out-42",
+		"/Users/dbourdon/fdf/out2-42",
+		"/Users/dbourdon/fdf/ligne.cdot",
+		"/Users/dbourdon/fdf/main.cdot",
+		"/Users/dbourdon/fdf/libft/get_next_line.c",
+		"/nfs/2015/d/dbourdon/fdf/test.c",
+		"/nfs/2015/d/dbourdon/Downloads/test_maps/42.fdf",
+		"/private/var/folders/zz/zyxvpxvq6csfxvn_n0001s18000f8_/T/fz3temp-1/Parser.php",
+		"/private/var/folders/zz/zyxvpxvq6csfxvn_n0001s18000f8_/T/fz3temp-1/composer.json",
+		"/private/var/folders/zz/zyxvpxvq6csfxvn_n0001s18000f8_/T/fz3temp-1/config.php",
+		"/private/var/folders/zz/zyxvpxvq6csfxvn_n0001s18000f8_/T/fz3temp-1/index 2.php",
+		"/private/var/folders/zz/zyxvpxvq6csfxvn_n0001s18000f8_/T/fz3temp-1/index.php",
+		"/private/var/folders/zz/zyxvpxvq6csfxvn_n0001s18000f8_/T/fz3temp-1/null.php",
+		"/nfs/2015/d/dbourdon/minishell/libft/Makefile",
+		"/nfs/2015/d/dbourdon/minishell/.gitignore",
+		"/nfs/2015/d/dbourdon/minishell/cd.c",
+		"/nfs/2015/d/dbourdon/minishell/libft/libft.h",
+		"/nfs/2015/d/dbourdon/minishell/env3.c",
+		"/nfs/2015/d/dbourdon/minishell/ft_exit.c",
+		"/nfs/2015/d/dbourdon/minishell/env2.c",
+		"/nfs/2015/d/dbourdon/minishell/ft_erreur.c",
+		"/nfs/2015/d/dbourdon/minishell/libft/ft_isspace.c",
+		"/nfs/2015/d/dbourdon/minishell/libft/ft_strsubfree.c",
+		"/nfs/2015/d/dbourdon/minishell/libft/ft_strsplitwhite.c",
+		"/nfs/2015/d/dbourdon/minishell/main.c",
+		"/nfs/2015/d/dbourdon/minishell/libft/ft_strcat.c",
+		"/nfs/2015/d/dbourdon/minishell/test.c",
+		"/nfs/2015/d/dbourdon/minishell/env.c",
+		"/nfs/2015/d/dbourdon/minishell/libft/testsplitwhite.c",
+		"/nfs/2015/d/dbourdon/minishell/libft/ft_strjoin.c",
+		"/nfs/2015/d/dbourdon/minishell/libft/get_next_line.c",
+		"/nfs/2015/d/dbourdon/minishell/libft/ft_strstr.c",
+		"/nfs/2015/d/dbourdon/minishell/libft/ft_strsplit.c",
+		"/nfs/2015/d/dbourdon/minishell/libft/ft_strjoinfree.c",
+		"/nfs/2015/d/dbourdon/minishell/ft_strjoinfree.c",
+		"/Volumes/Storage/cache/library.dbourdon/Application Support/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
+		"/nfs/2015/d/dbourdon/ft_ls/ft_ajout_liste.c",
+		"/nfs/2015/d/dbourdon/minishell/ft_lstaddend.c",
+		"/nfs/2015/d/dbourdon/ft_ls/ft_lstaddend.c",
+		"/nfs/2015/d/dbourdon/ft_ls/libft/ft_strsplit.c",
+		"/nfs/2015/d/dbourdon/minishell/Makefile2",
+		"/nfs/2015/d/dbourdon/ft_ls/libft/._get_next_line.c",
+		"/nfs/2015/d/dbourdon/ft_ls/libft/libft.h",
+		"/nfs/2015/d/dbourdon/Gnl/get_next_line.h",
+		"/nfs/2015/d/dbourdon/Gnl/get_next_line.c",
+		"/nfs/2015/d/dbourdon/ft_ls/libft/Makefile",
+		"/nfs/2015/d/dbourdon/ft_ls/libft/get_next_line.c",
+		"/nfs/2015/d/dbourdon/ft_ls/ft_lecture_liste.c",
+		"/nfs/2015/d/dbourdon/ft_ls/special2.c",
+		"/nfs/2015/d/dbourdon/ft_ls/ft_path.c",
+		"/nfs/2015/d/dbourdon/ft_ls/special.c",
+		"/nfs/2015/d/dbourdon/ft_ls/ft_ls.h",
+		"/nfs/2015/d/dbourdon/ft_ls/ft_erreur.c"
+	],
+	"find":
+	{
+		"height": 22.0
+	},
+	"find_in_files":
+	{
+		"height": 93.0,
+		"where_history":
+		[
+			"*"
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"\\",
+			"tinfo",
+			"point",
+			"info->",
+			"400",
+			"501",
+			"500",
+			"100",
+			"1000",
+			"500",
+			"200",
+			"600",
+			"500",
+			"p[0] + 100",
+			"282678",
+			"343715",
+			"407297",
+			"\\",
+			"TMP2",
+			"tmp",
+			"0",
+			"phpbb/",
+			"non",
+			"env",
+			"[( ]env[-,;)]",
+			"[( ]env",
+			"ft_retour_env",
+			"\tenvd = &envtab;",
+			"printf",
+			"{\n",
+			"ddddenv",
+			"  ",
+			"lst_f"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			""
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 22.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "21sh.sublime-project",
+	"replace":
+	{
+		"height": 40.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 392.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"",
+				"check_existe"
+			]
+		],
+		"width": 392.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 211.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
