@@ -6,11 +6,16 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 14:49:13 by dbourdon          #+#    #+#             */
-/*   Updated: 2017/01/04 11:52:32 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/01/04 16:18:50 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_cd.h"
+/*
+** A besoin d'une struct t_info qui comporte un char *workdir (initialisé 
+** au début du shell avec un getcwd) et definie en singletone 
+** et d'une liste chainé t_env avec l'env.
+*/
 
 int		ft_cd(char **argv, t_env *env)
 {
@@ -20,9 +25,9 @@ int		ft_cd(char **argv, t_env *env)
 		return (ft_cd_option(argv, env));
 	else if (argv[0] && argv[1] && !argv[2])
 	{
-		//if (ft_cd_lien(argv[1], env) == 1)
-		//	return(1); //	else
-		 if (chdir(argv[1]) == -1)
+		if (ft_cd_lien(argv[1], env) == 1)
+			return(1);
+		else if (chdir(argv[1]) == -1)
 			ft_cd_error(argv[1], 0);
 		else
 			ft_cd_set_pwd(argv[1], env);
@@ -34,24 +39,24 @@ int		ft_cd(char **argv, t_env *env)
 
 void	ft_cd_home(t_env *env)
 {
-	if (chdir(ft_lstchrenv(env, "HOME")->value) == -1)
+	if (chdir(ft_env_chr(env, "HOME")->value) == -1)
 		ft_putstr("\033[01mcd:\033[31m Aucun $HOME défini.\033[00m");
 	else
 	{
-		ft_env_stock(env, "OLDPWD", ft_env_chr("PWD")->value);
-		ft_env_stock(env, "PWD", ft_env_chr("HOME")->value);
+		ft_env_stock(env, "OLDPWD", ft_env_chr(env, "PWD")->value);
+		ft_env_stock(env, "PWD", ft_env_chr(env, "HOME")->value);
 	}
 }
 
 int		ft_cd_option(char **argv, t_env *env)
 {
 	if (ft_strcmp(argv[1], "-L") == 0)
-		if (ft_cd_lien(argv[2], env) == 1)
 			return (1);
-	if (ft_cd_spe(argv[2]) == 1)
-		return (1);
+//if (ft_cd_lien(argv[2], env) == 1)
+	//if (ft_cd_spe(argv[2]) == 1)
+	//	return (1);
 	if (chdir(argv[2]) == -1)
-		ft_cd_error(argv[2], 0)
+		ft_cd_error(argv[2], 0);
 	else
 		ft_cd_set_pwd(argv[1], env);
 	return (1);
@@ -83,5 +88,14 @@ void	ft_cd_error(char *str, int mode)
 
 void	ft_cd_set_pwd(char *path, t_env *env)
 {
-	
+	char tmp[500];
+
+	path = NULL;
+	if (getcwd(tmp, 500) == NULL)
+		ft_cd_error("Récupération de pwd impossible", 1);
+	else
+	{
+		ft_env_stock(env, "OLDPWD", ft_env_chr(env, "PWD")->value);
+		ft_env_stock(env, "PWD", tmp);
+	}
 }
