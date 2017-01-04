@@ -6,7 +6,7 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 14:49:13 by dbourdon          #+#    #+#             */
-/*   Updated: 2017/01/04 16:18:50 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/01/04 18:29:03 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ int		ft_cd(char **argv, t_env *env)
 		return (ft_cd_option(argv, env));
 	else if (argv[0] && argv[1] && !argv[2])
 	{
-		if (ft_cd_lien(argv[1], env) == 1)
-			return(1);
+	//	if (ft_cd_lien(argv[1], env) == 1)
+	//		return(1);
 		else if (chdir(argv[1]) == -1)
 			ft_cd_error(argv[1], 0);
 		else
@@ -39,12 +39,17 @@ int		ft_cd(char **argv, t_env *env)
 
 void	ft_cd_home(t_env *env)
 {
+	t_info *info;
+
+	info = singletone(NULL);
 	if (chdir(ft_env_chr(env, "HOME")->value) == -1)
 		ft_putstr("\033[01mcd:\033[31m Aucun $HOME défini.\033[00m");
 	else
 	{
+		free(info->workdir);
+		info->workdir = ft_strdup(ft_env_chr(env, "HOME")->value);
 		ft_env_stock(env, "OLDPWD", ft_env_chr(env, "PWD")->value);
-		ft_env_stock(env, "PWD", ft_env_chr(env, "HOME")->value);
+		ft_env_stock(env, "PWD", info->workdir);
 	}
 }
 
@@ -88,14 +93,21 @@ void	ft_cd_error(char *str, int mode)
 
 void	ft_cd_set_pwd(char *path, t_env *env)
 {
-	char tmp[500];
+	//char tmp[500];
+	t_info	*info;
 
-	path = NULL;
-	if (getcwd(tmp, 500) == NULL)
-		ft_cd_error("Récupération de pwd impossible", 1);
+	info = singletone(NULL);
+	if (path[0] == '/')
+		path = ft_clear_path_free(path, 1);
+	else
+		path = ft_clear_path_free(ft_strjoinfree(info->workdir, path, 2), 1);
+	//if (getcwd(tmp, 500) == NULL)
+	//	ft_cd_error("Récupération de pwd impossible", 1);
+	free(info->workdir);
+	info->workdir = ft_strdup(path);
 	else
 	{
 		ft_env_stock(env, "OLDPWD", ft_env_chr(env, "PWD")->value);
-		ft_env_stock(env, "PWD", tmp);
+		ft_env_stock(env, "PWD", path);
 	}
 }
