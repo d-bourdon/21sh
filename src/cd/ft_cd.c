@@ -6,7 +6,7 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 14:49:13 by dbourdon          #+#    #+#             */
-/*   Updated: 2017/01/03 18:17:54 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/01/04 11:52:32 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int		ft_cd(char **argv, t_env *env)
 			ft_cd_set_pwd(argv[1], env);
 	}
 	else
-		ft_cd_error(argv[1], 1);
+		ft_cd_error(argv[1], 2);
 	return (1);
 }
 
@@ -55,4 +55,33 @@ int		ft_cd_option(char **argv, t_env *env)
 	else
 		ft_cd_set_pwd(argv[1], env);
 	return (1);
+}
+
+void	ft_cd_error(char *str, int mode)
+{
+	if (mode == 0)
+	{
+		if (access(str, F_OK) == 0)
+			ft_putstr("\033[01mcd:\033[31m Chemin interdit : \033[00m");
+		else
+			ft_putstr("\033[01mcd:\033[31m Chemin inexistant : \033[00m");
+		ft_putstr(str);
+	}
+	else if (mode == 1)
+	{
+		ft_putstr("\033[01mcd:\033[31m");
+		ft_putstr(str);
+		ft_putstr("\033[00m");
+	}
+	else
+	{
+		ft_putstr("\033[31mCommande invalide\033[00m: cd [-L|-P] [\033[01mdo");
+		ft_putstr("ssier\033[00m | \033[01m..\033[00m | \033[01m/\033[00m ");
+		ft_putstr("| \033[01m-\033[00m | \033[01m~\033[00m |  ]");
+	}
+}
+
+void	ft_cd_set_pwd(char *path, t_env *env)
+{
+	
 }
