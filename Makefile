@@ -6,17 +6,17 @@
 #    By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/06/15 14:15:13 by dbourdon          #+#    #+#              #
-#    Updated: 2017/01/03 14:55:01 by dbourdon         ###   ########.fr        #
+#    Updated: 2017/01/05 19:09:03 by dbourdon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = 21sh
 
-SRC = 	./src/*
+SRC = 	./src/cd/*.c ./src/env/*.c ./src/*.c
 
 MALIB = libft/libft.a
 
-FILE_H = -I ./includes/
+FILE_H = -I ./includes/ -I ./libft/
 
 OBJ = $(SRC:.c=.o)
 
@@ -27,7 +27,7 @@ FLAGS = -Wall -Wextra -Werror
 all: $(NAME)
 
 $(NAME) : $(MALIB) $(OBG)
-	-@clang $(FLAGS) $(SRC) $(FILE_H) -g -o $(NAME) -L./libft/ -lft -l termcap
+	-@clang $(FLAGS) $(SRC) $(FILE_H) -o $(NAME) -L./libft/ -lft -l termcap
 	@echo "Compilation"
 
 $(MALIB):
@@ -44,7 +44,7 @@ fclean: clean
 	@echo "totale..."
 
 re: fclean all
-	-@make re -C libft/
+	#-@make re -C libft/
 
 norme:
 	@norminette ./includes/*.[ch] ./src/*.[ch] ./libft/*.[ch]

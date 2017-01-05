@@ -6,13 +6,13 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 16:31:49 by dbourdon          #+#    #+#             */
-/*   Updated: 2017/01/04 18:01:49 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/01/05 18:38:53 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_cd.h"
 
-static void	ft_freetabtab(char **tab)
+static void	stfreetabtab(char **tab)
 {
 	int		i;
 
@@ -51,7 +51,7 @@ static char	*stock_clear(char **clear, int mode)
 	}
 	if (ft_strlen(out) > 1)
 		out[ft_strlen(out) - 1] = '\0';
-	ft_freetabtab(clear);
+	stfreetabtab(clear);
 	return (out);
 }
 

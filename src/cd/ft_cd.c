@@ -6,7 +6,7 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 14:49:13 by dbourdon          #+#    #+#             */
-/*   Updated: 2017/01/04 18:29:03 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/01/05 19:22:47 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,55 +19,68 @@
 
 int		ft_cd(char **argv, t_env *env)
 {
+	//argv[1] = ft_strjoin(argv[1], "\0");
+	printf("HELLO !\n");
 	if (argv[0] && !argv[1])
-		ft_cd_home(env);
-	else if (ft_strcmp(argv[1], "-L") == 0 || ft_strcmp(argv[1], "-P") == 0)
-		return (ft_cd_option(argv, env));
-	else if (argv[0] && argv[1] && !argv[2])
 	{
-	//	if (ft_cd_lien(argv[1], env) == 1)
-	//		return(1);
+		printf("NOP1\n");
+		return(ft_cd_home(env));
+	}
+	printf("HELLO2\n");
+	if (strcmp(argv[1], "-L") == 0 || strcmp(argv[1], "-P") == 0)
+	{
+		printf("NOP2\n");
+		return (ft_cd_option(argv, env));
+	}
+	printf("HELLO3\n");
+	if (argv[0] && argv[1] && !argv[2])
+	{
+		printf("NORMAL\n");
+		if (ft_cd_spe(argv[1], env) == 1)
+			return(1);
 		else if (chdir(argv[1]) == -1)
-			ft_cd_error(argv[1], 0);
+			return (ft_cd_error(argv[1], 0));
 		else
 			ft_cd_set_pwd(argv[1], env);
 	}
 	else
-		ft_cd_error(argv[1], 2);
+	{
+		printf("NOP3\n");
+		return (ft_cd_error(argv[1], 2));
+	}
 	return (1);
 }
 
-void	ft_cd_home(t_env *env)
+int		ft_cd_home(t_env *env)
 {
 	t_info *info;
 
-	info = singletone(NULL);
+	info = singleton(NULL);
 	if (chdir(ft_env_chr(env, "HOME")->value) == -1)
-		ft_putstr("\033[01mcd:\033[31m Aucun $HOME défini.\033[00m");
-	else
-	{
-		free(info->workdir);
-		info->workdir = ft_strdup(ft_env_chr(env, "HOME")->value);
-		ft_env_stock(env, "OLDPWD", ft_env_chr(env, "PWD")->value);
-		ft_env_stock(env, "PWD", info->workdir);
-	}
+		return (ft_cd_error("Aucun $HOME défini.", 1));
+	free(info->workdir);
+	info->workdir = ft_strdup(ft_env_chr(env, "HOME")->value);
+	ft_env_stock(env, "OLDPWD", ft_env_chr(env, "PWD")->value);
+	ft_env_stock(env, "PWD", info->workdir);
+	return (1);
 }
 
 int		ft_cd_option(char **argv, t_env *env)
 {
-	if (ft_strcmp(argv[1], "-L") == 0)
-			return (1);
-//if (ft_cd_lien(argv[2], env) == 1)
-	//if (ft_cd_spe(argv[2]) == 1)
-	//	return (1);
+	if (!(argv[0] && argv[1] && argv[2] && !argv[3]))
+		return (ft_cd_error(NULL, 3));
+	if (ft_strcmp(argv[1], "-P") == 0)
+		return(ft_cd_lien(argv[2], env));
+	if (ft_cd_spe(argv[2], env) == 1)
+		return (1);
 	if (chdir(argv[2]) == -1)
-		ft_cd_error(argv[2], 0);
+		return (ft_cd_error(argv[2], 0));
 	else
-		ft_cd_set_pwd(argv[1], env);
+		ft_cd_set_pwd(argv[2], env);
 	return (1);
 }
 
-void	ft_cd_error(char *str, int mode)
+int		ft_cd_error(char *str, int mode)
 {
 	if (mode == 0)
 	{
@@ -89,6 +102,7 @@ void	ft_cd_error(char *str, int mode)
 		ft_putstr("ssier\033[00m | \033[01m..\033[00m | \033[01m/\033[00m ");
 		ft_putstr("| \033[01m-\033[00m | \033[01m~\033[00m |  ]");
 	}
+	return (0);
 }
 
 void	ft_cd_set_pwd(char *path, t_env *env)
@@ -96,18 +110,18 @@ void	ft_cd_set_pwd(char *path, t_env *env)
 	//char tmp[500];
 	t_info	*info;
 
-	info = singletone(NULL);
+	info = singleton(NULL);
 	if (path[0] == '/')
 		path = ft_clear_path_free(path, 1);
 	else
-		path = ft_clear_path_free(ft_strjoinfree(info->workdir, path, 2), 1);
+		path = ft_clear_path_free(ft_strjoinfree(ft_strjoin(info->workdir, "/"), path, 3), 1);
 	//if (getcwd(tmp, 500) == NULL)
 	//	ft_cd_error("Récupération de pwd impossible", 1);
 	free(info->workdir);
 	info->workdir = ft_strdup(path);
-	else
-	{
+	//else
+	//{
 		ft_env_stock(env, "OLDPWD", ft_env_chr(env, "PWD")->value);
 		ft_env_stock(env, "PWD", path);
-	}
+	//}
 }

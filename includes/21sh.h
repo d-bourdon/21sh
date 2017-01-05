@@ -1,41 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_cd.h                                            :+:      :+:    :+:   */
+/*   21sh.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/03 14:58:05 by dbourdon          #+#    #+#             */
-/*   Updated: 2017/01/05 18:29:30 by dbourdon         ###   ########.fr       */
+/*   Created: 2017/01/05 17:03:23 by dbourdon          #+#    #+#             */
+/*   Updated: 2017/01/05 18:37:12 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_CD_H
-# define FT_CD_H
+#ifndef SH_H
+# define SH_H
 
 # include "libft.h"
 # include "ft_env.h"
-# include "21sh.h"
+# include "ft_cd.h"
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <sys/wait.h>
+# include <signal.h>
+
+typedef	struct s_info
+{
+	char		*workdir;
+	t_env		*env;
+}				t_info;
 
 /*
-** ft_cd.c :
+** main.c :
 */
-int		ft_cd(char **argv, t_env *env);
-int		ft_cd_home(t_env *env);
-int		ft_cd_option(char **argv, t_env *env);
-int		ft_cd_error(char *str, int mode);
-void	ft_cd_set_pwd(char *path, t_env *env);
+void	*singleton(void *data);
 
 /*
-** ft_cd2.c :
+** ft_init.c :
 */
-int		ft_cd_lien(char *path, t_env *env);
-int		ft_cd_spe(char *path, t_env *env);
-/*
-** ft_clear_path.c :
-*/
-
-char	*ft_clear_path(char *str, int mode);
-char	*ft_clear_path_free(char *s, int m);
+void	ft_freetabtab(char **tab);
+t_env	*ft_init_env(char **environ);
+t_info	*ft_init_info(char **environ);
 
 #endif
