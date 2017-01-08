@@ -6,7 +6,7 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 14:45:48 by dbourdon          #+#    #+#             */
-/*   Updated: 2017/01/08 16:21:13 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/01/08 17:21:36 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	ft_affichage_help(void)
 	"*************************************************\033[00m\n\n"
 	"\033[01m-------------- Commandes spécifique -------------\n"
 	"-------------------------------------------------\033[00m\n"
-	"v. 3 -                              2016 dbourdon\n");
+	"v. 3.0 -                            2016 dbourdon\n");
 }
 
 static void	sighandler(int a)
@@ -59,8 +59,6 @@ int		main(void)
 		ft_putstr("\n\033[1;34m");
 		ft_putstr(info->workdir);
 		ft_putstr("\n\033[1;32m$\033[33m--> \033[00m");
-		//signal(SIGQUIT, sighandler);
-		//signal(SIGTERM, sighandler);
 		i = get_next_line(0, str);
 		if (str[0][0] == '\0')
 			ft_affichage_help();
@@ -68,7 +66,6 @@ int		main(void)
 	//		ft_affichage_un_env(tmp);
 		if (str[0][0] != '\0')
 		{
-			//printf("coucou : %s\n", str[0]);
 			ft_cd(ft_strsplitw(str[0]), info->env);
 			printf("ENV %s\n", ft_env_chr(info->env, "PWD")->value);
 		}
