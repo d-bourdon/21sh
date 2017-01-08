@@ -1,0 +1,5 @@
+
+Redirection in file
+Si le fichier existe pas: fd = open(argv3, O_CREAT, 0644);
+Si le fichier existe et >> : fd = open(argv3, O_RDWR | O_APPEND);
+Et pour > : fd = open(argv3, O_WRONLY | O_TRUNC);

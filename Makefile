@@ -6,54 +6,55 @@
 #    By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/06/15 14:15:13 by dbourdon          #+#    #+#              #
-#    Updated: 2017/01/05 19:09:03 by dbourdon         ###   ########.fr        #
+#    Updated: 2017/01/08 16:23:44 by dbourdon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = 21sh
+LIB_NAME = libft/libft.a
+INC_DIR = includes
+SRC_DIR = src
+OBJ_DIR = obj
 
-SRC = 	./src/cd/*.c ./src/env/*.c ./src/*.c
+SRCS = 	./src/cd/ft_cd.c \
+		./src/cd/ft_cd2.c \
+		./src/cd/ft_clear_path.c \
+		./src/env/ft_env.c \
+		./src/ft_init.c \
+		./src/main.c 
 
-MALIB = libft/libft.a
 
-FILE_H = -I ./includes/ -I ./libft/
+OBJS = $(SRCS:$(SRCS)%.c=$(OBJ_DIR)/%.o)
 
-OBJ = $(SRC:.c=.o)
+IFLAGS = -I $(INC_DIR) -I libft
+FLAGS = -Wall -Werror -Wextra
 
-FLAGS = -Wall -Wextra -Werror
+CC = clang $(FLAGS)
+LIBFLAGS = -Llibft -lft
+RM = /bin/rm -f
 
-.PHONY: clean fclean re norme check
+all: $(LIB_NAME) $(NAME)
 
-all: $(NAME)
+$(LIB_NAME) :
+	@make -C libft re
 
-$(NAME) : $(MALIB) $(OBG)
-	-@clang $(FLAGS) $(SRC) $(FILE_H) -o $(NAME) -L./libft/ -lft -l termcap
-	@echo "Compilation"
+$(NAME) : $(OBJS)
+	@echo "Make Objects :\033[1;32m DONE !\033[m"
+	@$(CC) $(IFLAGS) -o $@ $^ $(LIBFLAGS)
+	@echo "Make $(NAME) :\033[1;32m DONE !\033[m"
 
-$(MALIB):
-	-@make -C libft/
+$(OBJ_DIR)/%.o: $(SRCS).c
+	@$(CC) $(IFLAGS) -o $@ -c $<
 
-clean: 
-	-@make -C libft/ clean
-	-@rm -f $(OBJ) *.gch
-	@echo "Supression"
+clean:
+	@make -C libft clean
+	@echo "Make clean :\033[1;31m DONE !\033[m"
 
-fclean: clean
-	-@rm -f $(NAME)
-	-@make -C libft/ fclean
-	@echo "totale..."
+fclean : clean
+	@$(RM) $(NAME)
+	@make -C libft fclean
+	@echo "Make fclean :\033[1;31m DONE !\033[m"
 
 re: fclean all
-	#-@make re -C libft/
 
-norme:
-	@norminette ./includes/*.[ch] ./src/*.[ch] ./libft/*.[ch]
-
-check:
-	@echo "***** Verification norme :"
-	@make norme
-	@echo "***** Verification auteur :"
-	cat -e auteur
-	@echo "***** Lancement du make re ... "
-	@make re
-	@echo "***** Fini !"
+.PHONY: all clean fclean re

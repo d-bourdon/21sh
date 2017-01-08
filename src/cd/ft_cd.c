@@ -6,7 +6,7 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 14:49:13 by dbourdon          #+#    #+#             */
-/*   Updated: 2017/01/05 19:22:47 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/01/08 15:52:10 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,23 +19,12 @@
 
 int		ft_cd(char **argv, t_env *env)
 {
-	//argv[1] = ft_strjoin(argv[1], "\0");
-	printf("HELLO !\n");
 	if (argv[0] && !argv[1])
-	{
-		printf("NOP1\n");
 		return(ft_cd_home(env));
-	}
-	printf("HELLO2\n");
 	if (strcmp(argv[1], "-L") == 0 || strcmp(argv[1], "-P") == 0)
-	{
-		printf("NOP2\n");
 		return (ft_cd_option(argv, env));
-	}
-	printf("HELLO3\n");
 	if (argv[0] && argv[1] && !argv[2])
 	{
-		printf("NORMAL\n");
 		if (ft_cd_spe(argv[1], env) == 1)
 			return(1);
 		else if (chdir(argv[1]) == -1)
@@ -44,10 +33,7 @@ int		ft_cd(char **argv, t_env *env)
 			ft_cd_set_pwd(argv[1], env);
 	}
 	else
-	{
-		printf("NOP3\n");
 		return (ft_cd_error(argv[1], 2));
-	}
 	return (1);
 }
 
@@ -57,7 +43,7 @@ int		ft_cd_home(t_env *env)
 
 	info = singleton(NULL);
 	if (chdir(ft_env_chr(env, "HOME")->value) == -1)
-		return (ft_cd_error("Aucun $HOME défini.", 1));
+		return (ft_cd_error("AuCun $HOME défini.", 1));
 	free(info->workdir);
 	info->workdir = ft_strdup(ft_env_chr(env, "HOME")->value);
 	ft_env_stock(env, "OLDPWD", ft_env_chr(env, "PWD")->value);
@@ -87,7 +73,7 @@ int		ft_cd_error(char *str, int mode)
 		if (access(str, F_OK) == 0)
 			ft_putstr("\033[01mcd:\033[31m Chemin interdit : \033[00m");
 		else
-			ft_putstr("\033[01mcd:\033[31m Chemin inexistant : \033[00m");
+			ft_putstr("\033[01mcd:\033[31m Chemin inéxistant : \033[00m");
 		ft_putstr(str);
 	}
 	else if (mode == 1)
@@ -107,16 +93,14 @@ int		ft_cd_error(char *str, int mode)
 
 void	ft_cd_set_pwd(char *path, t_env *env)
 {
-	//char tmp[500];
 	t_info	*info;
 
 	info = singleton(NULL);
 	if (path[0] == '/')
 		path = ft_clear_path_free(path, 1);
 	else
-		path = ft_clear_path_free(ft_strjoinfree(ft_strjoin(info->workdir, "/"), path, 3), 1);
-	//if (getcwd(tmp, 500) == NULL)
-	//	ft_cd_error("Récupération de pwd impossible", 1);
+		path = ft_clear_path_free(ft_strjoinfree(
+			ft_strjoin(info->workdir, "/"), path, 3), 1);
 	free(info->workdir);
 	info->workdir = ft_strdup(path);
 	//else
