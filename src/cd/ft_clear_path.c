@@ -6,25 +6,25 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 16:31:49 by dbourdon          #+#    #+#             */
-/*   Updated: 2017/01/08 15:52:14 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/01/10 17:29:16 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_cd.h"
 
-static void	stfreetabtab(char **tab)
+static void	stfreetabtab(char **tabl)
 {
 	int		i;
 
 	i = 0;
-	while (tab && tab[i])
+	while (tabl && tabl[i])
 	{
-		if (tab[i])
-			free(tab[i]);
+		if (tabl[i])
+			free(tabl[i]);
 		i++;
 	}
-	if (tab)
-		free(tab);
+	if (tabl)
+		free(tabl);
 }
 
 static char	*stock_clear(char **clear, int mode)

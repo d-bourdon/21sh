@@ -6,7 +6,7 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 14:45:48 by dbourdon          #+#    #+#             */
-/*   Updated: 2017/01/10 12:42:00 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/01/10 17:33:58 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,15 @@ int		main(void)
 	int			i;
 	extern char	**environ;
 	t_info		*info;
+	char		*test;
 
-	printf("HELLO !!!!!\n");
 	signal(SIGINT, sighandler);
 	info = ft_init_info(environ);
-	printf("OKCHECK\n");
 	singleton(info);
 	ft_affichage_help();
+	if (ft_line_start(info->term) == -1)
+		return (1);
+	test = ft_line_get(0);
 	while (42)
 	{
 		str = (char**)malloc(sizeof(char*) * 1);
@@ -61,8 +63,6 @@ int		main(void)
 		ft_putstr(info->workdir);
 		ft_putstr("\n\033[1;32m$\033[33m--> \033[00m");
 		i = get_next_line(0, str);
-		if (str[0][0] == '\0')
-			ft_affichage_help();
 	//	if (str[0][0] != '\0' && (tmp = ft_cherche_env(str[0])) != NULL)
 	//		ft_affichage_un_env(tmp);
 		if (str[0][0] != '\0')

@@ -6,25 +6,25 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/05 17:39:42 by dbourdon          #+#    #+#             */
-/*   Updated: 2017/01/10 13:00:20 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/01/10 17:33:40 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "21sh.h"
 
-void	ft_freetabtab(char **tab)
+void	ft_freetabtab(char **tabl)
 {
 	int		i;
 
 	i = 0;
-	while (tab && tab[i])
+	while (tabl && tabl[i])
 	{
 		if (tab[i])
-			free(tab[i]);
+			free(tabl[i]);
 		i++;
 	}
-	if (tab)
-		free(tab);
+	if (tabl)
+		free(tabl);
 }
 
 t_info	*ft_init_info(char **environ)
@@ -38,6 +38,8 @@ t_info	*ft_init_info(char **environ)
 		printf("ERROR\n"); //norme
 		exit(1);
 	}
+	info->term->l_win = 0;
+	info->term->h_win = 0;
 	info->workdir = ft_strdup(tmp);
 	info->env = ft_init_env(environ);
 	return (info);
@@ -60,7 +62,6 @@ t_env	*ft_init_env(char **environ)
 	env = ajout;
 	while (tmp2[i])
 	{
-		printf("Hello : %d - %s\n", i, tmp2[i]);
 		ajout = (t_env*)malloc(sizeof(t_env));
 		tmp = ft_strsplit(tmp2[i], '=');
 		ajout->name = ft_strdupfree(ft_strjoin(tmp[0], "\0"));
