@@ -6,7 +6,7 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 14:49:13 by dbourdon          #+#    #+#             */
-/*   Updated: 2017/01/08 15:52:10 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/01/10 12:56:51 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,14 @@
 
 int		ft_cd(char **argv, t_env *env)
 {
+	if (ft_env_chr(env, "PWD") == NULL)
+		ft_env_stock(env, "PWD", " ");
+	printf("HELLO\n");
 	if (argv[0] && !argv[1])
 		return(ft_cd_home(env));
 	if (strcmp(argv[1], "-L") == 0 || strcmp(argv[1], "-P") == 0)
 		return (ft_cd_option(argv, env));
+	printf("NO option\n");
 	if (argv[0] && argv[1] && !argv[2])
 	{
 		if (ft_cd_spe(argv[1], env) == 1)
@@ -94,7 +98,7 @@ int		ft_cd_error(char *str, int mode)
 void	ft_cd_set_pwd(char *path, t_env *env)
 {
 	t_info	*info;
-
+	printf("ft_cd set pwd\n");
 	info = singleton(NULL);
 	if (path[0] == '/')
 		path = ft_clear_path_free(path, 1);
@@ -104,8 +108,10 @@ void	ft_cd_set_pwd(char *path, t_env *env)
 	free(info->workdir);
 	info->workdir = ft_strdup(path);
 	//else
+	printf("BEFORE stock\n");
 	//{
 		ft_env_stock(env, "OLDPWD", ft_env_chr(env, "PWD")->value);
 		ft_env_stock(env, "PWD", path);
+		printf("AFTER stock\n");
 	//}
 }

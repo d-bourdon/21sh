@@ -6,7 +6,7 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 14:45:48 by dbourdon          #+#    #+#             */
-/*   Updated: 2017/01/08 17:21:36 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/01/10 12:42:00 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,14 @@ static void	ft_affichage_help(void)
 }
 
 static void	sighandler(int a)
-{a = 0;}
+{a = 0;
+exit(0);}
 
 void	*singleton(void *data)
 {
 	static void *singleton_data;
 
-	if(data)
+	if (data)
 		singleton_data = data;
 	return (singleton_data);
 }
@@ -48,7 +49,7 @@ int		main(void)
 	t_info		*info;
 
 	printf("HELLO !!!!!\n");
-	signal(SIGSEGV, sighandler);
+	signal(SIGINT, sighandler);
 	info = ft_init_info(environ);
 	printf("OKCHECK\n");
 	singleton(info);
