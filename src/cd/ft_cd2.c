@@ -6,16 +6,15 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 12:51:03 by dbourdon          #+#    #+#             */
-/*   Updated: 2017/01/08 15:52:11 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/01/10 14:00:49 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_cd.h"
 
-
 int		ft_cd_lien(char *path, t_env *env)
 {
-	t_info *info;
+	t_info	*info;
 	char	tmp[500];
 
 	if (ft_cd_spe(path, env) == 1)

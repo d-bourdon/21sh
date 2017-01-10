@@ -6,14 +6,15 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 14:49:13 by dbourdon          #+#    #+#             */
-/*   Updated: 2017/01/10 12:56:51 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/01/10 14:05:25 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_cd.h"
+
 /*
-** A besoin d'une struct t_info qui comporte un char *workdir (initialisé 
-** au début du shell avec un getcwd) et definie en singletone 
+** A besoin d'une struct t_info qui comporte un char *workdir (initialisé
+** au début du shell avec un getcwd) et definie en singletone
 ** et d'une liste chainé t_env avec l'env.
 */
 
@@ -21,16 +22,14 @@ int		ft_cd(char **argv, t_env *env)
 {
 	if (ft_env_chr(env, "PWD") == NULL)
 		ft_env_stock(env, "PWD", " ");
-	printf("HELLO\n");
 	if (argv[0] && !argv[1])
-		return(ft_cd_home(env));
+		return (ft_cd_home(env));
 	if (strcmp(argv[1], "-L") == 0 || strcmp(argv[1], "-P") == 0)
 		return (ft_cd_option(argv, env));
-	printf("NO option\n");
 	if (argv[0] && argv[1] && !argv[2])
 	{
 		if (ft_cd_spe(argv[1], env) == 1)
-			return(1);
+			return (1);
 		else if (chdir(argv[1]) == -1)
 			return (ft_cd_error(argv[1], 0));
 		else
@@ -47,7 +46,7 @@ int		ft_cd_home(t_env *env)
 
 	info = singleton(NULL);
 	if (chdir(ft_env_chr(env, "HOME")->value) == -1)
-		return (ft_cd_error("AuCun $HOME défini.", 1));
+		return (ft_cd_error("Aucun $HOME défini.", 1));
 	free(info->workdir);
 	info->workdir = ft_strdup(ft_env_chr(env, "HOME")->value);
 	ft_env_stock(env, "OLDPWD", ft_env_chr(env, "PWD")->value);
@@ -60,7 +59,7 @@ int		ft_cd_option(char **argv, t_env *env)
 	if (!(argv[0] && argv[1] && argv[2] && !argv[3]))
 		return (ft_cd_error(NULL, 3));
 	if (ft_strcmp(argv[1], "-P") == 0)
-		return(ft_cd_lien(argv[2], env));
+		return (ft_cd_lien(argv[2], env));
 	if (ft_cd_spe(argv[2], env) == 1)
 		return (1);
 	if (chdir(argv[2]) == -1)
@@ -98,7 +97,7 @@ int		ft_cd_error(char *str, int mode)
 void	ft_cd_set_pwd(char *path, t_env *env)
 {
 	t_info	*info;
-	printf("ft_cd set pwd\n");
+
 	info = singleton(NULL);
 	if (path[0] == '/')
 		path = ft_clear_path_free(path, 1);
@@ -107,11 +106,6 @@ void	ft_cd_set_pwd(char *path, t_env *env)
 			ft_strjoin(info->workdir, "/"), path, 3), 1);
 	free(info->workdir);
 	info->workdir = ft_strdup(path);
-	//else
-	printf("BEFORE stock\n");
-	//{
-		ft_env_stock(env, "OLDPWD", ft_env_chr(env, "PWD")->value);
-		ft_env_stock(env, "PWD", path);
-		printf("AFTER stock\n");
-	//}
+	ft_env_stock(env, "OLDPWD", ft_env_chr(env, "PWD")->value);
+	ft_env_stock(env, "PWD", path);
 }
