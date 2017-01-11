@@ -6,7 +6,7 @@
 #    By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/06/15 14:15:13 by dbourdon          #+#    #+#              #
-#    Updated: 2017/01/08 16:23:44 by dbourdon         ###   ########.fr        #
+#    Updated: 2017/01/11 16:28:21 by dbourdon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,8 @@ SRCS = 	./src/cd/ft_cd.c \
 		./src/cd/ft_clear_path.c \
 		./src/env/ft_env.c \
 		./src/ft_init.c \
-		./src/main.c 
+		./src/main.c  \
+		./src/line/line.c
 
 
 OBJS = $(SRCS:$(SRCS)%.c=$(OBJ_DIR)/%.o)
@@ -40,7 +41,7 @@ $(LIB_NAME) :
 
 $(NAME) : $(OBJS)
 	@echo "Make Objects :\033[1;32m DONE !\033[m"
-	@$(CC) $(IFLAGS) -o $@ $^ $(LIBFLAGS)
+	@$(CC) $(IFLAGS) -o $@ $^ $(LIBFLAGS) -l termcap
 	@echo "Make $(NAME) :\033[1;32m DONE !\033[m"
 
 $(OBJ_DIR)/%.o: $(SRCS).c

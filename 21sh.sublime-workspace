@@ -4,6 +4,62 @@
 		"selected_items":
 		[
 			[
+				"inc",
+				"include"
+			],
+			[
+				"ft",
+				"ft_strdup"
+			],
+			[
+				"ft_enc",
+				"ft_env_stock"
+			],
+			[
+				"ft_env",
+				"ft_env_addend"
+			],
+			[
+				"str",
+				"ft_strdup"
+			],
+			[
+				"m",
+				"malloc"
+			],
+			[
+				"free",
+				"ft_freetabtab"
+			],
+			[
+				"ft_cd",
+				"ft_cd_spe"
+			],
+			[
+				"env",
+				"environ"
+			],
+			[
+				"s",
+				"singletone"
+			],
+			[
+				"ft_c",
+				"ft_clear_path_free"
+			],
+			[
+				"ft_str",
+				"ft_strdup"
+			],
+			[
+				"tpm",
+				"tmp2"
+			],
+			[
+				"t",
+				"tmp"
+			],
+			[
 				"b",
 				"b_term"
 			],
@@ -12,20 +68,12 @@
 				"ft_putchar_fd"
 			],
 			[
-				"ft",
-				"ft_putstr_fd"
-			],
-			[
 				"t_",
 				"t_info"
 			],
 			[
 				"ft_print",
 				"ft_print_lign"
-			],
-			[
-				"t",
-				"t_elem"
 			],
 			[
 				"mo",
@@ -104,10 +152,6 @@
 				"mlx_pixel_put"
 			],
 			[
-				"ft_str",
-				"ft_strdup"
-			],
-			[
 				"fts",
 				"ft_strcmp"
 			],
@@ -116,16 +160,8 @@
 				"chdir"
 			],
 			[
-				"str",
-				"ft_strjoinfree"
-			],
-			[
 				"n",
 				"npath"
-			],
-			[
-				"free",
-				"free_tabtab"
 			],
 			[
 				"ft_retou",
@@ -140,20 +176,8 @@
 				"environ"
 			],
 			[
-				"inc",
-				"inc\t#include <…>"
-			],
-			[
-				"s",
-				"signum"
-			],
-			[
 				"ft_s",
 				"ft_strjoinfree"
-			],
-			[
-				"env",
-				"envtab"
 			],
 			[
 				"en",
@@ -183,6 +207,96 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "Makefile",
+			"settings":
+			{
+				"buffer_size": 1792,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "includes/ft_env.h",
+			"settings":
+			{
+				"buffer_size": 1195,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "includes/ft_cd.h",
+			"settings":
+			{
+				"buffer_size": 1421,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "out.txt",
+			"settings":
+			{
+				"buffer_size": 195,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/line/line.c",
+			"settings":
+			{
+				"buffer_size": 1783,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "includes/21sh.h",
+			"settings":
+			{
+				"buffer_size": 1696,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/main.c",
+			"settings":
+			{
+				"buffer_size": 2568,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "libft/get_next_line.c",
+			"settings":
+			{
+				"buffer_size": 2926,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/cd/ft_clear_path.c",
+			"settings":
+			{
+				"buffer_size": 2135,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/ft_init.c",
+			"settings":
+			{
+				"buffer_size": 1998,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -211,6 +325,9 @@
 		"height": 126.0,
 		"history":
 		[
+			"i",
+			"help",
+			"ls",
 			"import urllib.request,os,hashlib; h = '2915d1851351e5ee549c20394736b442' + '8bc59f460fa1548d1514676163dafc88'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
 		]
 	},
@@ -225,10 +342,27 @@
 	},
 	"expanded_folders":
 	[
-		"/Users/dbourdon/21sh"
+		"/Users/dbourdon/21sh",
+		"/Users/dbourdon/21sh/includes",
+		"/Users/dbourdon/21sh/src"
 	],
 	"file_history":
 	[
+		"/Users/dbourdon/21sh/includes/line.h",
+		"/Users/dbourdon/21sh/src/env/ft_env.c",
+		"/Users/dbourdon/21sh/includes/ft_env.h",
+		"/Users/dbourdon/21sh/src/cd/ft_cd2.c",
+		"/Users/dbourdon/21sh/src/cd/ft_cd.c",
+		"/Users/dbourdon/fillit/test.fillit",
+		"/Users/dbourdon/21sh/out",
+		"/Users/dbourdon/21sh/src/main.c",
+		"/Users/dbourdon/21sh/libft/ft_memset.c",
+		"/Users/dbourdon/ft_select/Makefile",
+		"/Users/dbourdon/21sh/src/cd/ft_clear_path.c",
+		"/Users/dbourdon/21sh/src/cd/ft_lstchr.c",
+		"/Users/dbourdon/21sh/.gitignore",
+		"/Users/dbourdon/21sh/cd.c",
+		"/Users/dbourdon/21sh/main.c",
 		"/Users/dbourdon/make-makefile.sh",
 		"/Users/dbourdon/c-select/src/affichage.c",
 		"/Users/dbourdon/select/lol",
@@ -329,7 +463,7 @@
 	],
 	"find":
 	{
-		"height": 22.0
+		"height": 35.0
 	},
 	"find_in_files":
 	{
@@ -344,6 +478,12 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"while",
+			"[\\\\'`/]",
+			"\\",
+			"getcwd",
+			"ft_cd_spe",
+			"path",
 			"\\",
 			"tinfo",
 			"point",
@@ -395,8 +535,299 @@
 	"groups":
 	[
 		{
+			"selected": 5,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "Makefile",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1792,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1135,
+								1135
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Makefile/Makefile.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "includes/ft_env.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1195,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								947,
+								947
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 9,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "includes/ft_cd.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1421,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								985,
+								967
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "out.txt",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 195,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								20,
+								20
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "src/line/line.c",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1783,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1093,
+								1093
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "includes/21sh.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1696,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1217,
+								1217
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 6,
+					"file": "src/main.c",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2568,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								909,
+								909
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "libft/get_next_line.c",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2926,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1298,
+								1298
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "src/cd/ft_clear_path.c",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2135,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1131,
+								1131
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "src/ft_init.c",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1998,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1997,
+								1997
+							]
+						],
+						"settings":
+						{
+							"auto_name": "",
+							"syntax": "Packages/C++/C.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				}
 			]
 		}
 	],
@@ -417,11 +848,18 @@
 				0,
 				1,
 				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
 			]
 		],
 		"cols":
 		[
 			0.0,
+			0.5,
 			1.0
 		],
 		"rows":

@@ -6,7 +6,7 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 14:45:48 by dbourdon          #+#    #+#             */
-/*   Updated: 2017/01/10 17:33:58 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/01/11 18:31:18 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,18 @@ int		main(void)
 	char		*test;
 
 	signal(SIGINT, sighandler);
+	printf("before ft_init_info\n");
 	info = ft_init_info(environ);
+	printf("before singleton\n");
 	singleton(info);
 	ft_affichage_help();
-	if (ft_line_start(info->term) == -1)
+	printf("Before ft_line_start\n");
+	if (ft_line_start(info) == -1)
 		return (1);
+	printf("OK before ft_line_get\n");
 	test = ft_line_get(0);
+	printf("after\n");
+	exit(10);
 	while (42)
 	{
 		str = (char**)malloc(sizeof(char*) * 1);
