@@ -6,7 +6,7 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 14:45:48 by dbourdon          #+#    #+#             */
-/*   Updated: 2017/01/11 18:31:18 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/01/12 17:37:22 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,9 @@ int		main(void)
 		return (1);
 	printf("OK before ft_line_get\n");
 	test = ft_line_get(0);
-	printf("after\n");
+	printf("\n%s\n", test);
+	tputs(tgetstr("ei", NULL), 1, my_outc);
+	tcsetattr(0, TCSADRAIN, &(info->b_term));
 	exit(10);
 	while (42)
 	{
