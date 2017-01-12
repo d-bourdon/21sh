@@ -6,7 +6,7 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 15:05:59 by dbourdon          #+#    #+#             */
-/*   Updated: 2017/01/12 17:39:11 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/01/12 18:03:49 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ char	*ft_line_get(int fd)
 		buff[1] = 0;
 		buff[2] = 0;
 		read(0, buff, 3);
-		line = ft_strjoinfree(line, &buff[0], 1);
 		if (buff[0] == 10 && buff[1] == 0 && buff[2] == 0)
 			return (line);
 		if (buff[0] == 27 && buff[1] == 91 && buff[2] == 68)
@@ -64,8 +63,18 @@ char	*ft_line_get(int fd)
 			{
 				tputs(tgetstr("nd", NULL), 1, my_outc);
 			}
+		else if (buff[0] == 127)
+		{
+				tputs(tgetstr("le", NULL), 1, my_outc);
+				tputs(tgetstr("dc", NULL), 1, my_outc);
+				//tputs(tgetstr("nd", NULL), 1, my_outc);
+		}
+		else if (buff[0] == 9)
+			tputs("\t", 1, my_outc);
 		else
 		{
+		line = ft_strjoinfree(line, &buff[0], 1);
+			//printf("%d - %d - %d\n", buff[0], buff[1], buff[2]);
 			write(1, &buff[0], 1);
 		}
 	}
