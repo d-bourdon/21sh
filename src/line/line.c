@@ -6,13 +6,22 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 15:05:59 by dbourdon          #+#    #+#             */
-/*   Updated: 2017/01/12 18:03:49 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/01/13 17:08:57 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "21sh.h"
 # include <term.h>
 #include <curses.h>
+
+static char*	ft_strsubc(char *line,int p)
+{
+	char* tmp;
+	tmp = ft_strsub(line, 0, p - 1);
+	tmp = ft_strjoinfree(tmp, ft_strsub(line, p, ft_strlen(line) - 1), 3);
+	free (line);
+	return (tmp);
+}
 
 int		my_outc(int c)
 {
@@ -46,6 +55,11 @@ char	*ft_line_get(int fd)
 {
 	char	buff[3];
 	char	*line = ft_strdup("-");
+	int		c;
+	int		p;
+
+	c = 0;
+	p = 0;
 	fd = 0;
 	while (1)
 	{
@@ -54,28 +68,42 @@ char	*ft_line_get(int fd)
 		buff[2] = 0;
 		read(0, buff, 3);
 		if (buff[0] == 10 && buff[1] == 0 && buff[2] == 0)
+			{
+			printf("\n%s\n", line);
 			return (line);
+			}
 		if (buff[0] == 27 && buff[1] == 91 && buff[2] == 68)
 			{
+				if (p > 0)
+					p--;
 				tputs(tgetstr("le", NULL), 1, my_outc);
 			}
 		else if (buff[0] == 27 && buff[1] == 91 && buff[2] == 67)
 			{
-				tputs(tgetstr("nd", NULL), 1, my_outc);
+				if (p <= c)
+				{
+					p++;
+					tputs(tgetstr("nd", NULL), 1, my_outc);
+				}
 			}
 		else if (buff[0] == 127)
 		{
+				line = ft_strsubc(line, p);
 				tputs(tgetstr("le", NULL), 1, my_outc);
 				tputs(tgetstr("dc", NULL), 1, my_outc);
+				buff[0] = 8;
 				//tputs(tgetstr("nd", NULL), 1, my_outc);
 		}
 		else if (buff[0] == 9)
 			tputs("\t", 1, my_outc);
 		else
 		{
-		line = ft_strjoinfree(line, &buff[0], 1);
+			c++;
+			p++;
+			line = ft_strjoinfree(line, &buff[0], 1);
 			//printf("%d - %d - %d\n", buff[0], buff[1], buff[2]);
 			write(1, &buff[0], 1);
 		}
+		//printf("|%s|\n", line);
 	}
 }
