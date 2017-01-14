@@ -6,7 +6,7 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 15:05:59 by dbourdon          #+#    #+#             */
-/*   Updated: 2017/01/13 17:08:57 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/01/14 14:08:26 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 static char*	ft_strsubc(char *line,int p)
 {
 	char* tmp;
-	tmp = ft_strsub(line, 0, p - 1);
-	tmp = ft_strjoinfree(tmp, ft_strsub(line, p, ft_strlen(line) - 1), 3);
+	tmp = ft_strsub(line, 0, p);
+	tmp = ft_strjoinfree(tmp, ft_strsub(line, p+1, ft_strlen(line) - 1), 3);
 	free (line);
 	return (tmp);
 }
@@ -68,10 +68,7 @@ char	*ft_line_get(int fd)
 		buff[2] = 0;
 		read(0, buff, 3);
 		if (buff[0] == 10 && buff[1] == 0 && buff[2] == 0)
-			{
-			printf("\n%s\n", line);
 			return (line);
-			}
 		if (buff[0] == 27 && buff[1] == 91 && buff[2] == 68)
 			{
 				if (p > 0)
@@ -80,7 +77,7 @@ char	*ft_line_get(int fd)
 			}
 		else if (buff[0] == 27 && buff[1] == 91 && buff[2] == 67)
 			{
-				if (p <= c)
+				if (p < c)
 				{
 					p++;
 					tputs(tgetstr("nd", NULL), 1, my_outc);
@@ -88,11 +85,13 @@ char	*ft_line_get(int fd)
 			}
 		else if (buff[0] == 127)
 		{
-				line = ft_strsubc(line, p);
 				tputs(tgetstr("le", NULL), 1, my_outc);
 				tputs(tgetstr("dc", NULL), 1, my_outc);
-				buff[0] = 8;
-				//tputs(tgetstr("nd", NULL), 1, my_outc);
+				line = ft_strsubc(line, p);
+				if (p > 0)
+					p--;
+				if (c > 0)
+					c--;
 		}
 		else if (buff[0] == 9)
 			tputs("\t", 1, my_outc);
@@ -101,9 +100,7 @@ char	*ft_line_get(int fd)
 			c++;
 			p++;
 			line = ft_strjoinfree(line, &buff[0], 1);
-			//printf("%d - %d - %d\n", buff[0], buff[1], buff[2]);
 			write(1, &buff[0], 1);
 		}
-		//printf("|%s|\n", line);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 14:45:48 by dbourdon          #+#    #+#             */
-/*   Updated: 2017/01/12 17:37:22 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/01/14 14:15:33 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ int		main(void)
 	int			i;
 	extern char	**environ;
 	t_info		*info;
-	char		*test;
 
+	i = 0;
 	signal(SIGINT, sighandler);
 	printf("before ft_init_info\n");
 	info = ft_init_info(environ);
@@ -58,22 +58,26 @@ int		main(void)
 	printf("Before ft_line_start\n");
 	if (ft_line_start(info) == -1)
 		return (1);
-	printf("OK before ft_line_get\n");
-	test = ft_line_get(0);
-	printf("\n%s\n", test);
-	tputs(tgetstr("ei", NULL), 1, my_outc);
-	tcsetattr(0, TCSADRAIN, &(info->b_term));
-	exit(10);
+//	printf("OK before ft_line_get\n");
+	//test = ft_line_get(0);
+	//printf("\n%s\n", test);
+	//exit(10);
 	while (42)
 	{
 		str = (char**)malloc(sizeof(char*) * 1);
 		ft_putstr("\n\033[1;34m");
 		ft_putstr(info->workdir);
 		ft_putstr("\n\033[1;32m$\033[33m--> \033[00m");
-		i = get_next_line(0, str);
+		str[0] = ft_line_get(0);
 	//	if (str[0][0] != '\0' && (tmp = ft_cherche_env(str[0])) != NULL)
 	//		ft_affichage_un_env(tmp);
-		if (str[0][0] != '\0')
+
+		if (ft_strcmp(str[0], "exit") == 0)
+		{
+			tputs(tgetstr("ei", NULL), 1, my_outc);
+			tcsetattr(0, TCSADRAIN, &(info->b_term));
+		}
+		else if (str[0][0] != '\0')
 		{
 			ft_cd(ft_strsplitw(str[0]), info->env);
 			printf("ENV %s\n", ft_env_chr(info->env, "PWD")->value);
