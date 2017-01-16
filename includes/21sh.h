@@ -6,7 +6,7 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/05 17:03:23 by dbourdon          #+#    #+#             */
-/*   Updated: 2017/01/11 18:15:33 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/01/16 18:00:22 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,18 @@
 # include <unistd.h>
 # include <fcntl.h>
 
+typedef struct		s_cmd
+{
+	char			**av;
+	int				*ipipe;
+	int				*opipe;
+	struct s_cmd	*next;
+}					t_cmd;
+
 typedef	struct		s_info
 {
 	char			*workdir;
+	t_cmd			cmd;
 	t_env			*env;
 	struct termios	term;
 	struct termios	b_term;
@@ -58,4 +67,6 @@ t_info	*ft_init_info(char **environ);
 */
 int		ft_line_start(t_info *info);
 char	*ft_line_get(int fd);
+
+t_cmd	*ft_line_parse(char *str, t_info *info);
 #endif

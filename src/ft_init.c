@@ -6,7 +6,7 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/05 17:39:42 by dbourdon          #+#    #+#             */
-/*   Updated: 2017/01/14 14:07:41 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/01/16 18:11:06 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ t_info	*ft_init_info(char **environ)
 	info->l_win = 0;
 	info->h_win = 0;
 	info->workdir = ft_strdup(tmp);
+	//info->cmd = NULL;
 	info->env = ft_init_env(environ);
 	return (info);
 }

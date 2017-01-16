@@ -6,7 +6,7 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/10 15:05:59 by dbourdon          #+#    #+#             */
-/*   Updated: 2017/01/14 14:08:26 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/01/16 18:25:42 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,13 @@
 
 static char*	ft_strsubc(char *line,int p)
 {
+	printf("%d - %d - %s\n", p, (int)ft_strlen(line), line);
+	if (p <= 1 && ft_strlen(line) <= 1)
+	{
+		free(line);
+		line = ft_strdup("");
+		return (line);
+	}
 	char* tmp;
 	tmp = ft_strsub(line, 0, p);
 	tmp = ft_strjoinfree(tmp, ft_strsub(line, p+1, ft_strlen(line) - 1), 3);
@@ -54,7 +61,7 @@ int		ft_line_start(t_info *info)
 char	*ft_line_get(int fd)
 {
 	char	buff[3];
-	char	*line = ft_strdup("-");
+	char	*line = ft_strdup("");
 	int		c;
 	int		p;
 
@@ -72,8 +79,10 @@ char	*ft_line_get(int fd)
 		if (buff[0] == 27 && buff[1] == 91 && buff[2] == 68)
 			{
 				if (p > 0)
+				{
 					p--;
-				tputs(tgetstr("le", NULL), 1, my_outc);
+					tputs(tgetstr("le", NULL), 1, my_outc);
+				}
 			}
 		else if (buff[0] == 27 && buff[1] == 91 && buff[2] == 67)
 			{
@@ -85,13 +94,18 @@ char	*ft_line_get(int fd)
 			}
 		else if (buff[0] == 127)
 		{
+			//printf("%d-%d\n", p , c );
+			if (p > 0 && c > 0)
+			{
 				tputs(tgetstr("le", NULL), 1, my_outc);
 				tputs(tgetstr("dc", NULL), 1, my_outc);
+				printf("before %d\n", (int)ft_strlen(line));
 				line = ft_strsubc(line, p);
-				if (p > 0)
+				printf("After\n");
 					p--;
 				if (c > 0)
 					c--;
+			}
 		}
 		else if (buff[0] == 9)
 			tputs("\t", 1, my_outc);

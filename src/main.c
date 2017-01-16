@@ -6,7 +6,7 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 14:45:48 by dbourdon          #+#    #+#             */
-/*   Updated: 2017/01/14 14:15:33 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/01/16 18:17:05 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	*singleton(void *data)
 
 int		main(void)
 {
-	char		**str;
+	char		*str;
 	int			i;
 	extern char	**environ;
 	t_info		*info;
@@ -64,22 +64,21 @@ int		main(void)
 	//exit(10);
 	while (42)
 	{
-		str = (char**)malloc(sizeof(char*) * 1);
 		ft_putstr("\n\033[1;34m");
 		ft_putstr(info->workdir);
 		ft_putstr("\n\033[1;32m$\033[33m--> \033[00m");
-		str[0] = ft_line_get(0);
-	//	if (str[0][0] != '\0' && (tmp = ft_cherche_env(str[0])) != NULL)
-	//		ft_affichage_un_env(tmp);
-
-		if (ft_strcmp(str[0], "exit") == 0)
+		str = ft_line_get(0);
+		//info->cmd = ft_line_parse(str, info);
+		printf("|%s|\n", str);
+		if (ft_strcmp(str, "exit") == 0)
 		{
 			tputs(tgetstr("ei", NULL), 1, my_outc);
 			tcsetattr(0, TCSADRAIN, &(info->b_term));
+			exit(0);
 		}
-		else if (str[0][0] != '\0')
+		else if (str[0] != '\0')
 		{
-			ft_cd(ft_strsplitw(str[0]), info->env);
+			ft_cd(ft_strsplitw(str), info->env);
 			printf("ENV %s\n", ft_env_chr(info->env, "PWD")->value);
 		}
 	}
