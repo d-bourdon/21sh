@@ -6,7 +6,7 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 14:45:48 by dbourdon          #+#    #+#             */
-/*   Updated: 2017/01/16 18:17:05 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/01/18 18:58:10 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,25 @@ int		main(void)
 		ft_putstr(info->workdir);
 		ft_putstr("\n\033[1;32m$\033[33m--> \033[00m");
 		str = ft_line_get(0);
-		//info->cmd = ft_line_parse(str, info);
-		printf("|%s|\n", str);
+		info->cmd = ft_line_parse(str);
+		if (info->cmd == NULL)
+			printf("NULLLLLLLLLLLLLLLLL\n");
+		if (info->cmd)
+		{
+			printf("\ninfo->cmd exis\n");
+			if (info->cmd->av)
+			{
+				printf("info->cmd->av\n");
+				if (info->cmd->av[0])
+				{
+					printf("info->cmd->av[0] = %s\n", info->cmd->av[0]);
+					if (info->cmd->next && info->cmd->next->av[0])
+						printf("info->cmd->av[0] = %s\n", info->cmd->next->av[0]);
+
+				}
+			}
+		}
+		// printf("|%s|\n", str);
 		if (ft_strcmp(str, "exit") == 0)
 		{
 			tputs(tgetstr("ei", NULL), 1, my_outc);

@@ -6,7 +6,7 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/18 12:39:11 by dbourdon          #+#    #+#             */
-/*   Updated: 2017/01/18 16:28:13 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/01/18 19:16:51 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,10 @@ static char	*dupword(char *str)
 		return (NULL);
 	if (str[len] == '\"' || str[len] == '\'')
 	{
+		printf("on a detect une quote\n");
 		tmp = len;
-		while (str[len] && str[len] != strtmp)
+		len++;
+		while (str[len] && str[len] != str[tmp])
 			len++;
 	}
 	while (str[len] && ft_isspace(str[len]) == 0)
@@ -73,7 +75,7 @@ char		**ft_strsplitwq(char *str)
 	i = 0;
 	j = 0;
 	tmp = 0;
-	if ((nb = nb_word(str)) == -1);
+	if ((nb = nb_word(str)) == -1)
 		return (NULL);
 	if ((out = (char**)ft_memalloc(sizeof(char*) * nb)) == NULL)
 		return (NULL);
@@ -81,10 +83,11 @@ char		**ft_strsplitwq(char *str)
 	{
 		while (str[i] && ft_isspace(str[i]))
 			i++;
-		out[j++;] = dupword(&str[i]);
+		out[j++] = dupword(&str[i]);
 		if (str[i] == '\"' || str[i] == '\'')
 		{
 			tmp = i;
+			i++;
 			while (str[i] && str[i] != str[tmp])
 				i++;
 		}
