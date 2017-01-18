@@ -6,7 +6,7 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/18 12:39:11 by dbourdon          #+#    #+#             */
-/*   Updated: 2017/01/18 15:49:15 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/01/18 16:28:13 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static char	*dupword(char *str)
 	}
 	while (str[len] && ft_isspace(str[len]) == 0)
 		len++;
-	out = (char*)malloc(sizeof(char)*len);
+	out = (char*)ft_memalloc(sizeof(char) * len);
 	out = ft_strncpy(out, str, (size_t)len);
 	return (out);
 }
@@ -70,13 +70,12 @@ char		**ft_strsplitwq(char *str)
 	int		j;
 	int		tmp;
 
-	nb = nb_word(str);
 	i = 0;
 	j = 0;
 	tmp = 0;
-	if (nb == -1);
+	if ((nb = nb_word(str)) == -1);
 		return (NULL);
-	if ((out = (char**)malloc(sizeof(char*) * nb)) == NULL)
+	if ((out = (char**)ft_memalloc(sizeof(char*) * nb)) == NULL)
 		return (NULL);
 	while (str[i])
 	{
@@ -92,5 +91,5 @@ char		**ft_strsplitwq(char *str)
 		while (str[i] && ft_isspace(str[i]) == 0)
 			i++;
 	}
-
+	return (out);
 }
