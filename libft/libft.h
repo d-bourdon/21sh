@@ -6,7 +6,7 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/28 15:55:47 by paim              #+#    #+#             */
-/*   Updated: 2016/10/20 17:08:53 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/01/20 11:36:58 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,9 @@ typedef struct		s_list
 	struct s_list	*next;
 }					t_list;
 
+void				fr_free_tabtab(char **tab);
+void				fr_free_ntab(char **tab, int n);
+void				fr_free_tabtabn(char **tab, int n);
 char				*ft_strdupfree(char *s1);
 char				*ft_strsubfree(char *s, unsigned int start,
 						size_t len);

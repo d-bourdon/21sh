@@ -6,7 +6,7 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/18 12:39:11 by dbourdon          #+#    #+#             */
-/*   Updated: 2017/01/18 19:16:51 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/01/20 13:37:09 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ static char	*dupword(char *str)
 		return (NULL);
 	if (str[len] == '\"' || str[len] == '\'')
 	{
-		printf("on a detect une quote\n");
 		tmp = len;
 		len++;
 		while (str[len] && str[len] != str[tmp])
@@ -59,7 +58,7 @@ static char	*dupword(char *str)
 	}
 	while (str[len] && ft_isspace(str[len]) == 0)
 		len++;
-	out = (char*)ft_memalloc(sizeof(char) * len);
+	out = (char*)malloc(sizeof(char) * len + 1);
 	out = ft_strncpy(out, str, (size_t)len);
 	return (out);
 }
@@ -77,13 +76,15 @@ char		**ft_strsplitwq(char *str)
 	tmp = 0;
 	if ((nb = nb_word(str)) == -1)
 		return (NULL);
-	if ((out = (char**)ft_memalloc(sizeof(char*) * nb)) == NULL)
+	if ((out = (char**)ft_memalloc(sizeof(char*) * nb + 1)) == NULL)
 		return (NULL);
 	while (str[i])
 	{
 		while (str[i] && ft_isspace(str[i]))
 			i++;
+		printf("J = %d\n", j);
 		out[j++] = dupword(&str[i]);
+		out[j] = NULL;
 		if (str[i] == '\"' || str[i] == '\'')
 		{
 			tmp = i;

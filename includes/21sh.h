@@ -6,7 +6,7 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/05 17:03:23 by dbourdon          #+#    #+#             */
-/*   Updated: 2017/01/18 18:28:02 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/01/19 13:16:22 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,5 +78,10 @@ t_cmd	*ft_line_parse(char *str);
 ** ft_strsplitwq.c
 */
 char	**ft_strsplitwq(char *str);
+
+/*
+** detect_cmd.c
+*/
+int		ft_detect_builtin(t_cmd *cmd, t_info *info);
 
 #endif

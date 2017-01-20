@@ -6,7 +6,7 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 14:49:13 by dbourdon          #+#    #+#             */
-/*   Updated: 2017/01/10 14:05:25 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/01/19 14:54:20 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 
 int		ft_cd(char **argv, t_env *env)
 {
+	printf("ARGV %s - %s\n", argv[0], argv[1]);
 	if (ft_env_chr(env, "PWD") == NULL)
 		ft_env_stock(env, "PWD", " ");
 	if (argv[0] && !argv[1])

@@ -6,7 +6,7 @@
 #    By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/07 15:51:25 by paim              #+#    #+#              #
-#    Updated: 2017/01/17 11:46:23 by dbourdon         ###   ########.fr        #
+#    Updated: 2017/01/20 11:37:40 by dbourdon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -83,6 +83,7 @@ SRC = ft_isnbr.c\
 	  ft_strdupfree.c\
 	  ft_pow.c\
 	  ft_revers.c\
+	  ft_free_tabtab.c
 
 OBJ = $(SRC:.c=.o)
 

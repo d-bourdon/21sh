@@ -6,7 +6,7 @@
 #    By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/06/15 14:15:13 by dbourdon          #+#    #+#              #
-#    Updated: 2017/01/18 17:48:51 by dbourdon         ###   ########.fr        #
+#    Updated: 2017/01/19 13:14:47 by dbourdon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,8 @@ SRCS = 	./src/cd/ft_cd.c \
 		./src/main.c  \
 		./src/line/line.c \
 		./src/line/parse.c \
-		./src/ft_strsplitwq.c
+		./src/ft_strsplitwq.c \
+		./src/detect_cmd.c 
 
 
 OBJS = $(SRCS:$(SRCS)%.c=$(OBJ_DIR)/%.o)
