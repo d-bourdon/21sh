@@ -6,7 +6,7 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 14:45:48 by dbourdon          #+#    #+#             */
-/*   Updated: 2017/01/20 13:06:05 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/01/20 15:10:11 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int		main(void)
 	int			i;
 	extern char	**environ;
 	t_info		*info;
-	t_cmd		*tmp;
+//	t_cmd		*tmp;
 
 	i = 0;
 	signal(SIGINT, sighandler);
@@ -75,13 +75,13 @@ int		main(void)
 			printf("NULLLLLLLLLLLLLLLLL\n");
 		printf("cmd before builtin: %s\n", info->cmd->av[0]);
 		ft_detect_builtin(info->cmd, info);
-		while (info->cmd)
-		{
-			fr_free_tabtab(info->cmd->av);
-			tmp = info->cmd->next;
-			free (info->cmd);
-			info->cmd = tmp;
-		}
+		// while (info->cmd)
+		// {
+		// 	fr_free_tabtab(info->cmd->av);
+		// 	tmp = info->cmd->next;
+		// 	free (info->cmd);
+		// 	info->cmd = tmp;
+		// }
 	}
 	return (1);
 } 
