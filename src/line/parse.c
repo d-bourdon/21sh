@@ -6,7 +6,7 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/16 17:59:04 by dbourdon          #+#    #+#             */
-/*   Updated: 2017/01/20 14:57:06 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/01/20 18:46:14 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,10 @@ void	ft_line_exploit(char *str, int start, int i, t_cmd **out)
 	if (*out == NULL)
 		*out = ok;
 	else
+
 	{
 		list = *out;
-		while (list->next)
+		while (list && list->next)
 			list  = list->next;
 		list->next = ok;
 	}

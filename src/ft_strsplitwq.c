@@ -6,7 +6,7 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/18 12:39:11 by dbourdon          #+#    #+#             */
-/*   Updated: 2017/01/20 13:37:09 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/01/20 17:31:58 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static char	*dupword(char *str)
 	}
 	while (str[len] && ft_isspace(str[len]) == 0)
 		len++;
-	out = (char*)malloc(sizeof(char) * len + 1);
+	out = (char*)ft_memalloc(sizeof(char) * len + 1);
 	out = ft_strncpy(out, str, (size_t)len);
 	return (out);
 }

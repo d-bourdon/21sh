@@ -6,7 +6,7 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 14:45:48 by dbourdon          #+#    #+#             */
-/*   Updated: 2017/01/20 15:10:11 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/01/20 20:21:34 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ int		main(void)
 	int			i;
 	extern char	**environ;
 	t_info		*info;
+	void		*hash; 
 //	t_cmd		*tmp;
 
 	i = 0;
@@ -69,7 +70,6 @@ int		main(void)
 		ft_putstr(info->workdir);
 		ft_putstr("\n\033[1;32m$\033[33m--> \033[00m");
 		str = ft_line_get(0);
-		printf("\n|%s|\n", str);
 		info->cmd = ft_line_parse(str);
 		if (info->cmd == NULL)
 			printf("NULLLLLLLLLLLLLLLLL\n");

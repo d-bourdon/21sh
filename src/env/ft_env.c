@@ -6,7 +6,7 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 17:30:41 by dbourdon          #+#    #+#             */
-/*   Updated: 2017/01/10 14:03:24 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/01/20 17:32:17 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	ft_env_stock(t_env *env, char *find, char *value)
 	tmp = ft_env_chr(env, find);
 	if (tmp->value == NULL)
 		{
-			ajout = (t_env*)malloc(sizeof(t_env));
+			ajout = (t_env*)ft_memalloc(sizeof(t_env));
 			ajout->name = ft_strdup(find);
 			if (value == NULL)
 				ajout->value = ft_strdup(" ");
