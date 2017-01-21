@@ -6,7 +6,7 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/05 17:03:23 by dbourdon          #+#    #+#             */
-/*   Updated: 2017/01/21 14:54:37 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/01/21 15:06:56 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 # include <unistd.h>
 # include <fcntl.h>
 
-# define L_HASH 3000;
+# define L_HASH 3000
 
 
 typedef struct		s_hash
@@ -50,7 +50,7 @@ typedef struct		s_cmd
 typedef	struct		s_info
 {
 	char			*workdir;
-	void			*hash;
+	t_hash			**hash;
 	t_cmd			*cmd;
 	t_env			*env;
 	struct termios	term;
@@ -96,10 +96,10 @@ char				**ft_strsplitwq(char *str);
 int					ft_detect_builtin(t_cmd *cmd, t_info *info);
 
 /*
-**	hash/*.c
+**	hash/
 */
-void				*ft_hash_init(void);
-void				ft_hash_add(char *name, char *value, int hash, void **table);
+t_hash				**ft_hash_init(void);
+void				ft_hash_add(char *name, char *value, int hash, t_hash **table);
 t_cmd				*ft_hash_check(t_info *info, t_cmd *cmd);
 int					ft_hash_calc(char *str);
 int					*ft_hash_eratho(int size);

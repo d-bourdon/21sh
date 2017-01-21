@@ -6,7 +6,7 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 14:45:48 by dbourdon          #+#    #+#             */
-/*   Updated: 2017/01/20 20:21:34 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/01/21 15:00:16 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int		main(void)
 	int			i;
 	extern char	**environ;
 	t_info		*info;
-	void		*hash; 
+	//void		*hash; 
 //	t_cmd		*tmp;
 
 	i = 0;

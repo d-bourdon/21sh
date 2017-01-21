@@ -6,13 +6,13 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/21 12:10:36 by dbourdon          #+#    #+#             */
-/*   Updated: 2017/01/21 14:33:06 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/01/21 15:48:34 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "21sh.h"
 
-static int	*hash_areti(str, size)
+static int	*hash_areti(char *str, int size)
 {
 	int		i;
 	int		j;
@@ -31,7 +31,7 @@ static int	*hash_areti(str, size)
 	while (i < size)
 	{
 		if (!str[i])
-			out[j++] = str[i];
+			out[j++] = i;
 		i++;
 	}
 	return (out);
@@ -43,7 +43,7 @@ t_cmd	*ft_hash_check(t_info *info, t_cmd *cmd)
 	t_hash	*tmp;
 
 	hash = ft_hash_calc(cmd->av[0]);
-	tmp = info->hash[hash]
+	tmp = info->hash[hash];
 	if (tmp == NULL)
 		return (cmd);	
 	else if (ft_strequ(tmp->cmd, cmd->av[0]))
@@ -61,7 +61,7 @@ t_cmd	*ft_hash_check(t_info *info, t_cmd *cmd)
 				cmd->av[0] = ft_strdup(tmp->next->path);
 				return (cmd);
 			}
-			tmp = tmp->next
+			tmp = tmp->next;
 		}
 	return (cmd);
 }
@@ -75,6 +75,7 @@ int		ft_hash_calc(char *str)
 
 	len = ft_strlen(str);
 	i = 0;
+	out = 0;
 	prem = ft_hash_eratho((len * 100) / 15);
 	while (i < len && prem[i])
 	{
