@@ -6,7 +6,7 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/05 17:03:23 by dbourdon          #+#    #+#             */
-/*   Updated: 2017/01/19 13:16:22 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/01/21 14:54:37 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,16 @@
 # include <unistd.h>
 # include <fcntl.h>
 
+# define L_HASH 3000;
+
+
+typedef struct		s_hash
+{
+	char			*cmd;
+	char			*path;
+	struct s_hash	*next;
+}					t_hash;
+
 typedef struct		s_cmd
 {
 	char			**av;
@@ -40,6 +50,7 @@ typedef struct		s_cmd
 typedef	struct		s_info
 {
 	char			*workdir;
+	void			*hash;
 	t_cmd			*cmd;
 	t_env			*env;
 	struct termios	term;
@@ -49,39 +60,48 @@ typedef	struct		s_info
 }					t_info;
 
 
-int		my_outc(int c);
+int					my_outc(int c);
 /*
 ** main.c :
 */
-void	*singleton(void *data);
+void				*singleton(void *data);
 
 /*
 ** ft_init.c :
 */
-void	ft_freetabtab(char **tabl);
-t_env	*ft_init_env(char **environ);
-t_info	*ft_init_info(char **environ);
+void				ft_freetabtab(char **tabl);
+t_env				*ft_init_env(char **environ);
+t_info				*ft_init_info(char **environ);
 
 /*
 ** line/line.c
 */
-int		ft_line_start(t_info *info);
-char	*ft_line_get(int fd);
+int					ft_line_start(t_info *info);
+char				*ft_line_get(int fd);
 
 /*
 ** line/parse.c
 */
-void	ft_line_exploit(char *str, int start, int i, t_cmd **out);
-t_cmd	*ft_line_parse(char *str);
+void				ft_line_exploit(char *str, int start, int i, t_cmd **out);
+t_cmd				*ft_line_parse(char *str);
 
 /*
 ** ft_strsplitwq.c
 */
-char	**ft_strsplitwq(char *str);
+char				**ft_strsplitwq(char *str);
 
 /*
 ** detect_cmd.c
 */
-int		ft_detect_builtin(t_cmd *cmd, t_info *info);
+int					ft_detect_builtin(t_cmd *cmd, t_info *info);
+
+/*
+**	hash/*.c
+*/
+void				*ft_hash_init(void);
+void				ft_hash_add(char *name, char *value, int hash, void **table);
+t_cmd				*ft_hash_check(t_info *info, t_cmd *cmd);
+int					ft_hash_calc(char *str);
+int					*ft_hash_eratho(int size);
 
 #endif
