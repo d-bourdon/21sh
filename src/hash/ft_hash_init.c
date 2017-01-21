@@ -6,7 +6,7 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/21 14:33:46 by dbourdon          #+#    #+#             */
-/*   Updated: 2017/01/21 15:08:27 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/01/21 16:22:58 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_hash	**ft_hash_init(void)
 
 	if ((out = (t_hash**)ft_memalloc(sizeof(t_hash*) * L_HASH)) == NULL)
 		return (NULL);
-	return(out);
+	return (out);
 }
 
 void	ft_hash_add(char *name, char *value, int hash, t_hash **table)

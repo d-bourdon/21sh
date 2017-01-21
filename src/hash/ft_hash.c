@@ -6,7 +6,7 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/21 12:10:36 by dbourdon          #+#    #+#             */
-/*   Updated: 2017/01/21 15:48:34 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/01/21 16:24:11 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int	*hash_areti(char *str, int size)
 	return (out);
 }
 
-t_cmd	*ft_hash_check(t_info *info, t_cmd *cmd)
+t_cmd		*ft_hash_check(t_info *info, t_cmd *cmd)
 {
 	int		hash;
 	t_hash	*tmp;
@@ -45,7 +45,7 @@ t_cmd	*ft_hash_check(t_info *info, t_cmd *cmd)
 	hash = ft_hash_calc(cmd->av[0]);
 	tmp = info->hash[hash];
 	if (tmp == NULL)
-		return (cmd);	
+		return (cmd);
 	else if (ft_strequ(tmp->cmd, cmd->av[0]))
 	{
 		free(cmd->av[0]);
@@ -66,7 +66,7 @@ t_cmd	*ft_hash_check(t_info *info, t_cmd *cmd)
 	return (cmd);
 }
 
-int		ft_hash_calc(char *str)
+int			ft_hash_calc(char *str)
 {
 	int		i;
 	int		len;
@@ -83,11 +83,11 @@ int		ft_hash_calc(char *str)
 		i++;
 	}
 	out = out % L_HASH;
-	free (prem);
+	free(prem);
 	return (out);
 }
 
-int		*ft_hash_eratho(int size)
+int			*ft_hash_eratho(int size)
 {
 	int		i;
 	int		j;
@@ -95,7 +95,7 @@ int		*ft_hash_eratho(int size)
 	int		*out;
 
 	i = 2;
-	if ((str = (char*)ft_memalloc(size +1)) == NULL)
+	if ((str = (char*)ft_memalloc(size + 1)) == NULL)
 		return (NULL);
 	while (i * i <= size)
 	{
@@ -111,6 +111,6 @@ int		*ft_hash_eratho(int size)
 		i++;
 	}
 	out = hash_areti(str, size);
-	free (str);
+	free(str);
 	return (out);
 }
