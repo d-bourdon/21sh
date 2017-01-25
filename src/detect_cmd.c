@@ -6,7 +6,7 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/19 13:00:50 by dbourdon          #+#    #+#             */
-/*   Updated: 2017/01/21 16:13:34 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/01/25 13:54:13 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,11 @@ int		ft_detect_builtin(t_cmd *cmd, t_info *info)
 		{
 			printf("cd %s - |%s|\n", tmp->av[0], tmp->av[1]);
 			ft_cd(tmp->av, info->env);
+		}
+		else if (ft_strequ(tmp->av[0], "echo"))
+		{
+			printf("echo !\n");
+			ft_echo(tmp->av);
 		}
 		tmp = tmp->next;
 	}

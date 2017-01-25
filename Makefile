@@ -6,7 +6,7 @@
 #    By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/06/15 14:15:13 by dbourdon          #+#    #+#              #
-#    Updated: 2017/01/21 14:56:08 by dbourdon         ###   ########.fr        #
+#    Updated: 2017/01/25 13:28:29 by dbourdon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,15 +19,18 @@ OBJ_DIR = obj
 SRCS = 	./src/cd/ft_cd.c \
 		./src/cd/ft_cd2.c \
 		./src/cd/ft_clear_path.c \
+		./src/detect_cmd.c \
+		./src/echo/ft_echo.c \
+		./src/echo/ft_echo2.c \
+		./src/echo/main.c \
 		./src/env/ft_env.c \
 		./src/ft_init.c \
-		./src/main.c  \
+		./src/ft_strsplitwq.c \
+		./src/hash/ft_hash.c \
+		./src/hash/ft_hash_init.c \
 		./src/line/line.c \
 		./src/line/parse.c \
-		./src/ft_strsplitwq.c \
-		./src/detect_cmd.c \
-		./src/hash/ft_hash.c \
-		./src/hash/ft_hash_init.c
+		./src/main.c
 
 
 OBJS = $(SRCS:$(SRCS)%.c=$(OBJ_DIR)/%.o)

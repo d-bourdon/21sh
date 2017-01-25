@@ -6,7 +6,7 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/05 17:03:23 by dbourdon          #+#    #+#             */
-/*   Updated: 2017/01/21 15:06:56 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/01/25 13:54:06 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,5 +103,12 @@ void				ft_hash_add(char *name, char *value, int hash, t_hash **table);
 t_cmd				*ft_hash_check(t_info *info, t_cmd *cmd);
 int					ft_hash_calc(char *str);
 int					*ft_hash_eratho(int size);
+
+/*
+** echo/
+*/
+int					ft_otod(int	octal);
+void				ft_putends(char const *s);
+int					ft_echo(char **av);
 
 #endif

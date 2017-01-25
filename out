@@ -1,6 +1,0 @@
-./src/cd/ft_cd.c
-./src/cd/ft_cd2.c
-./src/cd/ft_clear_path.c
-./src/env/ft_env.c
-./src/ft_init.c
-./src/main.c
