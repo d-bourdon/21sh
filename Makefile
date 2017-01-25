@@ -6,7 +6,7 @@
 #    By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/20 09:10:32 by oyagci            #+#    #+#              #
-#    Updated: 2017/01/25 15:57:03 by dbourdon         ###   ########.fr        #
+#    Updated: 2017/01/25 16:13:08 by dbourdon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,10 +62,10 @@ _SRCS				= main.c \
 					  switch_input_mode.c \
 					  autocomplete.c \
 					  ft_echo.c \
-					  ft_echo2.c \
-					  ft_cd.c \
-					  ft_cd2.c \
-					  ft_clear_path.c
+					  ft_echo2.c 
+					 # ft_cd.c \
+					 # ft_cd2.c \
+					 # ft_clear_path.c
 _OBJS				= $(_SRCS:.c=.o)
 _DEPS				= minishell.h msh_signals.h
 

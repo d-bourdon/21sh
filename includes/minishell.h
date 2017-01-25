@@ -6,7 +6,7 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/20 09:42:13 by oyagci            #+#    #+#             */
-/*   Updated: 2017/01/25 15:55:54 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/01/25 16:12:42 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ int				ft_otod(int octal);
 
 /*
 ** ft_cd.c  ft_cd2.c :
-*/
+
 int				ft_cd(char **argv, t_env *env);
 int				ft_cd_home(t_env *env);
 int				ft_cd_option(char **argv, t_env *env);
@@ -120,8 +120,9 @@ int				ft_cd_spe(char *path, t_env *env);
 
 /*
 ** ft_clear_path.c :
+
+** char			*ft_clear_path(char *str, int mode)
+** char			*ft_clear_path_free(char *s, int m)
 */
-char			*ft_clear_path(char *str, int mode);
-char			*ft_clear_path_free(char *s, int m);
 
 #endif
