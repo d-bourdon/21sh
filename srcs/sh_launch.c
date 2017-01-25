@@ -6,7 +6,7 @@
 /*   By: oyagci <oyagci@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 10:26:43 by oyagci            #+#    #+#             */
-/*   Updated: 2017/01/04 10:26:49 by oyagci           ###   ########.fr       */
+/*   Updated: 2017/01/25 15:26:03 by oyagci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int		sh_launch_env(char **av, char **env)
 	else if (pid > 0)
 	{
 		wpid = waitpid(pid, &status, WUNTRACED);
-		check_for_signal(status);
+		check_for_signal(status, av[0]);
 	}
 	else
 		ft_putendl_fd("[ERROR] Could not fork.", 2);

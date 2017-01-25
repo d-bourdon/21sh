@@ -6,7 +6,7 @@
 /*   By: oyagci <oyagci@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/21 12:09:30 by oyagci            #+#    #+#             */
-/*   Updated: 2016/12/28 13:47:29 by oyagci           ###   ########.fr       */
+/*   Updated: 2017/01/25 16:24:00 by oyagci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,67 @@
 #include <libft.h>
 #include <unistd.h>
 
-void			signal_handle(int signal)
+int				is_fatal_signal(int signal)
 {
-	void (*const handles[])(int) = {
-		sighup, sigint, sigquit, sigill, sigtrap, sigabrt, sigemt, sigfpe,
-		sigkill, sigbus, sigsegv, sigsys, sigpipe, sigalrm, sigterm, sigurg,
-		sigstop, sigtstp, sigcont, sigchld, sigttin, sigttou, sigio, sigxcpu,
-		sigxfsz, sigvtalrm, sigprof, sigwinch, siginfo, sigusr1, sigusr2
+	int const	nb_signals = 19;
+	int	const	fatal_signals[] = {
+		SIGABRT, SIGALRM, SIGBUS, SIGFPE, SIGHUP, SIGILL, SIGINT, SIGKILL,
+		SIGPIPE, SIGPROF, SIGQUIT, SIGSEGV, SIGSYS, SIGTERM, SIGTRAP, SIGVTALRM,
+		SIGXCPU, SIGXFSZ,
 	};
+	int			i;
 
-	(handles[signal - 1])(signal);
+	i = 0;
+	while (i < nb_signals)
+	{
+		if (fatal_signals[i] == signal)
+			return (1);
+		i += 1;
+	}
+	return (0);
 }
 
-int				check_for_signal(int status)
+char			*get_signal_msg(int signal)
+{
+	int			i;
+	int			sig[] = { SIGSEGV, SIGBUS, SIGABRT, SIGALRM, SIGEMT,
+							SIGFPE, SIGHUP, SIGILL,
+							SIGKILL, SIGPROF, SIGQUIT, SIGSTOP, SIGSYS,
+							SIGTERM, SIGTRAP, SIGUSR1, SIGUSR2,
+							SIGVTALRM, SIGXCPU
+						};
+	char		*msg[] = { "Segmentation Fault", "Bus Error", "Abort", "Alarm", "EMT Instruction",
+							"Floating Point Exception", "Hangup", "Illegal Instruction",
+							"Killed", "Profile Signal", "Quit", "Stopped", "Invalid System Call",
+							"Terminated", "Trace Trap", "User Defined Signal 1", "User Defined Signal 2",
+							"Virtual Time Alarm", "CPU Limit Exceeded",
+						};
+	int const	nb_sig = 19;
+	i = 0;
+	while (i < nb_sig)
+	{
+		if (sig[i] == signal)
+			return (msg[i]);
+		i += 1;
+	}
+	return (NULL);
+}
+
+void			signal_handle(int signal, char *cmd)
+{
+	char *msg;
+
+	msg = get_signal_msg(signal);
+	if (msg)
+	{
+		ft_putstr_fd("21sh: ", 2);
+		ft_putstr_fd(get_signal_msg(signal), 2);
+		ft_putstr_fd(": ", 2);
+		ft_putendl_fd(cmd, 2);
+	}
+}
+
+int				check_for_signal(int status, char *cmd)
 {
 	int		sig;
 
@@ -37,7 +85,7 @@ int				check_for_signal(int status)
 		while (sig <= MAXSIGNALS)
 		{
 			if (WTERMSIG(status) == sig)
-				signal_handle(sig);
+				signal_handle(sig, cmd);
 			sig += 1;
 		}
 	return (0);

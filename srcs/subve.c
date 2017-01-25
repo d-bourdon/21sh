@@ -6,7 +6,7 @@
 /*   By: oyagci <oyagci@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/21 08:59:07 by oyagci            #+#    #+#             */
-/*   Updated: 2016/12/28 13:51:07 by oyagci           ###   ########.fr       */
+/*   Updated: 2017/01/25 16:26:08 by oyagci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	subve(char const *path, char *const *av, char *const *envp)
 	if (pid > 0)
 	{
 		wait(&ret);
-		check_for_signal(ret);
+		check_for_signal(ret, av[0]);
 		return (ret);
 	}
 	return (wrap_execve(path, av, envp));

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: oyagci <oyagci@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/20 09:42:13 by oyagci            #+#    #+#             */
-/*   Updated: 2017/01/25 16:12:42 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/01/25 16:53:19 by oyagci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,39 +66,7 @@ int				nb_args(char **av);
 char			*ft_getenv(char *s);
 int				is_dir(char *path);
 
-int				check_for_signal(int status);
-void			sighup(int signal);
-void			sigint(int signal);
-void			sigquit(int signal);
-void			sigill(int signal);
-void			sigtrap(int signal);
-void			sigabrt(int signal);
-void			sigemt(int signal);
-void			sigfpe(int signal);
-void			sigkill(int signal);
-void			sigbus(int signal);
-void			sigsegv(int signal);
-void			sigsys(int signal);
-void			sigpipe(int signal);
-void			sigalrm(int signal);
-void			sigterm(int signal);
-void			sigurg(int signal);
-void			sigstop(int signal);
-void			sigtstp(int signal);
-void			sigcont(int signal);
-void			sigchld(int signal);
-void			sigttin(int signal);
-void			sigttou(int signal);
-void			sigio(int signal);
-void			sigxcpu(int signal);
-void			sigxfsz(int signal);
-void			sigvtalrm(int signal);
-void			sigprof(int signal);
-void			sigwinch(int signal);
-void			siginfo(int signal);
-void			sigusr1(int signal);
-void			sigusr2(int signal);
-void			sigint_parent(int signal);
+int				check_for_signal(int status, char *cmd);
 
 /*
 ** ft_echo.c ft_echo2.c :
