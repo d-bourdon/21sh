@@ -6,7 +6,7 @@
 #    By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/20 09:10:32 by oyagci            #+#    #+#              #
-#    Updated: 2017/01/25 18:13:15 by dbourdon         ###   ########.fr        #
+#    Updated: 2017/01/27 16:58:40 by dbourdon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,7 +64,10 @@ _SRCS				= main.c \
 					  ft_echo.c \
 					  ft_echo2.c \
 					  line_parse.c \
-					  ft_strsplitwq.c
+					  ft_strsplitwq.c \
+					  ft_tabtab.c \
+					  line_detect_pipe.c \
+					  ft_strjoinfree.c
 					 # ft_cd.c \
 					 # ft_cd2.c \
 					 # ft_clear_path.c

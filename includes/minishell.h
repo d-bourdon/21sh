@@ -6,7 +6,7 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/20 09:42:13 by oyagci            #+#    #+#             */
-/*   Updated: 2017/01/25 18:53:44 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/01/27 16:58:33 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,10 @@ typedef struct	s_cmd
 	char		**av;
 	int			*ipipe;
 	int			*opipe;
+	int			pipe;
+	char		*routefd;
+	char		r_prio;
+	char		*infile;
 	struct s_cmd	*next;
 }				t_cmd;
 
@@ -140,5 +144,23 @@ int				ft_cd_spe(char *path, t_env *env);
 ** char			*ft_clear_path(char *str, int mode)
 ** char			*ft_clear_path_free(char *s, int m)
 */
+
+/*
+** ft_tabtab.c :
+*/
+int				ft_tabtab_len(char **tab);
+char			**ft_tabtab_frag(char **tab);
+void			ft_tabtab_ifree(char ***tab, int i_free);
+char			**ft_tabtab_icpy(char **origin, int i_cpy);
+
+/*
+** line_detect_pipe.c :
+*/
+void			ft_line_pipe(t_cmd *cmd, int i);
+void			ft_line_redir(t_cmd *cmd, int i);
+void			ft_free_cmd(t_cmd *cmd);
+void			ft_line_detect_pipe(t_cmd *cmd);
+void			ft_line_fdredir(t_cmd *cmd, int i);
+char			*ft_strjoinfree(char *s1, char *s2, int mode);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/20 13:24:52 by oyagci            #+#    #+#             */
-/*   Updated: 2017/01/25 18:51:33 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/01/27 16:58:07 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,9 @@ int		minishell(void)
 		if (line != NULL)
 		{
 			cmd = ft_line_parse(line);
-			while (cmd)
+			ft_line_detect_pipe(cmd);
+			tmp_cmd = cmd;
+			while (tmp_cmd)
 			{
 				if ((status = sh_execute(cmd->av)) == -1)
 					print_error(ft_strerror(g_errno));
