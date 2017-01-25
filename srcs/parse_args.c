@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_args.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oyagci <oyagci@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/20 09:30:48 by oyagci            #+#    #+#             */
-/*   Updated: 2016/12/28 13:49:55 by oyagci           ###   ########.fr       */
+/*   Updated: 2017/01/25 15:50:10 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,14 +81,14 @@ char	**parse_args(char *cmd)
 	char			*line;
 
 	line = ft_strdup(cmd);
-	parse_escape(line);
+	//parse_escape(line);
 	parse_separators(line);
 	av = ft_strsplit(line, '\n');
 	i = 0;
 	while (av[i] != 0)
 	{
 		remove_quotes(av[i]);
-		remove_escapes(av[i]);
+		//remove_escapes(av[i]);
 		i += 1;
 	}
 	free(line);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oyagci <oyagci@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/06 08:55:45 by oyagci            #+#    #+#             */
-/*   Updated: 2016/12/13 10:25:43 by oyagci           ###   ########.fr       */
+/*   Updated: 2017/01/25 15:33:31 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	ft_get_nb_digits(int n)
 	return (nb_digits);
 }
 
-static int	ft_pow(int nb, int pow)
+int			ft_pow(int nb, int pow)
 {
 	if (pow == 0)
 		return (1);

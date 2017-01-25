@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oyagci <oyagci@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/03 10:52:16 by oyagci            #+#    #+#             */
-/*   Updated: 2016/12/09 12:43:18 by oyagci           ###   ########.fr       */
+/*   Updated: 2017/01/25 15:34:11 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include "ft_getopt.h"
 
 unsigned int		ft_abs(int nb);
+int					ft_pow(int nb, int pow);
 
 int					ft_atoi(char *str);
 char				*ft_itoa(int n);

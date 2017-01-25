@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: oyagci <oyagci@student.42.fr>              +#+  +:+       +#+         #
+#    By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/20 09:10:32 by oyagci            #+#    #+#              #
-#    Updated: 2017/01/10 10:45:51 by oyagci           ###   ########.fr        #
+#    Updated: 2017/01/25 15:57:03 by dbourdon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,7 +60,12 @@ _SRCS				= main.c \
 					  ft_get_command_line.c \
 					  put.c \
 					  switch_input_mode.c \
-					  autocomplete.c
+					  autocomplete.c \
+					  ft_echo.c \
+					  ft_echo2.c \
+					  ft_cd.c \
+					  ft_cd2.c \
+					  ft_clear_path.c
 _OBJS				= $(_SRCS:.c=.o)
 _DEPS				= minishell.h msh_signals.h
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh_execute.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oyagci <oyagci@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/28 11:53:13 by oyagci            #+#    #+#             */
-/*   Updated: 2017/01/07 10:29:58 by oyagci           ###   ########.fr       */
+/*   Updated: 2017/01/25 15:25:30 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int		(*g_builtin_func[])(char **) = {
 	&sh_getenv,
 	&sh_env,
 	&sh_setenv,
-	&sh_echo,
+	&ft_echo,
 	&sh_unsetenv,
 	&sh_pwd,
 	&sh_env
