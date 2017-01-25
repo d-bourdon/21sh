@@ -142,6 +142,8 @@ flycheck_*.el
 .dir-locals.el
 
 # End of https://www.gitignore.io/api/vim,macos,c,emacs
+#Sublime Text
+.sublime_workspace
 
 # Name
 minishell
