@@ -6,7 +6,7 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/20 09:42:13 by oyagci            #+#    #+#             */
-/*   Updated: 2017/01/25 16:12:42 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/01/25 18:53:44 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,14 @@
 # define MSH_END		42
 
 # include <unistd.h>
+
+typedef struct	s_cmd
+{
+	char		**av;
+	int			*ipipe;
+	int			*opipe;
+	struct s_cmd	*next;
+}				t_cmd;
 
 extern char		**g_environ;
 
@@ -101,6 +109,14 @@ void			sigusr2(int signal);
 void			sigint_parent(int signal);
 
 /*
+** line_parse.c strsplitwq :
+*/
+t_cmd			*ft_line_parse(char *str);
+void			ft_line_exploit(char *str, int start, int i, t_cmd **out);
+char			**ft_strsplitwq(char *str);
+
+
+/*
 ** ft_echo.c ft_echo2.c :
 */
 int				ft_echo(char **av);
@@ -118,7 +134,7 @@ void			ft_cd_set_pwd(char *path, t_env *env);
 int				ft_cd_lien(char *path, t_env *env);
 int				ft_cd_spe(char *path, t_env *env);
 
-/*
+
 ** ft_clear_path.c :
 
 ** char			*ft_clear_path(char *str, int mode)
