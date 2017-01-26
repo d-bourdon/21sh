@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh_execute.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: oyagci <oyagci@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/28 11:53:13 by oyagci            #+#    #+#             */
-/*   Updated: 2017/01/25 15:25:30 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/01/26 12:52:11 by oyagci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,21 +44,6 @@ int		sh_nb_builtins(void)
 	return (sizeof(g_builtin_str) / sizeof(char *));
 }
 
-int		from_root(char *s)
-{
-	if (s[0] == '/')
-		return (1);
-	return (0);
-}
-
-int		is_d_dd_slash(char *s)
-{
-	if ((ft_strncmp(s, "./", 2) == 0
-				|| ft_strncmp(s, "../", 3) == 0))
-		return (1);
-	return (0);
-}
-
 int		sh_execute_env(char **av, char **env)
 {
 	int		i;
@@ -73,13 +58,13 @@ int		sh_execute_env(char **av, char **env)
 			return ((g_builtin_func[i])(av));
 		i += 1;
 	}
-	if ((!is_d_dd_slash(av[0]) || !from_root(av[0])) && (path = which(av[0])))
+	if (!ft_strchr(av[0], '/') && (path = which(av[0])))
 	{
 		free(av[0]);
 		av[0] = path;
 		return (sh_launch_env(av, env));
 	}
-	if ((is_d_dd_slash(av[0]) || from_root(av[0])) && !(path = which(av[0])))
+	else if (ft_strchr(av[0], '/'))
 	{
 		free(path);
 		return (sh_launch_env(av, env));
