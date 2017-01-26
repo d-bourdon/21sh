@@ -6,7 +6,7 @@
 /*   By: oyagci <oyagci@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/28 11:53:13 by oyagci            #+#    #+#             */
-/*   Updated: 2017/01/26 12:52:11 by oyagci           ###   ########.fr       */
+/*   Updated: 2017/01/26 13:47:06 by oyagci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,7 @@ int		sh_execute_env(char **av, char **env)
 		return (sh_launch_env(av, env));
 	}
 	else if (ft_strchr(av[0], '/'))
-	{
-		free(path);
 		return (sh_launch_env(av, env));
-	}
 	g_errno = FT_ENOCMD;
 	return (-1);
 }

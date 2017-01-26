@@ -6,7 +6,7 @@
 /*   By: oyagci <oyagci@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/21 12:09:30 by oyagci            #+#    #+#             */
-/*   Updated: 2017/01/25 16:24:00 by oyagci           ###   ########.fr       */
+/*   Updated: 2017/01/26 13:30:36 by oyagci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,27 +36,33 @@ int				is_fatal_signal(int signal)
 	return (0);
 }
 
+char			*signal_messages(int i)
+{
+	static char *const msg[] = {
+		"Segmentation Fault", "Bus Error", "Abort", "Alarm", "EMT Instruction",
+		"Floating Point Exception", "Hangup", "Illegal Instruction",
+		"Killed", "Profile Signal", "Quit", "Stopped", "Invalid System Call",
+		"Terminated", "Trace Trap", "User Defined Signal 1",
+		"User Defined Signal 2", "Virtual Time Alarm", "CPU Limit Exceeded",
+	};
+
+	return (msg[i]);
+}
+
 char			*get_signal_msg(int signal)
 {
 	int			i;
-	int			sig[] = { SIGSEGV, SIGBUS, SIGABRT, SIGALRM, SIGEMT,
-							SIGFPE, SIGHUP, SIGILL,
-							SIGKILL, SIGPROF, SIGQUIT, SIGSTOP, SIGSYS,
-							SIGTERM, SIGTRAP, SIGUSR1, SIGUSR2,
-							SIGVTALRM, SIGXCPU
-						};
-	char		*msg[] = { "Segmentation Fault", "Bus Error", "Abort", "Alarm", "EMT Instruction",
-							"Floating Point Exception", "Hangup", "Illegal Instruction",
-							"Killed", "Profile Signal", "Quit", "Stopped", "Invalid System Call",
-							"Terminated", "Trace Trap", "User Defined Signal 1", "User Defined Signal 2",
-							"Virtual Time Alarm", "CPU Limit Exceeded",
-						};
+	int const	sig[] = { SIGSEGV, SIGBUS, SIGABRT, SIGALRM, SIGEMT, SIGFPE,
+		SIGHUP, SIGILL, SIGKILL, SIGPROF, SIGQUIT, SIGSTOP, SIGSYS, SIGTERM,
+		SIGTRAP, SIGUSR1, SIGUSR2, SIGVTALRM, SIGXCPU
+	};
 	int const	nb_sig = 19;
+
 	i = 0;
 	while (i < nb_sig)
 	{
 		if (sig[i] == signal)
-			return (msg[i]);
+			return (signal_messages(i));
 		i += 1;
 	}
 	return (NULL);

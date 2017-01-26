@@ -6,7 +6,7 @@
 /*   By: oyagci <oyagci@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 10:25:37 by oyagci            #+#    #+#             */
-/*   Updated: 2017/01/04 10:25:39 by oyagci           ###   ########.fr       */
+/*   Updated: 2017/01/26 13:39:08 by oyagci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,6 @@
 
 void	print_error(char *s)
 {
-	ft_putstr_fd("minishell: ", 2);
+	ft_putstr_fd("21sh: ", 2);
 	ft_perror(s);
 }

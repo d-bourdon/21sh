@@ -6,7 +6,7 @@
 /*   By: oyagci <oyagci@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/21 08:59:07 by oyagci            #+#    #+#             */
-/*   Updated: 2017/01/25 16:26:08 by oyagci           ###   ########.fr       */
+/*   Updated: 2017/01/26 13:42:20 by oyagci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,7 @@ int	subve(char const *path, char *const *av, char *const *envp)
 	pid = fork();
 	if (pid == -1)
 	{
-		ft_putstr_fd("minishell: command not found: ", 2);
-		ft_putendl_fd(av[0], 2);
+		g_errno = FT_ENOMEM;
 		return (-1);
 	}
 	if (pid > 0)
