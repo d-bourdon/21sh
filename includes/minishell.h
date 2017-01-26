@@ -6,7 +6,7 @@
 /*   By: oyagci <oyagci@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/20 09:42:13 by oyagci            #+#    #+#             */
-/*   Updated: 2017/01/26 11:23:28 by oyagci           ###   ########.fr       */
+/*   Updated: 2017/01/26 17:17:40 by oyagci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,15 @@
 # define MSH_END		42
 
 # include <unistd.h>
+
+typedef	struct s_c	t_c;
+struct				s_c
+{
+	char	c;
+	int		cursor_on;
+	t_c		*prev;
+	t_c		*next;
+};
 
 extern char		**g_environ;
 
