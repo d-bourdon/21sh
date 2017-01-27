@@ -6,7 +6,7 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/20 13:24:52 by oyagci            #+#    #+#             */
-/*   Updated: 2017/01/27 16:58:07 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/01/27 17:13:57 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int		minishell(void)
 {
 	char	*line;
 	t_cmd	*cmd;
+	t_cmd	*tmp_cmd;
 	int		status;
 
 	line = NULL;
