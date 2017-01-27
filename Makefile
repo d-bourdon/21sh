@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: oyagci <oyagci@student.42.fr>              +#+  +:+       +#+         #
+#    By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/20 09:10:32 by oyagci            #+#    #+#              #
-#    Updated: 2017/01/25 16:53:48 by oyagci           ###   ########.fr        #
+#    Updated: 2017/01/27 17:01:32 by dbourdon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,12 @@ _SRCS				= main.c \
 					  check_for_signal.c \
 					  print_prompt.c \
 					  fetch_paths.c \
-					  cd.c \
+					  sigint.c sighup.c sigquit.c sigill.c sigtrap.c sigabrt.c \
+					  sigemt.c sigfpe.c sigkill.c sigbus.c sigsegv.c sigsys.c \
+					  sigpipe.c sigalrm.c sigterm.c sigurg.c sigstop.c \
+					  sigtstp.c sigcont.c sigchld.c sigttin.c sigttou.c \
+					  sigio.c sigxcpu.c sigxfsz.c sigvtalrm.c sigprof.c \
+					  sigwinch.c siginfo.c sigusr.c cd.c \
 					  ft_errno.c \
 					  sh_execute.c \
 					  sh_exit.c \
@@ -57,7 +62,12 @@ _SRCS				= main.c \
 					  switch_input_mode.c \
 					  autocomplete.c \
 					  ft_echo.c \
-					  ft_echo2.c 
+					  ft_echo2.c \
+					  line_parse.c \
+					  ft_strsplitwq.c \
+					  ft_tabtab.c \
+					  line_detect_pipe.c \
+					  ft_strjoinfree.c
 					 # ft_cd.c \
 					 # ft_cd2.c \
 					 # ft_clear_path.c
