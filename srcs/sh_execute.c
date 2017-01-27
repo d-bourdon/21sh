@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh_execute.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oyagci <oyagci@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/28 11:53:13 by oyagci            #+#    #+#             */
-/*   Updated: 2017/01/26 13:47:06 by oyagci           ###   ########.fr       */
+/*   Updated: 2017/01/27 19:41:28 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,5 +72,6 @@ int		sh_execute_env(char **av, char **env)
 
 int		sh_execute(char **av)
 {
+	
 	return (sh_execute_env(av, g_environ));
 }

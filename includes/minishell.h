@@ -6,7 +6,7 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/20 09:42:13 by oyagci            #+#    #+#             */
-/*   Updated: 2017/01/27 17:01:45 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/01/27 19:52:32 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,27 @@
 # define MAXSIGNALS		31
 # define SH_NAME		"minishell"
 # define MSH_END		42
+# define L_HASH			3000
 
-# include <unistd.h>
 
-typedef struct	s_cmd
+typedef struct		s_hash
 {
-	char		**av;
-	int			*ipipe;
-	int			*opipe;
-	int			pipe;
-	char		*routefd;
-	char		r_prio;
-	char		*infile;
+	char			*cmd;
+	char			*path;
+	struct s_hash	*next;
+}					t_hash;
+
+typedef struct		s_cmd
+{
+	char			**av;
+	int				*ipipe;
+	int				*opipe;
+	int				pipe;
+	char			*routefd;
+	char			r_prio;
+	char			*infile;
 	struct s_cmd	*next;
-}				t_cmd;
+}					t_cmd;
 
 extern char		**g_environ;
 
@@ -106,10 +113,6 @@ void			ft_cd_set_pwd(char *path, t_env *env);
 int				ft_cd_lien(char *path, t_env *env);
 int				ft_cd_spe(char *path, t_env *env);
 
-<<<<<<< HEAD
-=======
-
->>>>>>> dbourdon
 ** ft_clear_path.c :
 
 ** char			*ft_clear_path(char *str, int mode)
@@ -133,5 +136,14 @@ void			ft_free_cmd(t_cmd *cmd);
 void			ft_line_detect_pipe(t_cmd *cmd);
 void			ft_line_fdredir(t_cmd *cmd, int i);
 char			*ft_strjoinfree(char *s1, char *s2, int mode);
+
+/*
+** hash :
+*/
+void			ft_hash_add(char *name, char *value, int hash, t_hash **table);
+t_hash			**ft_hash_init(void);
+t_cmd			*ft_hash_check(t_info *info, t_cmd *cmd);
+int				ft_hash_calc(char *str);
+int				*ft_hash_eratho(int size);
 
 #endif
