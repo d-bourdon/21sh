@@ -6,7 +6,7 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/20 13:24:52 by oyagci            #+#    #+#             */
-/*   Updated: 2017/01/27 17:13:57 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/01/27 17:56:37 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,10 @@ int		minishell(void)
 			{
 				if ((status = sh_execute(cmd->av)) == -1)
 					print_error(ft_strerror(g_errno));
-				cmd = cmd->next;
+				tmp_cmd = tmp_cmd->next;
 			}
 			free(line);
-			cmd = NULL; // Warning // fonction free_cmd(cmd);
+			ft_free_cmd(cmd);
 		}
 	}
 	line ? free(line) : (void)0;
