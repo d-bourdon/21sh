@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: oyagci <oyagci@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/20 09:42:13 by oyagci            #+#    #+#             */
-/*   Updated: 2017/01/27 17:01:45 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/01/27 17:25:39 by oyagci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,23 @@ typedef struct	s_cmd
 	char		*infile;
 	struct s_cmd	*next;
 }				t_cmd;
+
+typedef	struct s_pos	t_pos;
+struct					s_pos
+{
+	int x;
+	int y;
+};
+
+typedef	struct s_c	t_c;
+struct				s_c
+{
+	char	c;
+	int		cursor_on;
+	t_pos	pos;
+	t_c		*prev;
+	t_c		*next;
+};
 
 extern char		**g_environ;
 

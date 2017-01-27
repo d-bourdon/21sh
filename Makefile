@@ -6,7 +6,7 @@
 #    By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/20 09:10:32 by oyagci            #+#    #+#              #
-#    Updated: 2017/01/27 17:01:32 by dbourdon         ###   ########.fr        #
+#    Updated: 2017/01/27 17:39:06 by oyagci           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,12 +31,7 @@ _SRCS				= main.c \
 					  check_for_signal.c \
 					  print_prompt.c \
 					  fetch_paths.c \
-					  sigint.c sighup.c sigquit.c sigill.c sigtrap.c sigabrt.c \
-					  sigemt.c sigfpe.c sigkill.c sigbus.c sigsegv.c sigsys.c \
-					  sigpipe.c sigalrm.c sigterm.c sigurg.c sigstop.c \
-					  sigtstp.c sigcont.c sigchld.c sigttin.c sigttou.c \
-					  sigio.c sigxcpu.c sigxfsz.c sigvtalrm.c sigprof.c \
-					  sigwinch.c siginfo.c sigusr.c cd.c \
+					  cd.c \
 					  ft_errno.c \
 					  sh_execute.c \
 					  sh_exit.c \
