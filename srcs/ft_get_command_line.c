@@ -6,7 +6,7 @@
 /*   By: oyagci <oyagci@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/07 12:51:23 by oyagci            #+#    #+#             */
-/*   Updated: 2017/01/28 13:52:20 by oyagci           ###   ########.fr       */
+/*   Updated: 2017/01/28 14:05:23 by oyagci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -237,6 +237,12 @@ void			jmp_word_forward(t_c **line)
 	move_cur_right(line);
 }
 
+void			jmp_line_begin(t_c **line)
+{
+	while ((*line)->prev && (*line)->prev->pos.x != 0)
+		move_cur_left(line);
+}
+
 void			parse_buffer(t_c **line, char *buffer, int buf_size)
 {
 	if (buf_size == 1 && (ft_isprint(buffer[0]) || ft_isspace(buffer[0])) && buffer[0] != '\n')
@@ -251,6 +257,8 @@ void			parse_buffer(t_c **line, char *buffer, int buf_size)
 		jmp_word_back(line);
 	else if (buf_size == 4 && buffer[0] == 27 && buffer[1] == 27 && buffer[2] == 91 && buffer[3] == 67)
 		jmp_word_forward(line);
+	else if (buf_size == 3 && buffer[0] == 27 && buffer[1] == 91 && buffer[2] == 72)
+		jmp_line_begin(line);
 }
 
 int				ft_get_command_line(char **command_line)
