@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh_launch.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oyagci <oyagci@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 10:26:43 by oyagci            #+#    #+#             */
-/*   Updated: 2017/01/26 14:10:49 by oyagci           ###   ########.fr       */
+/*   Updated: 2017/01/28 19:47:51 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,23 +17,23 @@
 #include <libft.h>
 #include <ft_errno.h>
 
-int		sh_launch_env(char **av, char **env)
+int		sh_launch_env(t_cmd *cmd, char **env)
 {
 	pid_t	pid;
 	int		status;
 
-	if (access(av[0], X_OK) >= 0)
+	if (access(cmd->av[0], X_OK) >= 0)
 	{
 		pid = wrap_fork();
 		if (pid == 0)
 		{
-			try_execve(av[0], av, env);
+			try_execve(cmd->av[0], av, env);
 			exit(EXIT_FAILURE);
 		}
 		else if (pid > 0)
 		{
 			waitpid(pid, &status, WUNTRACED);
-			check_for_signal(status, av[0]);
+			check_for_signal(status, cmd->av[0]);
 		}
 		else
 			ft_putendl_fd(ft_strerror(g_errno), 2);

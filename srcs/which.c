@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   which.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oyagci <oyagci@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/20 15:44:53 by oyagci            #+#    #+#             */
-/*   Updated: 2017/01/10 09:46:43 by oyagci           ###   ########.fr       */
+/*   Updated: 2017/01/28 20:02:33 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 #include <dirent.h>
 #include <sys/stat.h>
 #include <minishell.h>
+
+//
+// Quand path trouvé, enregistrer dans table hash
+//
 
 static char			*get_path(char *cmd)
 {

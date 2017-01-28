@@ -6,7 +6,7 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/28 11:53:13 by oyagci            #+#    #+#             */
-/*   Updated: 2017/01/28 17:13:38 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/01/28 20:04:11 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,9 @@ int		sh_execute_env(char **av, char **env)
 	return (-1);
 }
 
+//
+// check ft_cmd.c
+//
 int		sh_execute(t_cmd *cmd)
 {
 	t_info	*info;
@@ -79,7 +82,7 @@ int		sh_execute(t_cmd *cmd)
 
 	env = ft_env_to_char(cmd->env);
 	info = sigleton(NULL);
-	ret = sh_execute_env(av, env);
+	ret = sh_execute_env(, env);
 	ft_tabtab_free(env)
 	return (ret);
 }
