@@ -6,7 +6,7 @@
 /*   By: oyagci <oyagci@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/07 12:51:23 by oyagci            #+#    #+#             */
-/*   Updated: 2017/01/28 14:05:23 by oyagci           ###   ########.fr       */
+/*   Updated: 2017/01/28 16:42:56 by oyagci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -243,6 +243,30 @@ void			jmp_line_begin(t_c **line)
 		move_cur_left(line);
 }
 
+void			jmp_line_up(t_c **line)
+{
+	const int	x = (*line)->pos.x;
+	const int	y = (*line)->pos.y - 1;
+
+	if (y >= 0)
+		while ((*line)->prev && (*line)->prev->pos.y > y)
+			move_cur_left(line);
+		while ((*line)->prev && (*line)->prev->pos.x != x - 1)
+			move_cur_left(line);
+}
+
+void			jmp_line_down(t_c **line)
+{
+	const int	x = (*line)->pos.x;
+	const int	y = (*line)->pos.y + 1;
+
+	while ((*line)->next && (*line)->next->pos.y < y)
+		move_cur_right(line);
+	while ((*line)->next && (*line)->next->pos.x != x + 1)
+		move_cur_right(line);
+}
+
+
 void			parse_buffer(t_c **line, char *buffer, int buf_size)
 {
 	if (buf_size == 1 && (ft_isprint(buffer[0]) || ft_isspace(buffer[0])) && buffer[0] != '\n')
@@ -259,6 +283,10 @@ void			parse_buffer(t_c **line, char *buffer, int buf_size)
 		jmp_word_forward(line);
 	else if (buf_size == 3 && buffer[0] == 27 && buffer[1] == 91 && buffer[2] == 72)
 		jmp_line_begin(line);
+	else if (buffer[0] == 27 && buffer[1] == 91 && buffer[2] == 65)
+		jmp_line_up(line);
+	else if (buffer[0] == 27 && buffer[1] == 91 && buffer[2] == 66)
+		jmp_line_down(line);
 }
 
 int				ft_get_command_line(char **command_line)
