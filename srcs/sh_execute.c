@@ -6,7 +6,7 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/28 11:53:13 by oyagci            #+#    #+#             */
-/*   Updated: 2017/01/27 19:41:28 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/01/28 17:13:38 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ int		sh_execute_env(char **av, char **env)
 			return ((g_builtin_func[i])(av));
 		i += 1;
 	}
+
 	if (!ft_strchr(av[0], '/') && (path = which(av[0])))
 	{
 		free(av[0]);
@@ -70,8 +71,15 @@ int		sh_execute_env(char **av, char **env)
 	return (-1);
 }
 
-int		sh_execute(char **av)
+int		sh_execute(t_cmd *cmd)
 {
-	
-	return (sh_execute_env(av, g_environ));
+	t_info	*info;
+	char	**env;
+	int		ret;
+
+	env = ft_env_to_char(cmd->env);
+	info = sigleton(NULL);
+	ret = sh_execute_env(av, env);
+	ft_tabtab_free(env)
+	return (ret);
 }

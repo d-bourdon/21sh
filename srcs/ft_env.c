@@ -6,7 +6,7 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 17:30:41 by dbourdon          #+#    #+#             */
-/*   Updated: 2017/01/28 15:59:38 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/01/28 17:17:10 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,32 @@ void	ft_env_stock(t_env *env, char *find, char *value)
 	free(tmp->value);
 	tmp->value = ft_strdup(value);
 	return ;
+}
+
+char	**ft_env_to_char(t_env *env)
+{
+	t_env	*out;
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	tmp = env;
+	while (tmp)
+	{
+		tmp = tmp->next;
+		i++;
+	}
+	tmp = env;
+	out = (char**)ft_memalloc(sizeof(char)* i + 1);
+	i = 0;
+	while (tmp)
+	{
+		out[i++] = ft_strjoinfree(tmp->name, ft_strjoin("=", tmp->value), 2);
+		tmp = tmp->next;
+	}
+	out[i] = NULL;
+	return (out);
 }
 
 void	ft_env_addend(t_env **liste, t_env *ajout)

@@ -6,7 +6,7 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/20 09:42:13 by oyagci            #+#    #+#             */
-/*   Updated: 2017/01/28 16:04:12 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/01/28 17:17:29 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,6 +171,7 @@ int				*ft_hash_eratho(int size);
 t_env			*ft_env_chr(t_env *list, char *str);
 void			ft_env_stock(t_env *env, char *find, char *value);
 void			ft_env_addend(t_env **liste, t_env *ajout);
+char			**ft_env_to_char(t_env *env);
 
 /*
 ** ft_init_info.c
