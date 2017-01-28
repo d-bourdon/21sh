@@ -6,7 +6,7 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 14:49:13 by dbourdon          #+#    #+#             */
-/*   Updated: 2017/01/25 15:59:07 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/01/28 16:03:58 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,23 +21,25 @@
 ** et d'une liste chainé t_env avec l'env.
 */
 
-int		ft_cd(char **argv, t_env *env)
+int		ft_cd(char **argv)
 {
-	printf("ARGV %s - %s\n", argv[0], argv[1]);
-	if (ft_env_chr(env, "PWD") == NULL)
-		ft_env_stock(env, "PWD", " ");
+	t_info	*info;
+
+	info = singleton(NULL)
+	if (ft_env_chr(info->env, "PWD") == NULL)
+		ft_env_stock(info->env, "PWD", " ");
 	if (argv[0] && !argv[1])
-		return (ft_cd_home(env));
+		return (ft_cd_home(info->env));
 	if (ft_strcmp(argv[1], "-L") == 0 || ft_strcmp(argv[1], "-P") == 0)
-		return (ft_cd_option(argv, env));
+		return (ft_cd_option(argv, info->env));
 	if (argv[0] && argv[1] && !argv[2])
 	{
-		if (ft_cd_spe(argv[1], env) == 1)
+		if (ft_cd_spe(argv[1], info->env) == 1)
 			return (1);
 		else if (chdir(argv[1]) == -1)
 			return (ft_cd_error(argv[1], 0));
 		else
-			ft_cd_set_pwd(argv[1], env);
+			ft_cd_set_pwd(argv[1], info->env);
 	}
 	else
 		return (ft_cd_error(argv[1], 2));

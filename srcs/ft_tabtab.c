@@ -6,14 +6,14 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/26 16:08:06 by dbourdon          #+#    #+#             */
-/*   Updated: 2017/01/26 19:28:16 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/01/28 16:29:29 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 #include <libft.h>
 #include <stdlib.h>
-#include <stdio.h> //norme
+
 /*
 ** Because "tabtab" is GREAT
 */
@@ -56,6 +56,18 @@ char	**ft_tabtab_frag(char **tab)
 	free_split(tab);
 	out[len] = NULL;
 	return (out);
+}
+
+void	ft_tabtab_free(char **tab)
+{
+	int		i;
+	
+	i = 0;
+	if (!tab)
+		return ;
+	while (tab[i])
+		free(tab[i++]);
+	free(tab);
 }
 
 void	ft_tabtab_ifree(char ***tab, int i_free)

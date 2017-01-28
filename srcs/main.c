@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oyagci <oyagci@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/20 09:16:19 by oyagci            #+#    #+#             */
-/*   Updated: 2017/01/08 15:07:20 by oyagci           ###   ########.fr       */
+/*   Updated: 2017/01/28 15:44:43 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,13 @@ char			**dup_environ(char *env[])
 	return (environ);
 }
 
-int				main(int ac, char *av[], char *env[])
+int				main(void)
 {
-	int	status;
+	int			status;
+	extern char	**environ;
 
-	(void)ac;
-	(void)av;
-	g_environ = dup_environ(env);
+	singleton(ft_init_info(environ));
+	g_environ = dup_environ(environ);
 	if (tgetent(NULL, ft_getenv("TERM")) == -1)
 	{
 		ft_putendl("TERM environement variable not set.");

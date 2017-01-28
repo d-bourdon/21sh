@@ -6,7 +6,7 @@
 #    By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/20 09:10:32 by oyagci            #+#    #+#              #
-#    Updated: 2017/01/27 19:45:53 by dbourdon         ###   ########.fr        #
+#    Updated: 2017/01/28 14:02:20 by dbourdon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,7 +69,10 @@ _SRCS				= main.c \
 					  line_detect_pipe.c \
 					  ft_strjoinfree.c \
 					  ft_hash.c \
-					  ft_hash_init.c
+					  ft_hash_init.c \
+					  ft_erreur.c \
+					  ft_info_init.c \
+					  ft_env.c
 					 # ft_cd.c \
 					 # ft_cd2.c \
 					 # ft_clear_path.c

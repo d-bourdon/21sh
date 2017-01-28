@@ -6,12 +6,13 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/21 12:10:36 by dbourdon          #+#    #+#             */
-/*   Updated: 2017/01/27 19:45:17 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/01/28 15:47:39 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 #include <libft.h>
+#include <stdlib.h>
 
 static int	*hash_areti(char *str, int size)
 {

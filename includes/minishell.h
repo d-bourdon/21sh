@@ -6,7 +6,7 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/20 09:42:13 by oyagci            #+#    #+#             */
-/*   Updated: 2017/01/27 19:52:32 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/01/28 16:04:12 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,14 @@
 # define MSH_END		42
 # define L_HASH			3000
 
+# include <unistd.h>
+
+typedef struct		s_env
+{
+	char			*name;
+	char			*value;
+	struct s_env	*next;
+}					t_env;
 
 typedef struct		s_hash
 {
@@ -37,6 +45,16 @@ typedef struct		s_cmd
 	char			*infile;
 	struct s_cmd	*next;
 }					t_cmd;
+
+typedef	struct		s_info
+{
+	char			*workdir;
+	t_hash			**hash;
+	t_cmd			*cmd;
+	t_env			*env;
+	int				l_win;
+	int				h_win;
+}					t_info;
 
 extern char		**g_environ;
 
@@ -105,7 +123,7 @@ int				ft_otod(int octal);
 /*
 ** ft_cd.c  ft_cd2.c :
 
-int				ft_cd(char **argv, t_env *env);
+int				ft_cd(char **argv);
 int				ft_cd_home(t_env *env);
 int				ft_cd_option(char **argv, t_env *env);
 int				ft_cd_error(char *str, int mode);
@@ -126,6 +144,7 @@ int				ft_tabtab_len(char **tab);
 char			**ft_tabtab_frag(char **tab);
 void			ft_tabtab_ifree(char ***tab, int i_free);
 char			**ft_tabtab_icpy(char **origin, int i_cpy);
+void			ft_tabtab_free(char **tab);
 
 /*
 ** line_detect_pipe.c :
@@ -145,5 +164,25 @@ t_hash			**ft_hash_init(void);
 t_cmd			*ft_hash_check(t_info *info, t_cmd *cmd);
 int				ft_hash_calc(char *str);
 int				*ft_hash_eratho(int size);
+
+/*
+** ft_env.c :
+*/
+t_env			*ft_env_chr(t_env *list, char *str);
+void			ft_env_stock(t_env *env, char *find, char *value);
+void			ft_env_addend(t_env **liste, t_env *ajout);
+
+/*
+** ft_init_info.c
+*/
+t_info			*ft_init_info(char **environ);
+t_env			*ft_init_env(char **environ);
+void			*singleton(void *data);
+char			*ft_strdupfree(char *s1);
+
+/*
+** ft_erreur.c
+*/
+int				ft_erreur(char *str, int mode);
 
 #endif
