@@ -6,7 +6,7 @@
 /*   By: oyagci <oyagci@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/20 09:42:13 by oyagci            #+#    #+#             */
-/*   Updated: 2017/01/26 17:17:40 by oyagci           ###   ########.fr       */
+/*   Updated: 2017/01/28 09:56:05 by oyagci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,31 @@
 
 # include <unistd.h>
 
+typedef struct	s_cmd
+{
+	char		**av;
+	int			*ipipe;
+	int			*opipe;
+	int			pipe;
+	char		*routefd;
+	char		r_prio;
+	char		*infile;
+	struct s_cmd	*next;
+}				t_cmd;
+
+typedef	struct s_pos	t_pos;
+struct					s_pos
+{
+	int x;
+	int y;
+};
+
 typedef	struct s_c	t_c;
 struct				s_c
 {
 	char	c;
 	int		cursor_on;
+	t_pos	pos;
 	t_c		*prev;
 	t_c		*next;
 };
@@ -78,6 +98,14 @@ int				is_dir(char *path);
 int				check_for_signal(int status, char *cmd);
 
 /*
+** line_parse.c strsplitwq :
+*/
+t_cmd			*ft_line_parse(char *str);
+void			ft_line_exploit(char *str, int start, int i, t_cmd **out);
+char			**ft_strsplitwq(char *str);
+
+
+/*
 ** ft_echo.c ft_echo2.c :
 */
 int				ft_echo(char **av);
@@ -95,10 +123,32 @@ void			ft_cd_set_pwd(char *path, t_env *env);
 int				ft_cd_lien(char *path, t_env *env);
 int				ft_cd_spe(char *path, t_env *env);
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> dbourdon
 ** ft_clear_path.c :
 
 ** char			*ft_clear_path(char *str, int mode)
 ** char			*ft_clear_path_free(char *s, int m)
 */
+
+/*
+** ft_tabtab.c :
+*/
+int				ft_tabtab_len(char **tab);
+char			**ft_tabtab_frag(char **tab);
+void			ft_tabtab_ifree(char ***tab, int i_free);
+char			**ft_tabtab_icpy(char **origin, int i_cpy);
+
+/*
+** line_detect_pipe.c :
+*/
+void			ft_line_pipe(t_cmd *cmd, int i);
+void			ft_line_redir(t_cmd *cmd, int i);
+void			ft_free_cmd(t_cmd *cmd);
+void			ft_line_detect_pipe(t_cmd *cmd);
+void			ft_line_fdredir(t_cmd *cmd, int i);
+char			*ft_strjoinfree(char *s1, char *s2, int mode);
 
 #endif

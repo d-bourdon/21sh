@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: oyagci <oyagci@student.42.fr>              +#+  +:+       +#+         #
+#    By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/20 09:10:32 by oyagci            #+#    #+#              #
-#    Updated: 2017/01/25 16:53:48 by oyagci           ###   ########.fr        #
+#    Updated: 2017/01/27 17:39:06 by oyagci           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,7 +57,12 @@ _SRCS				= main.c \
 					  switch_input_mode.c \
 					  autocomplete.c \
 					  ft_echo.c \
-					  ft_echo2.c 
+					  ft_echo2.c \
+					  line_parse.c \
+					  ft_strsplitwq.c \
+					  ft_tabtab.c \
+					  line_detect_pipe.c \
+					  ft_strjoinfree.c
 					 # ft_cd.c \
 					 # ft_cd2.c \
 					 # ft_clear_path.c

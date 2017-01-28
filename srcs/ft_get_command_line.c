@@ -6,7 +6,7 @@
 /*   By: oyagci <oyagci@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/07 12:51:23 by oyagci            #+#    #+#             */
-/*   Updated: 2017/01/26 17:51:39 by oyagci           ###   ########.fr       */
+/*   Updated: 2017/01/28 09:59:44 by oyagci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,81 +16,41 @@
 #include <termcap.h>
 #include <termios.h>
 #include <minishell.h>
+#include <sys/ioctl.h>
 
-void			unset_raw(struct termios *t);
-
-t_c				*new_c(char c)
+int				put_tty(int c)
 {
-	t_c		*new;
-
-	new = (t_c *)ft_memalloc(sizeof(t_c));
-	new->c = c;
-	return (new);
+	write(1, &c, 1);
+	return (1);
 }
 
-void			set_raw(void)
+t_c				*get_first(t_c *line)
 {
-	struct termios	t_attr;
-
-	tcgetattr(STDIN_FILENO, &t_attr);
-	unset_raw(&t_attr);
-	t_attr.c_lflag &= ~(ECHO | ICANON);
-	t_attr.c_cc[VTIME] = 0;
-	t_attr.c_cc[VMIN] = 1;
-	tcsetattr(STDIN_FILENO, TCSAFLUSH, &t_attr);
+	while (line->prev)
+		line = line->prev;
+	return (line);
 }
 
-void			unset_raw(struct termios *t)
+int				nb_chars(t_c *line)
 {
-	static struct termios t_attr;
+	int nb;
 
-	if (t)
-		ft_memcpy(&t_attr, t, sizeof(*t));
-	else
-		tcsetattr(STDIN_FILENO, TCSAFLUSH, &t_attr);
-}
-
-void			add_char(t_c **line, char c)
-{
-	t_c		*new;
-
-	new = new_c(c);
-	new->next = *line;
-	new->prev = (*line)->prev;
-	if (new->prev)
-		new->prev->next = new;
-	(*line)->prev = new;
-}
-
-void			parse_buffer(char *buffer, int buf_size, t_c **line)
-{
-	if (buf_size == 1 && (ft_isprint(buffer[0]) || ft_isspace(buffer[0])))
+	nb = 0;
+	while (line->next)
 	{
-		add_char(line, buffer[0]);
-	}
-}
-
-size_t			depth_c(t_c *line)
-{
-	size_t	depth;
-
-	depth = 0;
-	while (line && line->c != 0)
-	{
-		depth += 1;
+		nb += 1;
 		line = line->next;
 	}
-	return (depth);
+	return (nb);
 }
 
 char			*to_str(t_c *line)
 {
 	char	*str;
-	size_t	i;
+	int		i;
 
-	while (line->prev)
-		line = line->prev;
-	str = ft_strnew(depth_c(line));
+	line = get_first(line);
+	str = ft_strnew(nb_chars(line));
 	i = 0;
 	while (line->next)
 	{
@@ -100,35 +60,129 @@ char			*to_str(t_c *line)
 	return (str);
 }
 
-void			print_line(t_c *line)
+struct winsize	get_winsize(void)
 {
-	while (line->prev)
-		line = line->prev;
-	while (line->next)
+	struct winsize	win;
+
+	ioctl(STDIN_FILENO, TIOCGWINSZ, &win);
+	return (win);
+}
+
+void			reset_cursor(t_pos *cur)
+{
+	while (cur->y > 0)
 	{
+		tputs(tgetstr("up", NULL), 1, &put);
+		cur->y -= 1;
+	}
+	tputs(tgetstr("cr", NULL), 1, &put);
+	cur->x = 0;
+}
+
+void			clear_line(t_pos *cur)
+{
+	reset_cursor(cur);
+	tputs(tgetstr("cd", NULL), 1, &put);
+}
+
+t_c				*new_c(char c)
+{
+	t_c *new;
+
+	new = (t_c *)ft_memalloc(sizeof(t_c));
+	new->c = c;
+	return (new);
+}
+
+void			add_char(t_c **line, char c)
+{
+	t_c	*new;
+
+	new = new_c(c);
+	new->next = *line;
+	new->prev = (*line)->prev;
+	if (new->prev)
+		new->prev->next = new;
+	(*line)->prev = new;
+}
+
+void			move_cur_left(t_c **line)
+{
+	if ((*line)->prev)
+	{
+		(*line)->cursor_on = 0;
+		*line = (*line)->prev;
+		(*line)->cursor_on = 1;
+	}
+}
+
+void			set_raw(struct termios *save)
+{
+	struct termios			t_attr;
+
+	(void)save;
+	tcgetattr(STDIN_FILENO, &t_attr);
+	t_attr.c_cc[VTIME] = 0;
+	t_attr.c_cc[VMIN] = 1;
+	t_attr.c_lflag &= ~(ECHO | ICANON);
+	tcsetattr(STDIN_FILENO, TCSANOW, &t_attr);
+}
+
+void			put_cursor(t_c *line, t_pos *cur)
+{
+	(void)cur;
+	(void)line;
+}
+
+void			print_line(t_c *line, t_pos *cur)
+{
+	const struct winsize	win = get_winsize();
+
+	line = get_first(line);
+	clear_line(cur);
+	while (line && line->c != 0)
+	{
+		if (cur->x > win.ws_col - 1)
+		{
+			ft_putchar('\n');
+			cur->x = 0;
+			cur->y += 1;
+		}
 		ft_putchar(line->c);
+		cur->x += 1;
 		line = line->next;
 	}
+	put_cursor(line, cur);
+}
+
+void			parse_buffer(t_c **line, char *buffer, int buf_size)
+{
+	if (buf_size == 1 && (ft_isprint(buffer[0]) || ft_isspace(buffer[0])))
+		add_char(line, buffer[0]);
+	else if (buf_size == 3 && buffer[0] == 27 && buffer[1] == 91 && buffer[2] == 68)
+		move_cur_left(line);
 }
 
 int				ft_get_command_line(char **command_line)
 {
 	char	buffer[8];
-	int		nb_read;
+	int		sz;
 	t_c		*line;
+	t_pos	pos;
 
+	pos.x = 0;
+	pos.y = 0;
 	line = new_c(0);
-	set_raw();
+	line->cursor_on = 1;
+	set_raw(NULL);
 	while (42)
 	{
-		ft_bzero(buffer, 8);
-		nb_read = read(STDIN_FILENO, buffer, 8);
-		parse_buffer(buffer, nb_read, &line);
-		print_line(line);
+		sz = read(STDIN_FILENO, buffer, 8);
+		parse_buffer(&line, buffer, sz);
+		print_line(line, &pos);
 		if (buffer[0] == '\n')
 			break ;
 	}
-	unset_raw(0);
 	*command_line = to_str(line);
-	return (1);
+	return (0);
 }

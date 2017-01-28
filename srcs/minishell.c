@@ -6,7 +6,7 @@
 /*   By: oyagci <oyagci@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/20 13:24:52 by oyagci            #+#    #+#             */
-/*   Updated: 2017/01/26 14:32:30 by oyagci           ###   ########.fr       */
+/*   Updated: 2017/01/28 09:55:30 by oyagci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ void	sigint_parent(int signal)
 int		minishell(void)
 {
 	char	*line;
-	char	**av;
+	t_cmd	*cmd;
+	t_cmd	*tmp_cmd;
 	int		status;
 
 	line = NULL;
@@ -39,15 +40,19 @@ int		minishell(void)
 		ft_get_command_line(&line);
 		if (line != NULL)
 		{
-			av = parse_args(line);
-			if ((status = sh_execute(av)) == -1)
-				print_error(ft_strerror(g_errno));
+			cmd = ft_line_parse(line);
+			ft_line_detect_pipe(cmd);
+			tmp_cmd = cmd;
+			while (tmp_cmd)
+			{
+				if ((status = sh_execute(cmd->av)) == -1)
+					print_error(ft_strerror(g_errno));
+				tmp_cmd = tmp_cmd->next;
+			}
 			free(line);
-			free_split(av);
-			av = NULL;
+			ft_free_cmd(cmd);
 		}
 	}
 	line ? free(line) : (void)0;
-	free_split(av);
 	return (1);
 }
