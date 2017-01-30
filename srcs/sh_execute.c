@@ -6,7 +6,7 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/28 11:53:13 by oyagci            #+#    #+#             */
-/*   Updated: 2017/01/28 20:04:11 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/01/30 13:36:06 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,29 +44,29 @@ int		sh_nb_builtins(void)
 	return (sizeof(g_builtin_str) / sizeof(char *));
 }
 
-int		sh_execute_env(char **av, char **env)
+int		sh_execute_env(t_cmd *cmd, char **env)
 {
 	int		i;
 	char	*path;
 
-	if (av[0] == NULL)
+	if (cmd->av[0] == NULL)
 		return (1);
 	i = 0;
 	while (i < sh_nb_builtins())
 	{
-		if (ft_strcmp(av[0], g_builtin_str[i]) == 0)
-			return ((g_builtin_func[i])(av));
+		if (ft_strcmp(cmd->av[0], g_builtin_str[i]) == 0)
+			return ((g_builtin_func[i])(cmd->av));
 		i += 1;
 	}
 
-	if (!ft_strchr(av[0], '/') && (path = which(av[0])))
+	if (!ft_strchr(cmd->av[0], '/') && (path = which(cmd->av[0])))
 	{
-		free(av[0]);
-		av[0] = path;
-		return (sh_launch_env(av, env));
+		free(cmd->av[0]);
+		cmd->av[0] = path;
+		return (sh_launch_env(cmd, env));
 	}
-	else if (ft_strchr(av[0], '/'))
-		return (sh_launch_env(av, env));
+	else if (ft_strchr(cmd->av[0], '/'))
+		return (sh_launch_env(cmd, env));
 	g_errno = FT_ENOCMD;
 	return (-1);
 }
@@ -80,9 +80,9 @@ int		sh_execute(t_cmd *cmd)
 	char	**env;
 	int		ret;
 
-	env = ft_env_to_char(cmd->env);
-	info = sigleton(NULL);
-	ret = sh_execute_env(, env);
-	ft_tabtab_free(env)
+	info = singleton(NULL);
+	env = ft_env_to_char(info->env);
+	ret = sh_execute_env(cmd, env);
+	ft_tabtab_free(env);
 	return (ret);
 }

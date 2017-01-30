@@ -6,7 +6,7 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/20 15:44:53 by oyagci            #+#    #+#             */
-/*   Updated: 2017/01/28 20:02:33 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/01/30 13:28:24 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ static char			*get_path(char *cmd)
 				{
 					cmd_path = ft_strjoin(fetch_paths(i), "/");
 					cmd_path = ft_stradd(cmd_path, dir->d_name);
+					ft_hash_add(dir->d_name, cmd_path);
 					closedir(dir_p);
 					return (cmd_path);
 				}

@@ -6,7 +6,7 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 17:30:41 by dbourdon          #+#    #+#             */
-/*   Updated: 2017/01/28 17:17:10 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/01/30 13:39:45 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,10 @@ void	ft_env_stock(t_env *env, char *find, char *value)
 
 char	**ft_env_to_char(t_env *env)
 {
-	t_env	*out;
+	char	**out;
 	int		i;
 	int		j;
+	t_env	*tmp;
 
 	i = 0;
 	j = 0;

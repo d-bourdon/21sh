@@ -6,7 +6,7 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/20 09:42:13 by oyagci            #+#    #+#             */
-/*   Updated: 2017/01/28 17:17:29 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/01/30 13:35:45 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,10 +87,10 @@ void			printenv();
 int				setenv(char const *name, char const *value, int overwrite);
 int				sh_unsetenv(char **av);
 int				sh_getenv(char **av);
-int				sh_launch_env(char **av, char **env);
-int				sh_launch(char **av);
-int				sh_execute_env(char **av, char **env);
-int				sh_execute(char **av);
+int				sh_launch_env(t_cmd *cmd, char **env);
+int				sh_launch(t_cmd *cmd);
+int				sh_execute_env(t_cmd *cmd, char **env);
+int				sh_execute(t_cmd *cmd);
 int				cd(char **av);
 void			pwd();
 int				sh_exit(char **av);
@@ -159,7 +159,7 @@ char			*ft_strjoinfree(char *s1, char *s2, int mode);
 /*
 ** hash :
 */
-void			ft_hash_add(char *name, char *value, int hash, t_hash **table);
+void			ft_hash_add(char *name, char *value);
 t_hash			**ft_hash_init(void);
 t_cmd			*ft_hash_check(t_info *info, t_cmd *cmd);
 int				ft_hash_calc(char *str);

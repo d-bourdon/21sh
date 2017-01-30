@@ -6,7 +6,7 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 10:26:43 by oyagci            #+#    #+#             */
-/*   Updated: 2017/01/28 19:47:51 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/01/30 13:36:32 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int		sh_launch_env(t_cmd *cmd, char **env)
 		pid = wrap_fork();
 		if (pid == 0)
 		{
-			try_execve(cmd->av[0], av, env);
+			try_execve(cmd->av[0], cmd->av, env);
 			exit(EXIT_FAILURE);
 		}
 		else if (pid > 0)
@@ -46,10 +46,10 @@ int		sh_launch_env(t_cmd *cmd, char **env)
 	return (1);
 }
 
-int		sh_launch(char **av)
+int		sh_launch(t_cmd *cmd)
 {
 	int status;
 
-	status = sh_launch_env(av, g_environ);
+	status = sh_launch_env(cmd, g_environ);
 	return (status);
 }
