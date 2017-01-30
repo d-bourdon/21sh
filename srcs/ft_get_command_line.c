@@ -6,7 +6,7 @@
 /*   By: oyagci <oyagci@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/07 12:51:23 by oyagci            #+#    #+#             */
-/*   Updated: 2017/01/30 12:59:17 by oyagci           ###   ########.fr       */
+/*   Updated: 2017/01/30 17:08:37 by oyagci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include <termios.h>
 #include <minishell.h>
 #include <sys/ioctl.h>
+#include <fcntl.h>
 
 void			set_pos(t_pos *pos, int x, int y)
 {
@@ -281,6 +282,35 @@ void			jmp_line_down(t_c **line)
 		move_cur_right(line);
 }
 
+void			free_line(t_c **line)
+{
+	t_c	*tmp;
+	t_c	*next;
+
+	tmp = get_first(*line);
+	while (tmp)
+	{
+		next = (*line)->next;
+		free(tmp);
+		tmp = next;
+	}
+	*line = NULL;
+}
+
+t_c				*to_line(char *str)
+{
+	t_c		*line;
+
+	line = new_c(0);
+	line->cursor_on = 1;
+	while (*str)
+	{
+		add_char(&line, *str);
+		str += 1;
+	}
+	return (line);
+}
+
 void			parse_buffer(t_c **line, char *buffer, int buf_size)
 {
 	if (buf_size == 1 && (ft_isprint(buffer[0]) || ft_isspace(buffer[0])) && buffer[0] != '\n')
@@ -303,8 +333,8 @@ void			parse_buffer(t_c **line, char *buffer, int buf_size)
 		jmp_line_begin(line);
 	else if (buf_size == 3 && buffer[0] == 27 && buffer[1] == 91 && buffer[2] == 70)
 		jmp_line_end(line);
-	//else if (buf_size == 3 && buffer[0] == 27 && buffer[1] == 91 && buffer[2] == 65)
-	//	hist_up(line);
+	else if (buf_size == 3 && buffer[0] == 27 && buffer[1] == 91 && buffer[2] == 65)
+		load_prev_cmd(line);
 }
 
 int				ft_get_command_line(char **command_line)
@@ -330,5 +360,6 @@ int				ft_get_command_line(char **command_line)
 	}
 	ft_putchar('\n');
 	*command_line = to_str(line);
+	add_to_history(*command_line);
 	return (0);
 }

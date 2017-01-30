@@ -3,15 +3,15 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+         #
+#    By: oyagci <oyagci@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/20 09:10:32 by oyagci            #+#    #+#              #
-#    Updated: 2017/01/27 17:39:06 by oyagci           ###   ########.fr        #
+#    Updated: 2017/01/30 17:07:29 by oyagci           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC					= clang
-CFLAGS				= -Wall -Wextra -Werror
+CFLAGS				= -Wall -Wextra -Werror -g
 
 NAME				= minishell
 
@@ -62,7 +62,8 @@ _SRCS				= main.c \
 					  ft_strsplitwq.c \
 					  ft_tabtab.c \
 					  line_detect_pipe.c \
-					  ft_strjoinfree.c
+					  ft_strjoinfree.c \
+					  history.c \
 					 # ft_cd.c \
 					 # ft_cd2.c \
 					 # ft_clear_path.c

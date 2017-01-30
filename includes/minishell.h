@@ -6,7 +6,7 @@
 /*   By: oyagci <oyagci@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/20 09:42:13 by oyagci            #+#    #+#             */
-/*   Updated: 2017/01/28 16:58:01 by oyagci           ###   ########.fr       */
+/*   Updated: 2017/01/30 17:29:48 by oyagci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ struct				s_c
 extern char		**g_environ;
 
 int				minishell(void);
+void			load_history(char *hist_path);
 unsigned int	count_arguments(char *command_line);
 int				is_quote(int c);
 int				is_unescaped_quote(unsigned int i, char *s);
@@ -150,5 +151,8 @@ void			ft_free_cmd(t_cmd *cmd);
 void			ft_line_detect_pipe(t_cmd *cmd);
 void			ft_line_fdredir(t_cmd *cmd, int i);
 char			*ft_strjoinfree(char *s1, char *s2, int mode);
+
+void			add_to_history(char *line);
+void			load_history(char *hist_path);
 
 #endif
