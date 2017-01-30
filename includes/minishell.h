@@ -6,7 +6,7 @@
 /*   By: oyagci <oyagci@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/20 09:42:13 by oyagci            #+#    #+#             */
-/*   Updated: 2017/01/28 09:56:05 by oyagci           ###   ########.fr       */
+/*   Updated: 2017/01/28 16:58:01 by oyagci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int				put(int c);
 int				ft_get_command_line(char **command_line);
 
 char			**parse_args(char *line);
-void			print_prompt();
+int				print_prompt();
 void			print_error(char *str);
 char			*fetch_paths(unsigned int index);
 

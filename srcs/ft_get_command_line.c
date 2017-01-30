@@ -6,7 +6,7 @@
 /*   By: oyagci <oyagci@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/07 12:51:23 by oyagci            #+#    #+#             */
-/*   Updated: 2017/01/28 16:42:56 by oyagci           ###   ########.fr       */
+/*   Updated: 2017/01/30 12:59:17 by oyagci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,12 @@ void			reset_cursor(t_pos *cur)
 
 void			clear_line(t_pos *cur)
 {
+	int	sz;
+
 	reset_cursor(cur);
 	tputs(tgetstr("cd", NULL), 1, &put);
+	sz = print_prompt();
+	cur->x = sz;
 }
 
 t_c				*new_c(char c)
@@ -160,6 +164,11 @@ void			put_cursor(t_c *line, t_pos *cur)
 
 	line = get_first(line);
 	reset_cursor(cur);
+	for (int i = 0; i < 3; i++)
+	{
+		tputs(tgetstr("nd", NULL), 1, &put_tty);
+		cur->x += 1;
+	}
 	while (line && !line->cursor_on)
 	{
 		if (cur->x >= win.ws_col - 1)
@@ -239,8 +248,14 @@ void			jmp_word_forward(t_c **line)
 
 void			jmp_line_begin(t_c **line)
 {
-	while ((*line)->prev && (*line)->prev->pos.x != 0)
+	while ((*line)->prev)
 		move_cur_left(line);
+}
+
+void			jmp_line_end(t_c **line)
+{
+	while ((*line)->next)
+		move_cur_right(line);
 }
 
 void			jmp_line_up(t_c **line)
@@ -266,7 +281,6 @@ void			jmp_line_down(t_c **line)
 		move_cur_right(line);
 }
 
-
 void			parse_buffer(t_c **line, char *buffer, int buf_size)
 {
 	if (buf_size == 1 && (ft_isprint(buffer[0]) || ft_isspace(buffer[0])) && buffer[0] != '\n')
@@ -277,16 +291,20 @@ void			parse_buffer(t_c **line, char *buffer, int buf_size)
 		move_cur_right(line);
 	else if (buf_size == 1 && buffer[0] == 127)
 		delete_char(line);
+	else if (buf_size == 4 && buffer[0] == 27 && buffer[1] == 27 && buffer[2] == 91 && buffer[3] == 65)
+		jmp_line_up(line);
+	else if (buf_size == 4 && buffer[0] == 27 && buffer[1] == 27 && buffer[2] == 91 && buffer[3] == 66)
+		jmp_line_down(line);
 	else if (buf_size == 4 && buffer[0] == 27 && buffer[1] == 27 && buffer[2] == 91 && buffer[3] == 68)
 		jmp_word_back(line);
 	else if (buf_size == 4 && buffer[0] == 27 && buffer[1] == 27 && buffer[2] == 91 && buffer[3] == 67)
 		jmp_word_forward(line);
 	else if (buf_size == 3 && buffer[0] == 27 && buffer[1] == 91 && buffer[2] == 72)
 		jmp_line_begin(line);
-	else if (buffer[0] == 27 && buffer[1] == 91 && buffer[2] == 65)
-		jmp_line_up(line);
-	else if (buffer[0] == 27 && buffer[1] == 91 && buffer[2] == 66)
-		jmp_line_down(line);
+	else if (buf_size == 3 && buffer[0] == 27 && buffer[1] == 91 && buffer[2] == 70)
+		jmp_line_end(line);
+	//else if (buf_size == 3 && buffer[0] == 27 && buffer[1] == 91 && buffer[2] == 65)
+	//	hist_up(line);
 }
 
 int				ft_get_command_line(char **command_line)
