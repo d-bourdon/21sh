@@ -6,7 +6,7 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/20 09:16:19 by oyagci            #+#    #+#             */
-/*   Updated: 2017/01/31 13:09:33 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/01/31 17:46:11 by oyagci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int				main(void)
 
 	singleton(ft_init_info(environ));
 	g_environ = dup_environ(environ);
+	load_history(".42sh_history");
 	if (tgetent(NULL, ft_getenv("TERM")) == -1)
 	{
 		ft_putendl("TERM environement variable not set.");
