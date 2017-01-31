@@ -6,13 +6,14 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 16:31:49 by dbourdon          #+#    #+#             */
-/*   Updated: 2017/01/25 15:59:09 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/01/31 18:33:21 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 #include <libft.h>
 #include <unistd.h>
+#include <stdlib.h>
 
 static void	stfreetabtab(char **tabl)
 {

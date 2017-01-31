@@ -6,14 +6,14 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 12:51:03 by dbourdon          #+#    #+#             */
-/*   Updated: 2017/01/25 15:59:08 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/01/31 17:21:19 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 #include <libft.h>
 #include <unistd.h>
-
+#include <stdlib.h>
 
 int		ft_cd_lien(char *path, t_env *env)
 {

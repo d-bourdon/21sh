@@ -6,7 +6,7 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/28 12:54:52 by dbourdon          #+#    #+#             */
-/*   Updated: 2017/01/31 17:10:14 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/01/31 18:08:31 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,9 @@
 
 char	*ft_strdupfree(char *s1)
 {
-	int		i;
-	int		len;
 	char	*str;
 
-	len = 0;
-	while (s1[len])
-		len++;
-	if (!(str = (char*)ft_memalloc(sizeof(char) * (len + 1))))
-		return (NULL);
-	i = 0;
-	while (s1[i])
-	{
-		str[i] = s1[i];
-		i++;
-	}
-	str[i] = '\0';
+	str = ft_strdup(s1);
 	free(s1);
 	return (str);
 }

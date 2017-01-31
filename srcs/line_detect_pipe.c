@@ -6,7 +6,7 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/26 13:51:43 by dbourdon          #+#    #+#             */
-/*   Updated: 2017/01/27 16:58:38 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/01/31 17:53:58 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,14 @@ void	ft_free_cmd(t_cmd *cmd)
 	t_cmd	*tmp;
 	while (cmd)
 	{
-		free_split(cmd->av);
+		ft_tabtab_free(cmd->av);
+		free(cmd->routefd);
+		free(cmd->infile);
 		tmp = cmd->next;
 		free(cmd);
 		cmd = tmp;
 	}
+	cmd = NULL;
 }
 
 void	ft_line_detect_pipe(t_cmd *cmd)

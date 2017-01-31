@@ -6,7 +6,7 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/28 11:53:13 by oyagci            #+#    #+#             */
-/*   Updated: 2017/01/31 15:54:18 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/01/31 17:22:05 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	*g_builtin_str[] = {
 };
 
 int		(*g_builtin_func[])(char **) = {
-	&cd,
+	&ft_cd,
 	&sh_exit,
 	&sh_getenv,
 	&sh_setenv,

@@ -6,7 +6,7 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/20 09:42:13 by oyagci            #+#    #+#             */
-/*   Updated: 2017/01/31 17:13:08 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/01/31 17:30:55 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # define L_HASH			3000
 
 # include <unistd.h>
+#include <stdio.h>
 
 typedef struct		s_env
 {
@@ -143,7 +144,7 @@ int				ft_otod(int octal);
 
 /*
 ** ft_cd.c  ft_cd2.c :
-
+*/
 int				ft_cd(char **argv);
 int				ft_cd_home(t_env *env);
 int				ft_cd_option(char **argv, t_env *env);
@@ -152,11 +153,11 @@ void			ft_cd_set_pwd(char *path, t_env *env);
 int				ft_cd_lien(char *path, t_env *env);
 int				ft_cd_spe(char *path, t_env *env);
 
+/*
 ** ft_clear_path.c :
-
-** char			*ft_clear_path(char *str, int mode)
-** char			*ft_clear_path_free(char *s, int m)
 */
+char			*ft_clear_path(char *str, int mode);
+char			*ft_clear_path_free(char *s, int m);
 
 /*
 ** ft_tabtab.c :

@@ -6,7 +6,7 @@
 #    By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/20 09:10:32 by oyagci            #+#    #+#              #
-#    Updated: 2017/01/31 13:08:47 by dbourdon         ###   ########.fr        #
+#    Updated: 2017/01/31 17:18:46 by dbourdon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,10 +68,10 @@ _SRCS				= main.c \
 					  ft_erreur.c \
 					  ft_info_init.c \
 					  ft_env.c \
-					  history.c 
-					 # ft_cd.c \
-					 # ft_cd2.c \
-					 # ft_clear_path.c
+					  history.c \
+					  ft_cd.c \
+					  ft_cd2.c \
+					  ft_clear_path.c
 _OBJS				= $(_SRCS:.c=.o)
 _DEPS				= minishell.h msh_signals.h
 
