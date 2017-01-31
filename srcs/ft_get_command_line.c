@@ -6,7 +6,7 @@
 /*   By: oyagci <oyagci@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/07 12:51:23 by oyagci            #+#    #+#             */
-/*   Updated: 2017/01/10 10:41:01 by oyagci           ###   ########.fr       */
+/*   Updated: 2017/01/30 17:08:37 by oyagci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,85 +16,350 @@
 #include <termcap.h>
 #include <termios.h>
 #include <minishell.h>
+#include <sys/ioctl.h>
+#include <fcntl.h>
 
-void	move_cursor(char *cmd_line, char *c, size_t *cur_pos)
+void			set_pos(t_pos *pos, int x, int y)
 {
-	if (c[0] == 27 && c[1] == 91)
-	{
-		if (c[2] == 68 && *cur_pos > 0)
-		{
-			tputs(tgetstr("le", NULL), 0, &put);
-			*cur_pos -= 1;
-		}
-		if (c[2] == 67 && *cur_pos < ft_strlen(cmd_line))
-		{
-			tputs(tgetstr("nd", NULL), 0, &put);
-			*cur_pos += 1;
-		}
-	}
+	pos->x = x;
+	pos->y = y;
 }
 
-void	erase_char(char **cmd_line, char *c, size_t *cur_pos)
+int				put_tty(int c)
 {
-	if (c[0] == 127 && c[1] == 0 && *cur_pos > 0)
-	{
-		tputs(tgetstr("le", NULL), 0, &put);
-		tputs(tgetstr("dc", NULL), 0, &put);
-		ft_memmove(&(cmd_line[0][*cur_pos - 1]),
-				&(cmd_line[0][*cur_pos]),
-				ft_strlen(&(cmd_line[0][*cur_pos])) + 1);
-		*cur_pos -= 1;
-	}
-}
-
-void	print_char(char **cmd_line, char *c, size_t *cur_pos)
-{
-	char	*tmp;
-
-	if (ft_isprint(c[0]) && c[1] == 0)
-	{
-		tputs(tgetstr("im", NULL), 0, &put);
-		tputs(tgetstr("ic", NULL), 0, &put);
-		tmp = ft_strjoin_at(*cmd_line, c, *cur_pos);
-		free(*cmd_line);
-		*cmd_line = tmp;
-		write(STDOUT_FILENO, c, 1);
-		*cur_pos += 1;
-		tputs(tgetstr("ei", NULL), 0, &put);
-	}
-}
-
-void	clear_screen(char **line, size_t *cur_pos)
-{
-	tputs(tgetstr("cl", NULL), 0, &put);
-	free(*line);
-	*line = ft_strnew(0);
-	print_prompt();
-	*cur_pos = 0;
-}
-
-int		ft_get_command_line(char **command_line)
-{
-	char		c[3];
-	size_t		cur_pos;
-	short		loop;
-
-	cur_pos = 0;
-	*command_line = ft_strnew(0);
-	switch_input_mode();
-	loop = 1;
-	while (loop)
-	{
-		ft_bzero(c, 3);
-		read(STDIN_FILENO, &c, 3);
-		print_char(command_line, c, &cur_pos);
-		c[0] == '\n' ? (int)(put('\n') && (loop = 0)) : (void)0;
-		c[0] == 4 ? exit(switch_input_mode()) : (void)0;
-		c[0] == 12 ? clear_screen(command_line, &cur_pos) : (void)0;
-		autocomplete(*command_line, c, &cur_pos);
-		move_cursor(*command_line, c, &cur_pos);
-		erase_char(command_line, c, &cur_pos);
-	}
-	switch_input_mode();
+	write(1, &c, 1);
 	return (1);
+}
+
+t_c				*get_first(t_c *line)
+{
+	while (line->prev)
+		line = line->prev;
+	return (line);
+}
+
+int				nb_chars(t_c *line)
+{
+	int nb;
+
+	nb = 0;
+	while (line->next)
+	{
+		nb += 1;
+		line = line->next;
+	}
+	return (nb);
+}
+
+char			*to_str(t_c *line)
+{
+	char	*str;
+	int		i;
+
+	line = get_first(line);
+	str = ft_strnew(nb_chars(line));
+	i = 0;
+	while (line->next)
+	{
+		str[i++] = line->c;
+		line = line->next;
+	}
+	return (str);
+}
+
+struct winsize	get_winsize(void)
+{
+	struct winsize	win;
+
+	ioctl(STDIN_FILENO, TIOCGWINSZ, &win);
+	return (win);
+}
+
+void			reset_cursor(t_pos *cur)
+{
+	while (cur->y > 0)
+	{
+		tputs(tgetstr("up", NULL), 1, &put);
+		cur->y -= 1;
+	}
+	tputs(tgetstr("cr", NULL), 1, &put);
+	cur->x = 0;
+}
+
+void			clear_line(t_pos *cur)
+{
+	int	sz;
+
+	reset_cursor(cur);
+	tputs(tgetstr("cd", NULL), 1, &put);
+	sz = print_prompt();
+	cur->x = sz;
+}
+
+t_c				*new_c(char c)
+{
+	t_c *new;
+
+	new = (t_c *)ft_memalloc(sizeof(t_c));
+	new->c = c;
+	return (new);
+}
+
+void			add_char(t_c **line, char c)
+{
+	t_c	*new;
+
+	new = new_c(c);
+	new->next = *line;
+	new->prev = (*line)->prev;
+	if (new->prev)
+		new->prev->next = new;
+	(*line)->prev = new;
+}
+
+void			delete_char(t_c **line)
+{
+	if ((*line)->prev)
+	{
+		(*line)->prev = (*line)->prev->prev;
+		if ((*line)->prev)
+			(*line)->prev->next = (*line);
+	}
+}
+
+void			move_cur_left(t_c **line)
+{
+	if ((*line)->prev)
+	{
+		(*line)->cursor_on = 0;
+		*line = (*line)->prev;
+		(*line)->cursor_on = 1;
+	}
+}
+
+void			move_cur_right(t_c **line)
+{
+	if ((*line)->next)
+	{
+		(*line)->cursor_on = 0;
+		*line = (*line)->next;
+		(*line)->cursor_on = 1;
+	}
+}
+
+void			set_raw(struct termios *save)
+{
+	struct termios			t_attr;
+
+	(void)save;
+	tcgetattr(STDIN_FILENO, &t_attr);
+	t_attr.c_cc[VTIME] = 0;
+	t_attr.c_cc[VMIN] = 1;
+	t_attr.c_lflag &= ~(ECHO | ICANON);
+	tcsetattr(STDIN_FILENO, TCSANOW, &t_attr);
+}
+
+void			put_cursor(t_c *line, t_pos *cur)
+{
+	const struct winsize	win = get_winsize();
+
+	line = get_first(line);
+	reset_cursor(cur);
+	for (int i = 0; i < 3; i++)
+	{
+		tputs(tgetstr("nd", NULL), 1, &put_tty);
+		cur->x += 1;
+	}
+	while (line && !line->cursor_on)
+	{
+		if (cur->x >= win.ws_col - 1)
+		{
+			ft_putchar('\n');
+			cur->x = 0;
+			cur->y += 1;
+		}
+		tputs(tgetstr("nd", NULL), 1, &put_tty);
+		cur->x += 1;
+		line = line->next;
+	}
+}
+
+void			set_index(t_c *line)
+{
+	const struct winsize	win = get_winsize();
+	t_pos					p;
+
+	line = get_first(line);
+	p.x = 0;
+	p.y = 0;
+	while (line)
+	{
+		if (p.x >= win.ws_col - 1)
+		{
+			p.x = 0;
+			p.y += 1;
+		}
+		line->pos.x = p.x;
+		line->pos.y = p.y;
+		p.x += 1;
+		line = line->next;
+	}
+}
+
+void			print_line(t_c *line, t_pos *cur)
+{
+	const struct winsize	win = get_winsize();
+
+	line = get_first(line);
+	clear_line(cur);
+	while (line && line->c != 0)
+	{
+		if (cur->x >= win.ws_col - 1)
+		{
+			ft_putchar('\n');
+			cur->x = 0;
+			cur->y += 1;
+		}
+		ft_putchar(line->c);
+		cur->x += 1;
+		line = line->next;
+	}
+	put_cursor(line, cur);
+	set_index(line);
+}
+
+void			jmp_word_back(t_c **line)
+{
+	move_cur_left(line);
+	while ((*line)->prev && ft_isspace((*line)->prev->c))
+		move_cur_left(line);
+	while ((*line)->prev && !ft_isspace((*line)->prev->c))
+		move_cur_left(line);
+}
+
+void			jmp_word_forward(t_c **line)
+{
+	move_cur_right(line);
+	while ((*line)->next && ft_isspace((*line)->next->c) && (*line)->next->c != 0)
+		move_cur_right(line);
+	while ((*line)->next && !ft_isspace((*line)->next->c) && (*line)->next->c != 0)
+		move_cur_right(line);
+	move_cur_right(line);
+}
+
+void			jmp_line_begin(t_c **line)
+{
+	while ((*line)->prev)
+		move_cur_left(line);
+}
+
+void			jmp_line_end(t_c **line)
+{
+	while ((*line)->next)
+		move_cur_right(line);
+}
+
+void			jmp_line_up(t_c **line)
+{
+	const int	x = (*line)->pos.x;
+	const int	y = (*line)->pos.y - 1;
+
+	if (y >= 0)
+		while ((*line)->prev && (*line)->prev->pos.y > y)
+			move_cur_left(line);
+		while ((*line)->prev && (*line)->prev->pos.x != x - 1)
+			move_cur_left(line);
+}
+
+void			jmp_line_down(t_c **line)
+{
+	const int	x = (*line)->pos.x;
+	const int	y = (*line)->pos.y + 1;
+
+	while ((*line)->next && (*line)->next->pos.y < y)
+		move_cur_right(line);
+	while ((*line)->next && (*line)->next->pos.x != x + 1)
+		move_cur_right(line);
+}
+
+void			free_line(t_c **line)
+{
+	t_c	*tmp;
+	t_c	*next;
+
+	tmp = get_first(*line);
+	while (tmp)
+	{
+		next = (*line)->next;
+		free(tmp);
+		tmp = next;
+	}
+	*line = NULL;
+}
+
+t_c				*to_line(char *str)
+{
+	t_c		*line;
+
+	line = new_c(0);
+	line->cursor_on = 1;
+	while (*str)
+	{
+		add_char(&line, *str);
+		str += 1;
+	}
+	return (line);
+}
+
+void			parse_buffer(t_c **line, char *buffer, int buf_size)
+{
+	if (buf_size == 1 && (ft_isprint(buffer[0]) || ft_isspace(buffer[0])) && buffer[0] != '\n')
+		add_char(line, buffer[0]);
+	else if (buf_size == 3 && buffer[0] == 27 && buffer[1] == 91 && buffer[2] == 68)
+		move_cur_left(line);
+	else if (buf_size == 3 && buffer[0] == 27 && buffer[1] == 91 && buffer[2] == 67)
+		move_cur_right(line);
+	else if (buf_size == 1 && buffer[0] == 127)
+		delete_char(line);
+	else if (buf_size == 4 && buffer[0] == 27 && buffer[1] == 27 && buffer[2] == 91 && buffer[3] == 65)
+		jmp_line_up(line);
+	else if (buf_size == 4 && buffer[0] == 27 && buffer[1] == 27 && buffer[2] == 91 && buffer[3] == 66)
+		jmp_line_down(line);
+	else if (buf_size == 4 && buffer[0] == 27 && buffer[1] == 27 && buffer[2] == 91 && buffer[3] == 68)
+		jmp_word_back(line);
+	else if (buf_size == 4 && buffer[0] == 27 && buffer[1] == 27 && buffer[2] == 91 && buffer[3] == 67)
+		jmp_word_forward(line);
+	else if (buf_size == 3 && buffer[0] == 27 && buffer[1] == 91 && buffer[2] == 72)
+		jmp_line_begin(line);
+	else if (buf_size == 3 && buffer[0] == 27 && buffer[1] == 91 && buffer[2] == 70)
+		jmp_line_end(line);
+	else if (buf_size == 3 && buffer[0] == 27 && buffer[1] == 91 && buffer[2] == 65)
+		load_prev_cmd(line);
+}
+
+int				ft_get_command_line(char **command_line)
+{
+	char	buffer[8];
+	int		sz;
+	t_c		*line;
+	t_pos	pos;
+
+	pos.x = 0;
+	pos.y = 0;
+	set_pos(&pos, 0, 0);
+	line = new_c(0);
+	line->cursor_on = 1;
+	set_raw(NULL);
+	while (42)
+	{
+		sz = read(STDIN_FILENO, buffer, 8);
+		parse_buffer(&line, buffer, sz);
+		print_line(line, &pos);
+		if (buffer[0] == '\n')
+			break ;
+	}
+	ft_putchar('\n');
+	*command_line = to_str(line);
+	add_to_history(*command_line);
+	return (0);
 }

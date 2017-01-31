@@ -6,7 +6,7 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/20 09:42:13 by oyagci            #+#    #+#             */
-/*   Updated: 2017/01/31 13:04:12 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/01/31 13:07:52 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,27 @@ typedef	struct		s_info
 	int				h_win;
 }					t_info;
 
+typedef	struct s_pos	t_pos;
+struct					s_pos
+{
+	int x;
+	int y;
+};
+
+typedef	struct s_c	t_c;
+struct				s_c
+{
+	char	c;
+	int		cursor_on;
+	t_pos	pos;
+	t_c		*prev;
+	t_c		*next;
+};
+
 extern char		**g_environ;
 
 int				minishell(void);
+void			load_history(char *hist_path);
 unsigned int	count_arguments(char *command_line);
 int				is_quote(int c);
 int				is_unescaped_quote(unsigned int i, char *s);
@@ -77,7 +95,7 @@ int				put(int c);
 int				ft_get_command_line(char **command_line);
 
 char			**parse_args(char *line);
-void			print_prompt();
+int				print_prompt();
 void			print_error(char *str);
 char			*fetch_paths(unsigned int index);
 
@@ -185,5 +203,7 @@ char			*ft_strdupfree(char *s1);
 ** ft_erreur.c
 */
 int				ft_erreur(char *str, int mode);
+void			add_to_history(char *line);
+void			load_history(char *hist_path);
 
 #endif
