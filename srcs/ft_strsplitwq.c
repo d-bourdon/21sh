@@ -6,7 +6,7 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 16:39:02 by dbourdon          #+#    #+#             */
-/*   Updated: 2017/01/27 16:57:36 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/01/31 12:51:58 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ static char	*ft_strncpyq(char *dst, const char *src, size_t len)
 	}
 	while (i < len)
 	{
+		printf("en trop\n");
 		dst[j] = '\0';
 		i++;
 		j++;
@@ -87,7 +88,7 @@ static char	*dupword(char *str)
 	}
 	while (str[len] && ft_isspace(str[len]) == 0)
 		len++;
-	out = (char*)ft_memalloc(sizeof(char) * len + 1);
+	out = (char*)ft_memalloc(sizeof(char) * (len + 1));
 	out = ft_strncpyq(out, str, (size_t)len);
 	return (out);
 }
@@ -105,7 +106,7 @@ char		**ft_strsplitwq(char *str)
 	tmp = 0;
 	if ((nb = nb_word(str)) == -1)
 		return (NULL);
-	if ((out = (char**)ft_memalloc(sizeof(char*) * nb + 1)) == NULL)
+	if ((out = (char**)ft_memalloc(sizeof(char*) * (nb + 1))) == NULL)
 		return (NULL);
 	while (str[i])
 	{

@@ -6,13 +6,12 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/21 14:33:46 by dbourdon          #+#    #+#             */
-/*   Updated: 2017/01/30 13:42:31 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/01/31 11:37:52 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 #include <libft.h>
-#include <stdio.h>
 
 t_hash	**ft_hash_init(void)
 {
@@ -39,12 +38,10 @@ void	ft_hash_add(char *name, char *value)
 	ajout->next = NULL;
 	if (!info->hash[hash])
 	{
-		printf("On ajoute %s - %d\n", ajout->cmd, hash);
 		info->hash[hash] = ajout;
 	}
 	else
 	{
-		printf("on add car ça existe\n");
 		tmp = info->hash[hash];
 		while (tmp && tmp->next)
 			tmp = tmp->next;

@@ -6,7 +6,7 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 17:30:41 by dbourdon          #+#    #+#             */
-/*   Updated: 2017/01/30 13:39:45 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/01/31 12:53:16 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ char	**ft_env_to_char(t_env *env)
 		i++;
 	}
 	tmp = env;
-	out = (char**)ft_memalloc(sizeof(char)* i + 1);
+	out = (char**)ft_memalloc(sizeof(char*)* (i + 1));
 	i = 0;
 	while (tmp)
 	{
