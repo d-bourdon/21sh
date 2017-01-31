@@ -6,7 +6,7 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/28 12:54:52 by dbourdon          #+#    #+#             */
-/*   Updated: 2017/01/28 15:57:53 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/01/31 17:10:14 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,17 +72,13 @@ t_env	*ft_init_env(char **environ)
 
 	i = 0;
 	tmp2 = environ;
-	ajout = (t_env*)ft_memalloc(sizeof(t_env));
-	ajout->name = ft_strdup("\0");
-	ajout->value = NULL;
-	ajout->next = NULL;
-	env = ajout;
+	env = NULL;
 	while (tmp2[i])
 	{
 		ajout = (t_env*)ft_memalloc(sizeof(t_env));
 		tmp = ft_strsplit(tmp2[i], '=');
-		ajout->name = ft_strdupfree(ft_strjoin(tmp[0], "\0"));
-		ajout->value = ft_strdupfree(ft_strjoin(tmp[1], "\0"));
+		ajout->name = ft_strdup(tmp[0]);
+		ajout->value = ft_strdup(tmp[1]);
 		ajout->next = NULL;
 		ft_tabtab_free(tmp);
 		ft_env_addend(&env, ajout);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh_setenv.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oyagci <oyagci@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/28 11:21:54 by oyagci            #+#    #+#             */
-/*   Updated: 2017/01/04 11:23:06 by oyagci           ###   ########.fr       */
+/*   Updated: 2017/01/31 16:34:44 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,4 +19,4 @@ int				sh_setenv(char **av)
 	else if (nb_args(av) == 1)
 		printenv();
 	return (1);
-}
+} 

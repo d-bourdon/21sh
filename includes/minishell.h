@@ -6,7 +6,7 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/20 09:42:13 by oyagci            #+#    #+#             */
-/*   Updated: 2017/01/31 13:07:52 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/01/31 17:13:08 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,6 @@ struct				s_c
 	t_c		*next;
 };
 
-extern char		**g_environ;
-
 int				minishell(void);
 void			load_history(char *hist_path);
 unsigned int	count_arguments(char *command_line);
@@ -106,14 +104,12 @@ int				setenv(char const *name, char const *value, int overwrite);
 int				sh_unsetenv(char **av);
 int				sh_getenv(char **av);
 int				sh_launch_env(t_cmd *cmd, char **env);
-int				sh_launch(t_cmd *cmd);
 int				sh_execute_env(t_cmd *cmd, char **env);
 int				sh_execute(t_cmd *cmd);
 int				cd(char **av);
 void			pwd();
 int				sh_exit(char **av);
-int				sh_env(char **av);
-int				sh_setenv(char **av);
+int				sh_env(t_cmd *cmd);
 int				sh_echo(char **av);
 int				sh_pwd(char **av);
 
@@ -122,6 +118,13 @@ char			*ft_getenv(char *s);
 int				is_dir(char *path);
 
 int				check_for_signal(int status, char *cmd);
+
+/*
+** setenv.c :
+*/
+int				setenv(char const *name, char const *value, int overwrite);
+int				sh_setenv(char **av);
+t_env			*addenviron(char const *name, char const *value);
 
 /*
 ** line_parse.c strsplitwq :

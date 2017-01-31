@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   setenv.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oyagci <oyagci@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/28 09:53:26 by oyagci            #+#    #+#             */
-/*   Updated: 2016/12/28 11:28:26 by oyagci           ###   ########.fr       */
+/*   Updated: 2017/01/31 16:50:09 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,54 +14,38 @@
 #include <minishell.h>
 #include <stdlib.h>
 
-static char		*getenvvalue(char const *name, char const *value)
+t_env	*addenviron(char const *name, char const *value)
 {
-	char	*val;
+	t_env			*out;
 
-	val = ft_strjoin(name, "=");
-	val = ft_stradd(val, (char *)value);
-	return (val);
+	out = (t_env*)ft_memalloc(sizeof(t_env));
+	out->name = ft_strdup(name);
+	out->value = ft_strdup(value);
+	out->next = NULL;
+	return (out);
 }
 
-char			**addenviron(char *env[], char const *name, char const *value)
+int		setenv(char const *name, char const *value, int overwrite)
 {
-	char			**environ;
-	unsigned int	i;
+	t_info			*info;
+	t_env			*env;
 
-	environ = (char **)ft_memalloc(sizeof(char *) * (nb_args(env) + 2));
-	i = 0;
-	while (env[i] != 0)
+	info = singleton(NULL);
+	env = info->env;
+	while (env)
 	{
-		environ[i] = ft_strdup(env[i]);
-		i += 1;
-	}
-	environ[i] = getenvvalue(name, value);
-	return (environ);
-}
-
-int				setenv(char const *name, char const *value, int overwrite)
-{
-	unsigned int	i;
-	char			**up_env;
-
-	i = 0;
-	while (g_environ[i] != 0)
-	{
-		if (ft_strncmp(g_environ[i], name, ft_strlen(name)) == 0)
+		if (ft_strequ(env->name, name))
 		{
 			if (overwrite)
 			{
-				free(g_environ[i]);
-				g_environ[i] = getenvvalue(name, value);
-				return (1);
+				free(env->value);
+				env->value = ft_strdup(value);
 			}
-			else
-				return (1);
+			return (1);
 		}
-		i += 1;
+		env = env->next;
 	}
-	up_env = addenviron(g_environ, name, value);
-	free_split(g_environ);
-	g_environ = up_env;
+	env = info->env;
+	ft_env_addend(&env, addenviron(name, value));
 	return (1);
 }

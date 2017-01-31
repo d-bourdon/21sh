@@ -3,56 +3,47 @@
 /*                                                        :::      ::::::::   */
 /*   sh_unsetenv.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oyagci <oyagci@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/28 14:57:30 by oyagci            #+#    #+#             */
-/*   Updated: 2016/12/28 15:49:39 by oyagci           ###   ########.fr       */
+/*   Updated: 2017/01/31 16:48:44 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
 #include <ft_errno.h>
 #include <minishell.h>
+#include <stdlib.h>
 
-static int		isset(char *name)
+static void		free_env(t_env *env)
 {
-	unsigned int	i;
-
-	i = 0;
-	while (g_environ[i] != 0)
-	{
-		if (ft_strncmp(name, g_environ[i], ft_strlen(name)) == 0
-				&& g_environ[i][ft_strlen(name)] == '=')
-			return (1);
-		i += 1;
-	}
-	return (0);
+	free(env->name);
+	free(env->value);
+	free(env);
 }
 
 int				sh_unsetenv(char **av)
 {
-	char			**dup;
-	unsigned int	i;
-	unsigned int	j;
+	t_info	*info;
+	t_env	*env;
+	t_env	*tmp;
 
-	if (isset(av[1]))
+	info = singleton(NULL);
+	env = info->env;
+	if (env && ft_strequ(env->name, av[1]))
 	{
-		if (!(dup = (char **)ft_memalloc(sizeof(char *) * nb_args(g_environ))))
-		{
-			g_errno = FT_ENOMEM;
-			return (-1);
-		}
-		i = 0;
-		j = 0;
-		while (g_environ[j] != 0)
-		{
-			if (ft_strncmp(av[1], g_environ[j], ft_strlen(av[1])) != 0)
-				dup[i++] = ft_strdup(g_environ[j++]);
-			else
-				j++;
-		}
-		free_split(g_environ);
-		g_environ = dup;
+		tmp = env->next;
+		free_env(env);
+		info->env = tmp;
+		return (1);
+	}
+	while (env && env->next && !ft_strequ(env->next->name, av[1]))
+		env = env->next;
+	if (env && env->next)
+	{
+		tmp = env->next->next;
+		free_env(env->next);
+		env->next = tmp;
 	}
 	return (1);
 }

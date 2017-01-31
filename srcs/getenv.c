@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   getenv.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oyagci <oyagci@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 10:26:32 by oyagci            #+#    #+#             */
-/*   Updated: 2017/01/08 15:03:30 by oyagci           ###   ########.fr       */
+/*   Updated: 2017/01/31 14:08:13 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,17 @@
 char	*ft_getenv(char *env)
 {
 	char	*current;
-	char	**envp;
+	t_info	*info;
+	t_env	*tmp;
 
 	current = NULL;
-	envp = g_environ;
-	while (*envp != 0)
+	info = singleton(NULL);
+	tmp = info->env;
+	while (tmp)
 	{
-		if (ft_strncmp(*envp, env, ft_strlen(env)) == 0
-				&& (*envp)[ft_strlen(env)] == '=')
-		{
-			current = ft_strchr(*envp, '=') + 1;
-			return (current);
-		}
-		envp += 1;
+		if (ft_strequ(tmp->name, env))
+			return (current = tmp->value);
+		tmp = tmp->next;
 	}
 	return (NULL);
 }

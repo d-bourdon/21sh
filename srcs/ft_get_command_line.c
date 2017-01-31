@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_get_command_line.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oyagci <oyagci@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/07 12:51:23 by oyagci            #+#    #+#             */
-/*   Updated: 2017/01/30 17:08:37 by oyagci           ###   ########.fr       */
+/*   Updated: 2017/01/31 13:19:29 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -333,8 +333,8 @@ void			parse_buffer(t_c **line, char *buffer, int buf_size)
 		jmp_line_begin(line);
 	else if (buf_size == 3 && buffer[0] == 27 && buffer[1] == 91 && buffer[2] == 70)
 		jmp_line_end(line);
-	else if (buf_size == 3 && buffer[0] == 27 && buffer[1] == 91 && buffer[2] == 65)
-		load_prev_cmd(line);
+	//else if (buf_size == 3 && buffer[0] == 27 && buffer[1] == 91 && buffer[2] == 65)
+	//	load_prev_cmd(line);
 }
 
 int				ft_get_command_line(char **command_line)

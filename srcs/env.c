@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oyagci <oyagci@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/28 13:08:29 by oyagci            #+#    #+#             */
-/*   Updated: 2017/01/04 11:30:29 by oyagci           ###   ########.fr       */
+/*   Updated: 2017/01/31 15:51:48 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,17 +54,24 @@ void	env_set(char **av)
 	}
 }
 
-int		sh_env(char **av)
+int		sh_env(t_cmd *cmd)
 {
 	int				ac;
+	char			**av;
 	unsigned int	i;
 	int				options;
 
-	options = get_options(&ac, av);
+	options = get_options(&ac, cmd->av);
 	if (options == 1)
-		sh_execute_env(av + 2, NULL);
+	{
+		cmd->av[0][0] = '\0';
+		cmd->av[1][0] = '\0';
+		cmd->av = ft_tabtab_frag(cmd->av);
+		sh_execute_env(cmd, NULL);
+	}
 	else
 	{
+		av = cmd->av;
 		av += g_optind;
 		ac -= g_optind;
 		i = 0;

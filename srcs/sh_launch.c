@@ -6,7 +6,7 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 10:26:43 by oyagci            #+#    #+#             */
-/*   Updated: 2017/01/30 13:36:32 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/01/31 13:59:46 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,4 @@ int		sh_launch_env(t_cmd *cmd, char **env)
 		return (-1);
 	}
 	return (1);
-}
-
-int		sh_launch(t_cmd *cmd)
-{
-	int status;
-
-	status = sh_launch_env(cmd, g_environ);
-	return (status);
 }

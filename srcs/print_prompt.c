@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_prompt.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oyagci <oyagci@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/21 14:04:20 by oyagci            #+#    #+#             */
-/*   Updated: 2017/01/30 12:13:31 by oyagci           ###   ########.fr       */
+/*   Updated: 2017/01/31 13:17:35 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int				print_prompt(void)
 //		basename += 1;
 	ft_putstr(BOLDNRM);
 //	ft_putstr(basename);
-	ft_putstr("$" CNRM CGRN "> " CNRM);
+	ft_putstr("$" CRES CGRE "> " CRES);
 	// TODO : Compute prompt size
 	return (3);
 }
