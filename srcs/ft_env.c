@@ -6,7 +6,7 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 17:30:41 by dbourdon          #+#    #+#             */
-/*   Updated: 2017/01/31 12:53:16 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/01/31 18:58:33 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ t_env	*ft_env_chr(t_env *list, char *str)
 	tmp = list;
 	while (tmp && ft_strcmp(tmp->name, str) != 0)
 		tmp = tmp->next;
-	if (tmp == NULL)
-		tmp = list;
+	//if (tmp == NULL)
+	//	tmp = list;
 	return (tmp);
 }
 

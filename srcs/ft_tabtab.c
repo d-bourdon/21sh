@@ -6,7 +6,7 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/26 16:08:06 by dbourdon          #+#    #+#             */
-/*   Updated: 2017/01/28 16:29:29 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/01/31 19:11:06 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char	**ft_tabtab_frag(char **tab)
 			len++;
 		i++;
 	}
-	out = (char**)ft_memalloc(sizeof(char*) * len + 1);
+	out = (char**)ft_memalloc(sizeof(char*) * (len + 1));
 	i = 0;
 	len = 0;
 	while (tab[i])

@@ -6,13 +6,37 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 16:37:00 by dbourdon          #+#    #+#             */
-/*   Updated: 2017/01/27 16:57:38 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/01/31 19:33:33 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <minishell.h>
 #include <libft.h>
 #include <stdlib.h>
+
+char	**ft_replace_env(char **str, int *i)
+{
+	t_env	*tmp;
+	t_info	*info;
+
+	tmp = NULL;
+	info = singleton(NULL);
+	if (str[*i][0] != '$')
+		return (str);
+	tmp = ft_env_chr(info->env, str[*i] + 1);
+	if (tmp == NULL)
+	{
+		str[*i][0] = '\0';
+		*i = *i - 1;
+		return (str = ft_tabtab_frag(str));
+	}
+	else
+	{
+		free(str[*i]);
+		str[*i] = ft_strdup(tmp->value);
+	}
+	return (str);
+}
 
 t_cmd	*ft_line_parse(char *str)
 {
@@ -66,7 +90,6 @@ void	ft_line_exploit(char *str, int start, int i, t_cmd **out)
 	if (*out == NULL)
 		*out = ok;
 	else
-
 	{
 		list = *out;
 		while (list && list->next)

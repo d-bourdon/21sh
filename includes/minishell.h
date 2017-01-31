@@ -6,7 +6,7 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/20 09:42:13 by oyagci            #+#    #+#             */
-/*   Updated: 2017/01/31 17:30:55 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/01/31 19:25:12 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ t_env			*addenviron(char const *name, char const *value);
 t_cmd			*ft_line_parse(char *str);
 void			ft_line_exploit(char *str, int start, int i, t_cmd **out);
 char			**ft_strsplitwq(char *str);
-
+char			**ft_replace_env(char **str, int *i);
 
 /*
 ** ft_echo.c ft_echo2.c :
