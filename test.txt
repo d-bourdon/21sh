@@ -1,0 +1,11 @@
+Makefile
+auteur
+includes
+key.c
+libft
+minishell
+minishell.dSYM
+objs
+out.txt
+srcs
+test.txt

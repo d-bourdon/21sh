@@ -6,7 +6,7 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/01 11:40:55 by dbourdon          #+#    #+#             */
-/*   Updated: 2017/02/01 14:53:29 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/02/01 17:13:46 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 #include <unistd.h>
 #include <sys/types.h> 
 #include <sys/wait.h>
+#include <ft_errno.h>
+#include <fcntl.h>
 
 void	ft_pipe_process(t_cmd *cmd,char **env)
 {
@@ -44,4 +46,32 @@ t_cmd	*ft_next_to_pipe(t_cmd *cmd)
 		cmd = cmd->next;
 	cmd = cmd->next;
 	return (cmd);
+}
+
+int		ft_open_redir(char *file)
+{
+	int		fd;
+
+	fd = 0;
+	if (file[0] == '>' && file[1] == '>')
+		fd = open(file + 2, O_WRONLY | O_CREAT | O_APPEND, 0644);
+	else if (file[0] == '>')
+		fd = open(file + 1, O_WRONLY | O_CREAT, 0644);
+	else if (file[0] == '<' && file[1] == '<')
+		fd = 0;
+	else if (file[0] == '<')
+		fd = open(file + 1, O_RDONLY, 0644);
+	if (fd == -1)
+		g_errno = FT_ENOENT;
+	return (fd);
+}
+
+void	exec_fd_redir(int fd, char *infile)
+{
+	if (infile == NULL)
+		return ;
+	if (infile[0] == '<')
+		dup2(fd, STDIN_FILENO);
+	else if (infile[0] == '>')
+		dup2(fd, STDOUT_FILENO);
 }
