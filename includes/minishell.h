@@ -6,7 +6,7 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/20 09:42:13 by oyagci            #+#    #+#             */
-/*   Updated: 2017/01/31 19:25:12 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/02/01 14:48:55 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,5 +209,11 @@ char			*ft_strdupfree(char *s1);
 int				ft_erreur(char *str, int mode);
 void			add_to_history(char *line);
 void			load_history(char *hist_path);
+
+/*
+** ft_pipe_close.c :
+*/
+void	ft_pipe_process(t_cmd *cmd,char **env);
+t_cmd	*ft_next_to_pipe(t_cmd *cmd);
 
 #endif

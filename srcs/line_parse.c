@@ -6,7 +6,7 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 16:37:00 by dbourdon          #+#    #+#             */
-/*   Updated: 2017/01/31 19:33:33 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/02/01 14:10:02 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	**ft_replace_env(char **str, int *i)
 
 	tmp = NULL;
 	info = singleton(NULL);
-	if (str[*i][0] != '$')
+	if (!str[*i] || (str[*i] && str[*i][0] != '$'))
 		return (str);
 	tmp = ft_env_chr(info->env, str[*i] + 1);
 	if (tmp == NULL)

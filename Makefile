@@ -6,7 +6,7 @@
 #    By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/20 09:10:32 by oyagci            #+#    #+#              #
-#    Updated: 2017/01/31 17:18:46 by dbourdon         ###   ########.fr        #
+#    Updated: 2017/02/01 11:41:57 by dbourdon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,7 +71,10 @@ _SRCS				= main.c \
 					  history.c \
 					  ft_cd.c \
 					  ft_cd2.c \
-					  ft_clear_path.c
+					  ft_clear_path.c \
+					  ft_pipe_close.c
+
+					  
 _OBJS				= $(_SRCS:.c=.o)
 _DEPS				= minishell.h msh_signals.h
 

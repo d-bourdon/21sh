@@ -6,7 +6,7 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/28 11:53:13 by oyagci            #+#    #+#             */
-/*   Updated: 2017/01/31 17:22:05 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/02/01 11:35:26 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ int		sh_execute_env(t_cmd *cmd, char **env)
 		return (1);
 	i = -1;
 	if (ft_strequ(cmd->av[0], "env") || ft_strequ(cmd->av[0], "export"))
-		return (sh_env(cmd));
+		if (env != NULL)
+			return (sh_env(cmd));
 	while (++i < sh_nb_builtins())
 		if (ft_strequ(cmd->av[0], g_builtin_str[i]))
 			return ((g_builtin_func[i])(cmd->av));
