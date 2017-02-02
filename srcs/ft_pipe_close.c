@@ -6,7 +6,7 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/01 11:40:55 by dbourdon          #+#    #+#             */
-/*   Updated: 2017/02/01 17:13:46 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/02/02 18:33:02 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,16 @@ t_cmd	*ft_next_to_pipe(t_cmd *cmd)
 		cmd = cmd->next;
 	cmd = cmd->next;
 	return (cmd);
+}
+
+int		ft_redir(char *file)
+{
+	int		fd;
+
+	fd = ft_open_redir(file);
+	printf("FD = %d\n", fd);
+	exec_fd_redir(fd, file);
+	return (fd);
 }
 
 int		ft_open_redir(char *file)

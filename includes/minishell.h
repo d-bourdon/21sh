@@ -6,7 +6,7 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/20 09:42:13 by oyagci            #+#    #+#             */
-/*   Updated: 2017/02/01 16:43:20 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/02/02 18:35:17 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,5 +217,6 @@ void	ft_pipe_process(t_cmd *cmd,char **env);
 t_cmd	*ft_next_to_pipe(t_cmd *cmd);
 int		ft_open_redir(char *file);
 void	exec_fd_redir(int fd, char *infile);
+int		ft_redir(char *file);
 
 #endif

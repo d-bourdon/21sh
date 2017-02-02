@@ -6,7 +6,7 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/20 13:24:52 by oyagci            #+#    #+#             */
-/*   Updated: 2017/02/01 14:48:42 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/02/02 17:56:09 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int		minishell(void)
 			tmp_cmd = cmd;
 			while (tmp_cmd)
 			{
-				if ((status = sh_execute(cmd)) == -1)
+				if ((status = sh_execute(tmp_cmd)) == -1)
 					print_error(ft_strerror(g_errno));
 				if (tmp_cmd->pipe)
 					tmp_cmd = ft_next_to_pipe(tmp_cmd);

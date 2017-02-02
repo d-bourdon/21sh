@@ -6,7 +6,7 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/28 11:53:13 by oyagci            #+#    #+#             */
-/*   Updated: 2017/02/01 11:35:26 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/02/02 19:18:17 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 #include <stdlib.h>
 #include <libft.h>
 #include <ft_errno.h>
+#include <fcntl.h>
+#include <unistd.h>
 
 char	*g_builtin_str[] = {
 	"cd",
@@ -40,6 +42,42 @@ int		sh_nb_builtins(void)
 	return (sizeof(g_builtin_str) / sizeof(char *));
 }
 
+static int	execute_builtin(t_cmd *cmd, char **env)
+{
+	int		i;
+	int		fd;
+	int		tmp1;
+	int		tmp2;
+
+	i = -1;
+	fd = -2;
+	tmp1 = STDIN_FILENO;
+	tmp2 = STDOUT_FILENO;
+	if (ft_strequ(cmd->av[0], "env") || ft_strequ(cmd->av[0], "export"))
+		if (env != NULL)
+		{
+			if (cmd->infile != NULL)
+				fd = ft_redir(cmd->infile);
+			i = sh_env(cmd);
+			if (cmd->infile != NULL)
+				close(fd);
+			return (i);
+		}
+	while (++i < sh_nb_builtins())
+		if (ft_strequ(cmd->av[0], g_builtin_str[i]))
+		{
+			if (cmd->infile != NULL)
+				fd = ft_redir(cmd->infile);
+			i = (g_builtin_func[i])(cmd->av);
+			if (cmd->infile != NULL)
+			{
+				close(3);
+			}
+			return (i);
+		}
+	return (999);
+}
+
 int		sh_execute_env(t_cmd *cmd, char **env)
 {
 	int		i;
@@ -49,13 +87,8 @@ int		sh_execute_env(t_cmd *cmd, char **env)
 	info = singleton(NULL);
 	if (cmd->av[0] == NULL)
 		return (1);
-	i = -1;
-	if (ft_strequ(cmd->av[0], "env") || ft_strequ(cmd->av[0], "export"))
-		if (env != NULL)
-			return (sh_env(cmd));
-	while (++i < sh_nb_builtins())
-		if (ft_strequ(cmd->av[0], g_builtin_str[i]))
-			return ((g_builtin_func[i])(cmd->av));
+	if ((i = execute_builtin(cmd, env)) != 999)
+		return (i);
 	cmd = ft_hash_check(info, cmd);
 	if (!ft_strchr(cmd->av[0], '/') && (path = which(cmd->av[0])))
 	{
