@@ -6,7 +6,7 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/28 11:53:13 by oyagci            #+#    #+#             */
-/*   Updated: 2017/02/02 19:18:17 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/02/03 13:21:34 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,37 +42,38 @@ int		sh_nb_builtins(void)
 	return (sizeof(g_builtin_str) / sizeof(char *));
 }
 
+static void	close_redir(int	*fd, char *file)
+{
+	if (file == NULL)
+		return ;
+	if (file && file[0] == '<')
+		dup2(fd[1], STDIN_FILENO);
+	if (file && file[0] == '>')
+		dup2(fd[1], STDOUT_FILENO);
+	close(fd[0]);
+	free(fd);
+}
+
 static int	execute_builtin(t_cmd *cmd, char **env)
 {
 	int		i;
-	int		fd;
-	int		tmp1;
-	int		tmp2;
+	int		*fd;
 
 	i = -1;
-	fd = -2;
-	tmp1 = STDIN_FILENO;
-	tmp2 = STDOUT_FILENO;
 	if (ft_strequ(cmd->av[0], "env") || ft_strequ(cmd->av[0], "export"))
 		if (env != NULL)
 		{
-			if (cmd->infile != NULL)
-				fd = ft_redir(cmd->infile);
+			fd = ft_redir(cmd->infile);
 			i = sh_env(cmd);
-			if (cmd->infile != NULL)
-				close(fd);
+			close_redir(fd, cmd->infile);
 			return (i);
 		}
 	while (++i < sh_nb_builtins())
 		if (ft_strequ(cmd->av[0], g_builtin_str[i]))
 		{
-			if (cmd->infile != NULL)
-				fd = ft_redir(cmd->infile);
+			fd = ft_redir(cmd->infile);
 			i = (g_builtin_func[i])(cmd->av);
-			if (cmd->infile != NULL)
-			{
-				close(3);
-			}
+			close_redir(fd, cmd->infile);
 			return (i);
 		}
 	return (999);

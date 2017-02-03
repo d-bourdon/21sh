@@ -6,7 +6,7 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/01 11:40:55 by dbourdon          #+#    #+#             */
-/*   Updated: 2017/02/02 18:33:02 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/02/03 13:19:05 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,19 @@ t_cmd	*ft_next_to_pipe(t_cmd *cmd)
 	return (cmd);
 }
 
-int		ft_redir(char *file)
+int		*ft_redir(char *file)
 {
-	int		fd;
+	int		*fd;
 
-	fd = ft_open_redir(file);
-	printf("FD = %d\n", fd);
-	exec_fd_redir(fd, file);
+	if (file == NULL)
+		return (NULL);
+	fd = (int*)ft_memalloc(sizeof(int) * 2);
+	if (file[0] == '<')
+		fd[1] = dup(STDIN_FILENO);
+	if (file[0] == '>')
+		fd[1] = dup(STDOUT_FILENO);
+	fd[0] = ft_open_redir(file);
+	exec_fd_redir(fd[0], file);
 	return (fd);
 }
 
@@ -66,7 +72,7 @@ int		ft_open_redir(char *file)
 	if (file[0] == '>' && file[1] == '>')
 		fd = open(file + 2, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	else if (file[0] == '>')
-		fd = open(file + 1, O_WRONLY | O_CREAT, 0644);
+		fd = open(file + 1, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	else if (file[0] == '<' && file[1] == '<')
 		fd = 0;
 	else if (file[0] == '<')

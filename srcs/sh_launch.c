@@ -6,7 +6,7 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 10:26:43 by oyagci            #+#    #+#             */
-/*   Updated: 2017/02/01 16:43:52 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/02/03 13:22:32 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ int		sh_launch_env(t_cmd *cmd, char **env)
 		}
 		else
 			ft_putendl_fd(ft_strerror(g_errno), 2);
-		close(fd);
+		if (cmd->infile != NULL)
+			close(fd);
 	}
 	else
 	{
