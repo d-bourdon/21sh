@@ -6,7 +6,7 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/30 17:06:39 by oyagci            #+#    #+#             */
-/*   Updated: 2017/01/31 13:20:17 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/02/06 16:03:08 by oyagci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,7 @@
 #include <libft.h>
 #include <fcntl.h>
 
-void			load_history(char *hist_path)
-{
-	char	*line;
-	int		fd;
-	t_list	*hist;
-
-	hist = NULL;
-	if ((fd = open(hist_path, O_RDONLY)) > 0)
-		while (get_next_line(fd, &line) > 0)
-			ft_lstadd(&hist, ft_lstnew(line, ft_strlen(line) + 1));
-}
+extern t_dlist *g_history;
 
 void			add_to_history(char *line)
 {
@@ -36,9 +26,7 @@ void			add_to_history(char *line)
 		write(fd, "\n", 1);
 		close(fd);
 	}
-}
-
-void            load_prev_cmd(void)
-{
-    
+	while (g_history->prev)
+		g_history = g_history->prev;
+	ft_dlstadd(&g_history, ft_dlstnew(line, ft_strlen(line) + 1));
 }

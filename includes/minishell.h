@@ -6,7 +6,7 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/20 09:42:13 by oyagci            #+#    #+#             */
-/*   Updated: 2017/02/03 13:01:04 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/02/06 14:30:30 by oyagci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,9 @@ struct				s_c
 	t_c		*next;
 };
 
+void			add_to_history(char *line);
+void			load_history(void);
 int				minishell(void);
-void			load_history(char *hist_path);
 unsigned int	count_arguments(char *command_line);
 int				is_quote(int c);
 int				is_unescaped_quote(unsigned int i, char *s);
@@ -207,8 +208,6 @@ char			*ft_strdupfree(char *s1);
 ** ft_erreur.c
 */
 int				ft_erreur(char *str, int mode);
-void			add_to_history(char *line);
-void			load_history(char *hist_path);
 
 /*
 ** ft_pipe_close.c :

@@ -6,7 +6,7 @@
 /*   By: oyagci <oyagci@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/05 12:58:44 by oyagci            #+#    #+#             */
-/*   Updated: 2016/12/06 12:59:08 by oyagci           ###   ########.fr       */
+/*   Updated: 2017/02/06 14:15:33 by oyagci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,15 @@ typedef struct		s_list
 	struct s_list	*next;
 }					t_list;
 
+typedef	struct s_dlist	t_dlist;
+struct					s_dlist
+{
+	void		*content;
+	size_t		content_size;
+	t_dlist		*prev;
+	t_dlist		*next;
+};
+
 t_list				*ft_lstnew(void const *content, size_t content_size);
 void				ft_lstdelone(t_list **alst, void (*del)(void *, size_t));
 void				ft_lstdel(t_list **alst, void (*del)(void *, size_t));
@@ -33,5 +42,10 @@ t_list				*ft_lstpush_filter(
 						void *content, size_t content_size,
 						int (*f)(t_list *, void *, size_t));
 void				ft_lstpush(t_list **list, t_list *elem);
+
+t_dlist				*ft_dlstnew(void const *content, size_t content_size);
+void				ft_dlstdelone(t_dlist **alst, void (*del)(void *, size_t));
+void				ft_dlstdel(t_dlist **alst, void (*del)(void *, size_t));
+void				ft_dlstadd(t_dlist **alst, t_dlist *elem);
 
 #endif

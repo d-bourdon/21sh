@@ -147,3 +147,4 @@ flycheck_*.el
 
 # Name
 minishell
+.42sh_history

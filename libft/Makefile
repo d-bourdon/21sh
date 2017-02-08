@@ -6,7 +6,7 @@
 #    By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/03 10:27:13 by oyagci            #+#    #+#              #
-#    Updated: 2017/01/25 15:34:03 by dbourdon         ###   ########.fr        #
+#    Updated: 2017/02/06 14:13:30 by oyagci           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,8 @@ SOURCES_RAW	= ft_memalloc.c ft_memdel.c ft_strnew.c ft_strdel.c ft_strclr.c \
 			  ft_strsplit.c ft_lstnew.c ft_lstdelone.c ft_lstdel.c ft_lstadd.c \
 			  ft_lstiter.c ft_lstmap.c ft_lstmap.c ft_abs.c ft_strupper.c \
 			  ft_strlower.c get_next_line.c ft_lstpush_filter.c ft_getopt.c \
-			  ft_lstpush.c ft_stradd.c ft_isspace.c ft_strjoin_at.c ft_strndup.c
+			  ft_lstpush.c ft_stradd.c ft_isspace.c ft_strjoin_at.c ft_strndup.c \
+			  ft_dlstadd.c ft_dlstnew.c ft_dlstdelone.c ft_dlstdel.c
 OBJECTS_RAW	= $(SOURCES_RAW:.c=.o)
 DEPS_RAW	= libft.h libft_mem.h libft_list.h libft_str.h
 

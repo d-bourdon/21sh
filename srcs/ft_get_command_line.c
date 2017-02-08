@@ -6,7 +6,7 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/07 12:51:23 by oyagci            #+#    #+#             */
-/*   Updated: 2017/01/31 18:13:22 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/02/06 16:08:09 by oyagci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 #include <minishell.h>
 #include <sys/ioctl.h>
 #include <fcntl.h>
+
+t_dlist			*g_history;
+char			*g_clipboard;
 
 void			set_pos(t_pos *pos, int x, int y)
 {
@@ -311,30 +314,78 @@ t_c				*to_line(char *str)
 	return (line);
 }
 
+void			copy_line(t_c **line)
+{
+	char	*str;
+
+	str = to_str(*line);
+	if (g_clipboard)
+		ft_strdel(&g_clipboard);
+	g_clipboard = str;
+}
+
+void			paste_line(t_c **line)
+{
+	char *clipboard;
+
+	clipboard = g_clipboard;
+	while (*clipboard)
+	{
+		add_char(line, *clipboard);
+		clipboard += 1;
+	}
+}
+
+void			load_history(void)
+{
+	g_history = ft_dlstnew("", 1);
+	ft_dlstadd(&g_history, ft_dlstnew("", 1));
+}
+
+void			load_prev_cmd(t_c **line)
+{
+	if (g_history->next)
+		g_history = g_history->next;
+	*line = to_line(g_history->content);
+}
+
+void			load_next_cmd(t_c **line)
+{
+	if (g_history->prev)
+		g_history = g_history->prev;
+	*line = to_line(g_history->content);
+}
+
 void			parse_buffer(t_c **line, char *buffer, int buf_size)
 {
 	if (buf_size == 1 && (ft_isprint(buffer[0]) || ft_isspace(buffer[0])) && buffer[0] != '\n')
 		add_char(line, buffer[0]);
-	else if (buf_size == 3 && buffer[0] == 27 && buffer[1] == 91 && buffer[2] == 68)
+	else if (buffer[0] == 27 && buffer[1] == 91 && buffer[2] == 68)
 		move_cur_left(line);
-	else if (buf_size == 3 && buffer[0] == 27 && buffer[1] == 91 && buffer[2] == 67)
+	else if (buffer[0] == 27 && buffer[1] == 91 && buffer[2] == 67)
 		move_cur_right(line);
-	else if (buf_size == 1 && buffer[0] == 127)
+	else if (buffer[0] == 127)
 		delete_char(line);
-	else if (buf_size == 4 && buffer[0] == 27 && buffer[1] == 27 && buffer[2] == 91 && buffer[3] == 65)
+	else if (buffer[0] == 27 && buffer[1] == 27 && buffer[2] == 91 && buffer[3] == 65)
 		jmp_line_up(line);
-	else if (buf_size == 4 && buffer[0] == 27 && buffer[1] == 27 && buffer[2] == 91 && buffer[3] == 66)
+	else if (buffer[0] == 27 && buffer[1] == 27 && buffer[2] == 91 && buffer[3] == 66)
 		jmp_line_down(line);
-	else if (buf_size == 4 && buffer[0] == 27 && buffer[1] == 27 && buffer[2] == 91 && buffer[3] == 68)
+	else if (buffer[0] == 27 && buffer[1] == 27 && buffer[2] == 91 && buffer[3] == 68)
 		jmp_word_back(line);
-	else if (buf_size == 4 && buffer[0] == 27 && buffer[1] == 27 && buffer[2] == 91 && buffer[3] == 67)
+	else if (buffer[0] == 27 && buffer[1] == 27 && buffer[2] == 91 && buffer[3] == 67)
 		jmp_word_forward(line);
-	else if (buf_size == 3 && buffer[0] == 27 && buffer[1] == 91 && buffer[2] == 72)
+	else if (buffer[0] == 27 && buffer[1] == 91 && buffer[2] == 72)
 		jmp_line_begin(line);
-	else if (buf_size == 3 && buffer[0] == 27 && buffer[1] == 91 && buffer[2] == 70)
+	else if (buffer[0] == 27 && buffer[1] == 91 && buffer[2] == 70)
 		jmp_line_end(line);
-	//else if (buf_size == 3 && buffer[0] == 27 && buffer[1] == 91 && buffer[2] == 65)
-	//	load_prev_cmd(line);
+	else if (buffer[0] == -61 && buffer[1] == -89)
+		copy_line(line);
+	else if (buffer[0] == -30 && buffer[1] == -120 && buffer[2] == -102)
+		paste_line(line);
+	else if (buffer[0] == 27 && buffer[1] == 91 && buffer[2] == 65)
+		load_prev_cmd(line);
+	else if (buffer[0] == 27 && buffer[1] == 91 && buffer[2] == 66)
+		load_next_cmd(line);
 }
 
 int				ft_get_command_line(char **command_line)
