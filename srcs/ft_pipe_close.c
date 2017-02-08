@@ -6,7 +6,7 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/01 11:40:55 by dbourdon          #+#    #+#             */
-/*   Updated: 2017/02/03 13:19:05 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/02/08 12:32:35 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,32 @@ void	ft_pipe_process(t_cmd *cmd,char **env)
 	return ;
 }
 
+void	ft_pipe_redir(t_cmd *cmd,char **env, int fd)
+{
+	pid_t	child;
+	int		tmp;
+	int		tmp2;
+	int		tmp3;
+
+	tmp = dup(fd);
+	tmp2 = dup(STDOUT_FILENO);
+	tmp3 = dup(STDIN_FILENO);
+	exec_fd_redir(fd, cmd->infile);
+	child = fork();
+	if (child == -1)
+		printf("Errorn\n"); //norme
+	else if (child == 0)
+	{
+		dup2(fd, STDOUT_FILENO);
+		try_execve(cmd->av[0], cmd->av, env);
+		return ;
+	}
+	wait(NULL);
+	close(fd);
+	dup2(tmp3, STDIN_FILENO);
+	dup2(tmp2, STDOUT_FILENO);
+}
+
 t_cmd	*ft_next_to_pipe(t_cmd *cmd)
 {
 	while (cmd && cmd->pipe)
@@ -70,9 +96,9 @@ int		ft_open_redir(char *file)
 
 	fd = 0;
 	if (file[0] == '>' && file[1] == '>')
-		fd = open(file + 2, O_WRONLY | O_CREAT | O_APPEND, 0644);
+		fd = open(file + 2, O_RDWR | O_CREAT | O_APPEND, 0644);
 	else if (file[0] == '>')
-		fd = open(file + 1, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		fd = open(file + 1, O_RDWR | O_CREAT | O_TRUNC, 0644);
 	else if (file[0] == '<' && file[1] == '<')
 		fd = 0;
 	else if (file[0] == '<')
