@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: oyagci <oyagci@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/20 09:42:13 by oyagci            #+#    #+#             */
-/*   Updated: 2017/02/08 12:46:40 by oyagci           ###   ########.fr       */
+/*   Updated: 2017/02/09 16:40:46 by oyagci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,6 @@ struct				s_c
 	t_c		*next;
 };
 
-void			add_to_history(char *line);
-void			load_history(void);
 int				minishell(void);
 unsigned int	count_arguments(char *command_line);
 int				is_quote(int c);
@@ -92,7 +90,7 @@ pid_t			wrap_fork();
 int				switch_input_mode(void);
 void			autocomplete(char *line, char *c, size_t *cur_pos);
 int				put(int c);
-int				ft_get_command_line(char **command_line);
+int				get_line(char **command_line);
 
 char			**parse_args(char *line);
 int				print_prompt();
@@ -120,6 +118,12 @@ char			*ft_getenv(char *s);
 int				is_dir(char *path);
 
 int				check_for_signal(int status, char *cmd);
+
+/*
+** get_line.c :
+*/
+void			set_raw(void);
+void			unset_raw(void);
 
 /*
 ** setenv.c :

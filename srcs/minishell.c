@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: oyagci <oyagci@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/20 13:24:52 by oyagci            #+#    #+#             */
-/*   Updated: 2017/02/08 12:33:07 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/02/09 16:23:05 by oyagci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int		minishell(void)
 	{
 		signal(SIGINT, sigint_parent);
 		print_prompt();
-		ft_get_command_line(&line);
+		get_line(&line);
 		if (line != NULL)
 		{
 			cmd = ft_line_parse(line);

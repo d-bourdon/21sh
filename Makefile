@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+         #
+#    By: oyagci <oyagci@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/20 09:10:32 by oyagci            #+#    #+#              #
-#    Updated: 2017/02/01 11:41:57 by dbourdon         ###   ########.fr        #
+#    Updated: 2017/02/09 17:22:50 by oyagci           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,7 +52,7 @@ _SRCS				= main.c \
 					  sh_pwd.c \
 					  try_chdir.c \
 					  is_dir.c \
-					  ft_get_command_line.c \
+					  get_line.c \
 					  put.c \
 					  switch_input_mode.c \
 					  autocomplete.c \
@@ -68,15 +68,15 @@ _SRCS				= main.c \
 					  ft_erreur.c \
 					  ft_info_init.c \
 					  ft_env.c \
-					  history.c \
 					  ft_cd.c \
 					  ft_cd2.c \
 					  ft_clear_path.c \
-					  ft_pipe_close.c
-
+					  ft_pipe_close.c \
+					  set_raw.c \
+					  key.c
 					  
 _OBJS				= $(_SRCS:.c=.o)
-_DEPS				= minishell.h msh_signals.h
+_DEPS				= minishell.h msh_signals.h key.h
 
 SRCS				= $(addprefix $(SRCSDIR)/,$(_SRCS))
 OBJS				= $(addprefix $(OBJSDIR)/,$(_OBJS))

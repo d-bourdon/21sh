@@ -1,30 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   set_raw.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oyagci <oyagci@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/20 09:16:19 by oyagci            #+#    #+#             */
-/*   Updated: 2017/02/09 16:27:35 by oyagci           ###   ########.fr       */
+/*   Created: 2017/02/09 16:38:35 by oyagci            #+#    #+#             */
+/*   Updated: 2017/02/09 16:43:05 by oyagci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <minishell.h>
-#include <libft.h>
+#include <unistd.h>
 #include <termcap.h>
+#include <termios.h>
 
-int				main(void)
+struct termios	g_attr_save;
+
+void			set_raw(void)
 {
-	int			status;
-	extern char	**environ;
+	struct termios	attr;
 
-	singleton(ft_init_info(environ));
-	if (tgetent(NULL, ft_getenv("TERM")) == -1)
-	{
-		ft_putendl("TERM environement variable not set.");
-		return (0);
-	}
-	status = minishell();
-	return (status);
+	tcgetattr(STDIN_FILENO, &attr);
+	tcgetattr(STDIN_FILENO, &g_attr_save);
+	attr.c_lflag &= ~(ECHO | ICANON);
+	attr.c_cc[VTIME] = 0;
+	attr.c_cc[VMIN] = 1;
+	tcsetattr(STDIN_FILENO, TCSADRAIN, &attr);
+}
+
+void			unset_raw(void)
+{
+	tcsetattr(STDIN_FILENO, TCSADRAIN, &g_attr_save);
 }
