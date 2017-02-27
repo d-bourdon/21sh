@@ -6,7 +6,7 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/20 13:24:52 by oyagci            #+#    #+#             */
-/*   Updated: 2017/02/08 12:33:07 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/02/10 15:26:20 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,10 @@ int		minishell(void)
 			tmp_cmd = cmd;
 			while (tmp_cmd)
 			{
+				printf("ROUTE FD = %s\n", tmp_cmd->routefd);
+				ft_def_routefd(tmp_cmd->routefd);
+				if (g_errno == FT_ENOSYN)
+					break ;
 				if ((status = sh_execute(tmp_cmd)) == -1)
 					print_error(ft_strerror(g_errno));
 				if (tmp_cmd->pipe)
@@ -52,6 +56,7 @@ int		minishell(void)
 				else
 					tmp_cmd = tmp_cmd->next;
 			}
+			ft_reset_fd();
 			free(line);
 			ft_free_cmd(cmd);
 		}

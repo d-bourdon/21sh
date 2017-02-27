@@ -6,7 +6,7 @@
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/26 13:51:43 by dbourdon          #+#    #+#             */
-/*   Updated: 2017/01/31 19:25:05 by dbourdon         ###   ########.fr       */
+/*   Updated: 2017/02/10 14:53:30 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,14 @@ void	ft_line_pipe(t_cmd *cmd, int i)
 void	ft_line_fdredir(t_cmd *cmd, int i)
 {
 	char	*str;
-	char	tmp[3];
 
-	tmp[0] = ';';
-	tmp[1] = cmd->r_prio + 48;
-	tmp[2] = '|';
-	str = ft_strjoin(tmp, cmd->av[i]);
-	cmd->routefd = ft_strjoinfree(cmd->routefd, str, 3);
+	printf("av i %s\n", cmd->av[i]);
+	str = ft_strjoin(" ", cmd->av[i]);
+	if (cmd->routefd != NULL)
+		cmd->routefd = ft_strjoinfree(cmd->routefd, str, 3);
+	else
+		cmd->routefd = str;
+	printf("cmd->routefd %s\n", cmd->routefd);
 	cmd->av[i][0] = '\0';
 	cmd->av = ft_tabtab_frag(cmd->av);
 }
@@ -97,6 +98,7 @@ void	ft_line_detect_pipe(t_cmd *cmd)
 			tmp->av = ft_replace_env(tmp->av, &i);
 			i++;
 		}
+		printf("out cmd->routefd %s\n", tmp->routefd);
 		//ft_tabtab_frag(tmp->av);
 		tmp = tmp->next;
 	}

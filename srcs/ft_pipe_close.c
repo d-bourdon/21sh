@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dbourdon <dbourdon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/01 11:40:55 by dbourdon          #+#    #+#             */
-/*   Updated: 2017/02/08 12:32:35 by dbourdon         ###   ########.fr       */
+/*   Created: 2017/02/09 14:57:46 by dbourdon          #+#    #+#             */
+/*   Updated: 2017/02/10 15:16:43 by dbourdon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,91 @@
 #include <sys/wait.h>
 #include <ft_errno.h>
 #include <fcntl.h>
+#include <stdlib.h>
+
+static int	route_verif_exec(int *fd)
+{
+	int		ret;
+
+	ret = fcntl(fd[2], F_GETFL);
+	if (fd[1] == 1 && ret != -1) //<
+	{
+		if (ret & O_RDONLY || ret & O_RDWR)
+			dup2(fd[2], fd[0]);
+		else
+			return (0);
+	}
+	else if (fd[1] == 2 && ret != -1) //>
+	{
+		if (ret & O_WRONLY || ret & O_RDWR)
+			dup2(fd[2], fd[0]);
+		else
+			return (0);
+	}
+	else
+		return (0);
+	return (1);
+}
+
+static int	*route_detect(char *str)
+{
+	int		i;
+	int		*tab;
+
+	i = 0;
+	tab = (int*)ft_memalloc(sizeof(int) * 3);
+	if (str[i] == '<' || str[i] == '>')
+		tab[0] = (tab[i] == '<')? 0 : 1 ;
+	else
+		tab[0] = ft_atoi(str);
+	while (str[i] && str[i] != '&')
+		i++;
+	tab[1] = (str[i - 1] == '<')? 1: 2;
+	if (str[i + 1])
+	{
+		if (str[i + 1] == '-')
+			tab[2] = -1;
+		else
+			tab[2] = ft_atoi(str + i);
+		return (tab);
+	}
+	free(tab);
+	return (NULL);
+}
+
+void	ft_def_routefd(char	*str)
+{
+	char	**tab;
+	int		i;
+	int		*fd;
+	int		ret;
+
+	if (!str)
+		return ;
+	i = 0;
+	ret = 0;
+	tab = ft_strsplit(str, ' ');
+	while (tab && tab[i])
+	{
+		if ((fd = route_detect(tab[i])) != NULL)
+		{
+			if (fd[2] == -1)
+				close(fd[0]);
+			else
+				ret = route_verif_exec(fd);
+		}
+		if (ret == 0)
+		{
+			free(fd);
+			ft_tabtab_free(tab);
+			g_errno = FT_ENOSYN;
+			return ;
+		}
+		free(fd);
+		i++;
+	}
+	ft_tabtab_free(tab);
+}
 
 void	ft_pipe_process(t_cmd *cmd,char **env)
 {
